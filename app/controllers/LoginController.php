@@ -20,7 +20,6 @@ class LoginController extends Controller
             'pages' => 'LoginAdminPage'
         ]);
     }
-
     public function logout()
     {
         return $this->LoginModel->logoutAdminAccount();

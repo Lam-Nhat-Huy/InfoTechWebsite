@@ -366,14 +366,14 @@
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="#"><?= $_SESSION['user_name'] ?></a>
+                                                <a href=""><?= $_SESSION['user_name'] ?></a>
                                             </h5>
                                             <span class="email"><?= $_SESSION['user_email'] ?></span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
-                                            <a href="#">
+                                            <a href="">
                                                 <i class="zmdi zmdi-account"></i>Account</a>
                                         </div>
                                         <div class="account-dropdown__item">
@@ -398,7 +398,6 @@
         </div>
     </header>
     <!-- HEADER DESKTOP-->
-
     <!-- MAIN CONTENT-->
     <div class="main-content">
         <div class="section__content section__content--p30">
