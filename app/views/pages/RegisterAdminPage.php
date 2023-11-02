@@ -48,7 +48,7 @@
                                 <label>Avatar</label>
                                 <input class="" type="file" name="avatar" placeholder="Avatar" required>
                             </div>
-                            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
+                            <button class="au-btn au-btn--block au-btn--green" type="submit">register</button>
                         </form>
                         <div class="register-link">
                             <p>

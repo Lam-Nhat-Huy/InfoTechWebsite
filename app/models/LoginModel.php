@@ -54,6 +54,7 @@ class LoginModel extends Database
             // Kiểm tra mật khẩu và role_id
             if (password_verify($password, $user['password']) && $user['role_id'] == 0) {
                 // Tạo session id cho người dùng
+                $_SESSION['authentication'] = "yes";
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
                 $_SESSION['user_avatar'] = $user['avatar'];
@@ -74,25 +75,5 @@ class LoginModel extends Database
     {
         session_destroy();
         header('Location: /login/');
-    }
-
-    public function register($name, $email, $phone, $address, $role_id, $password, $cpassword, $avatar)
-    {
-        // Kiểm tra xem mật khẩu và mật khẩu xác nhận có khớp không
-        if ($password != $cpassword) {
-            return "Mật khẩu và mật khẩu xác nhận không khớp.";
-        }
-
-        // Mã hóa mật khẩu
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Tạo câu truy vấn SQL
-        $sql = "INSERT INTO users (name, email, phone, address, role_id, password, avatar)
-            VALUES ('$name', '$email', '$phone', '$address', '$role_id', '$hashed_password', '$avatar')";
-
-        // Thực hiện câu truy vấn
-        if ($this->conn->query($sql) === TRUE) {
-            return "Đăng ký thành công!";
-        }
     }
 }
