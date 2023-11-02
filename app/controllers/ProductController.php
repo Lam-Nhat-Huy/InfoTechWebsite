@@ -10,7 +10,16 @@ class ProductController extends Controller
     public function index()
     {
         $this->view('HomeMasterLayout', [
-            'pages' => 'ProductAdminPage'
+            'pages' => 'ProductAdminPage',
+            'block' => 'product/list'
+        ]);
+    }
+
+    public function add()
+    {
+        $this->view('HomeMasterLayout', [
+            'pages' => 'ProductAdminPage',
+            'block' => 'product/add'
         ]);
     }
 }
