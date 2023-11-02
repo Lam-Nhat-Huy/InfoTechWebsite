@@ -11,7 +11,16 @@ class CategoryController extends Controller
     public function index()
     {
         $this->view('HomeMasterLayout', [
-            'pages' => 'CategoryAdminPage'
+            'pages' => 'CategoryAdminPage',
+            'block' => 'category/list'
+        ]);
+    }
+
+    public function add()
+    {
+        $this->view('HomeMasterLayout', [
+            'pages' => 'CategoryAdminPage',
+            'block' => 'category/add'
         ]);
     }
 }
