@@ -11,7 +11,7 @@ function checkLogin()
 {
     if (!isset($_SESSION['authentication']) || $_SESSION['authentication'] != "yes") {
         // Nếu người dùng chưa đăng nhập, chuyển hướng họ đến trang đăng nhập
-        header('Location: http://infotech-website/login');
+        header('Location: /login');
         exit();
     }
 }
