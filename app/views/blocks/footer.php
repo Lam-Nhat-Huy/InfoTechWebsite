@@ -1,3 +1,9 @@
+<!-- END MAIN CONTENT-->
+<!-- END PAGE CONTAINER-->
+</div>
+</div>
+</div>
+</div>
 </div>
 <!-- Jquery JS-->
 <script src="<?= ASSETS ?>/vendor/jquery-3.2.1.min.js"></script>
