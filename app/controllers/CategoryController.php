@@ -43,4 +43,15 @@ class CategoryController extends Controller
             'category' => $this->CategoryModel->getOneCategory()
         ]);
     }
+
+    public function delete(){
+        if(isset($_GET['delete_id'])) {
+            $id = $_GET['delete_id'];
+            $this->CategoryModel->deleteCategory($id);
+        }
+        $this->view('HomeMasterLayout', [
+            'pages' => 'CategoryAdminPage',
+            'block' => 'category/list'
+        ]);
+    }
 }
