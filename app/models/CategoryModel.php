@@ -22,7 +22,8 @@ class CategoryModel extends Database
     public function getAllCategoryByAccount()
     {
         $user_id = $_SESSION['user_id'];
-        $stmt = "SELECT c.name as name, c.id as id, u.name as user_name, c.created_at as cr, c.updated_at as ud FROM `categories` c, `users` u WHERE  u.id = c.user_id AND  c.user_id = $user_id";
+
+        $stmt = "SELECT c.name as name, c.id as id, u.name as user_name, c.created_at as cr, c.updated_at as ud FROM `categories` c, `users` u WHERE u.id = c.user_id AND c.user_id = $user_id";
         return $this->execute($stmt);
     }
 
@@ -40,13 +41,25 @@ class CategoryModel extends Database
         $stmt->bind_param('si', $name, $id);
         if (!empty($name)) {
             if ($stmt->execute()) {
-                header('Location: /category/');
+                header('Location: /category/list/');
             } else {
                 $this->error = "Can't update category" . $this->conn->error;
                 header('Location: /category/add/');
             }
         } else {
             header('Location: /category/add/');
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        $stmt = $this->conn->prepare("DELETE FROM `categories` WHERE id = ?");
+
+        $stmt->bind_param('i', $id);
+        if ($stmt->execute()) {
+            header('Location: /category/list/');
+        } else {
+            header('Location: /category/list/');
         }
     }
 }
