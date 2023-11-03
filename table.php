@@ -21,7 +21,7 @@
                 <th>date</th>
                 <th>status</th>
                 <th>price</th>
-                <th>Ation</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

@@ -12,15 +12,35 @@ class CategoryController extends Controller
     {
         $this->view('HomeMasterLayout', [
             'pages' => 'CategoryAdminPage',
-            'block' => 'category/list'
+            'block' => 'category/list',
+            'category' => $this->CategoryModel->getAllCategoryByAccount()
         ]);
     }
 
     public function add()
     {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $name = $_POST['name'];
+            $user_id = $_SESSION['user_id'];
+            $this->CategoryModel->createCategory($name, $user_id);
+        }
         $this->view('HomeMasterLayout', [
             'pages' => 'CategoryAdminPage',
             'block' => 'category/add'
+        ]);
+    }
+
+    public function edit()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $name = $_POST['name'];
+            $id = $_GET['id'];
+            $this->CategoryModel->updateCategory($name, $id);
+        }
+        $this->view('HomeMasterLayout', [
+            'pages' => 'CategoryAdminPage',
+            'block' => 'category/edit',
+            'category' => $this->CategoryModel->getOneCategory()
         ]);
     }
 }
