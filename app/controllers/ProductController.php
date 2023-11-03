@@ -22,4 +22,12 @@ class ProductController extends Controller
             'block' => 'product/add'
         ]);
     }
+    
+    public function edit()
+    {
+        $this->view('HomeMasterLayout', [
+            'pages' => 'ProductAdminPage',
+            'block' => 'product/edit'
+        ]);
+    }
 }
