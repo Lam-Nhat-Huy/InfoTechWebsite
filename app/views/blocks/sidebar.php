@@ -2,7 +2,7 @@
 <div class="menu-sidebar d-none d-lg-block">
     <div class="logo">
         <a href="/home/">
-            <img src="<?= ASSETS ?>/images/icon/logo.png" alt="Cool Admin" />
+            <img src="<?= ASSETS ?>/images/infotech-logo.png" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">

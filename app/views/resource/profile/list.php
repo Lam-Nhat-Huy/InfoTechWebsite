@@ -1,5 +1,3 @@
-<div class="container">
-    <div class="main-body">
         <?php
         while ($row = mysqli_fetch_array($data['profile'])) {
         ?>
@@ -59,7 +57,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a class="btn btn-info" href="">Edit</a>
+                                    <a class="btn btn-outline-danger float-end" href="/profile/edit/"><i class="fas fa-pencil-alt"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -69,5 +67,3 @@
         <?php
         }
         ?>
-    </div>
-</div>
