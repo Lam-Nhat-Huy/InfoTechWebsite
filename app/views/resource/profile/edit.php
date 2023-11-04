@@ -56,9 +56,11 @@ while ($row = mysqli_fetch_array($data['profile'])) {
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-3">
                                 <button type="submit" class="btn btn-outline-success"><i class="fas fa-save"></i>
                                 </button>
+                                <a href="/profile/" class="btn btn-outline-danger"><i class="fas fa-arrow-left"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
