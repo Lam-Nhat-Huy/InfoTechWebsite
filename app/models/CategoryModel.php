@@ -53,7 +53,7 @@ class CategoryModel extends Database
 
     public function deleteCategory($id)
     {
-        $stmt = $this->conn->prepare("DELETE FROM `categories` WHERE id = ?");
+        $stmt = $this->conn->prepare("DELETE FROM `categories` WHERE `id` = ?");
 
         $stmt->bind_param('i', $id);
         if ($stmt->execute()) {
