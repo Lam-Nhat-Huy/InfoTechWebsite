@@ -36,10 +36,10 @@ class ProductController extends Controller
                 $originalName = basename($upload['name']);
                 $extension = pathinfo($originalName, PATHINFO_EXTENSION);
                 $newFileName = uniqid() . '_' . $originalName; // Thêm một giá trị duy nhất vào tên file
-        
+
                 // Thư mục lưu trữ ảnh
-                $uploadDir = './app/views/resource/product/upload/';
-        
+                $uploadDir = 'public/upload/';
+
                 // Di chuyển file ảnh đến thư mục lưu trữ
                 if (move_uploaded_file($tempName, $uploadDir . $newFileName)) {
                     // Trả về đường dẫn ảnh mới
@@ -60,7 +60,7 @@ class ProductController extends Controller
             'category' => $this->CategoryModel->getAllCategoryByAccount()
         ]);
     }
-    
+
     public function edit()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -80,10 +80,10 @@ class ProductController extends Controller
                 $originalName = basename($upload['name']);
                 $extension = pathinfo($originalName, PATHINFO_EXTENSION);
                 $newFileName = uniqid() . '_' . $originalName; // Thêm một giá trị duy nhất vào tên file
-        
+
                 // Thư mục lưu trữ ảnh
                 $uploadDir = './app/views/resource/product/upload/';
-        
+
                 // Di chuyển file ảnh đến thư mục lưu trữ
                 if (move_uploaded_file($tempName, $uploadDir . $newFileName)) {
                     // Trả về đường dẫn ảnh mới
@@ -105,7 +105,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function delete(){
+    public function delete()
+    {
         $id = $_GET['product_id'];
         $this->ProductModel->deleteProduct($id);
     }

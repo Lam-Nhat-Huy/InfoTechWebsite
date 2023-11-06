@@ -21,41 +21,41 @@
             </tr>
         </thead>
         <tbody>
-            <?php if(!empty($data['product'])){ ?>
-                <?php foreach($data['product'] as $data):?>
-            <tr class="tr-shadow">
-                <td><?= $data['id']?></td>
-                <td>
-                    <span class="block-email"><?= $data['name']?></span>
-                </td>
-                <td><img src=".<?= $data['image']?>" alt="" width="80px" height="80px"></td>
-                <td><?= $data['price']?></td>
-                <td>
-                <?= $data['sale_price']?>
-                </td>
-                <td><?= $data['user_name']?></td>
-                <td><?= $data['category_name']?></td>
-                <td><?= $data['created_at']?></td>
-                
-                <td>
-                    <div class="table-data-feature">
-                        <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send">
-                            <i class="zmdi zmdi-mail-send"></i>
-                        </button>
-                        <a href="/product/edit?product_id=<?=$data['id']?>&category_id=<?= $data['category_id']?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
-                            <i class="zmdi zmdi-edit"></i>
-                        </a>
-                        <a href="/product/delete?product_id=<?=$data['id']?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete?')">
-                            <i class="zmdi zmdi-delete"></i>
-                        </a>
-                        <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="More">
-                            <i class="zmdi zmdi-more"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            <tr class="spacer"></tr>
-            <?php endforeach?>
+            <?php if (!empty($data['product'])) { ?>
+                <?php foreach ($data['product'] as $data) : ?>
+                    <tr class="tr-shadow">
+                        <td><?= $data['id'] ?></td>
+                        <td>
+                            <span class="block-email"><?= $data['name'] ?></span>
+                        </td>
+                        <td><img src="../../../../<?= $data['image'] ?>" alt="" width="80px" height="80px"></td>
+                        <td><?= $data['price'] ?></td>
+                        <td>
+                            <?= $data['sale_price'] ?>
+                        </td>
+                        <td><?= $data['user_name'] ?></td>
+                        <td><?= $data['category_name'] ?></td>
+                        <td><?= $data['created_at'] ?></td>
+
+                        <td>
+                            <div class="table-data-feature">
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send">
+                                    <i class="zmdi zmdi-mail-send"></i>
+                                </button>
+                                <a href="/product/edit?product_id=<?= $data['id'] ?>&category_id=<?= $data['category_id'] ?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </a>
+                                <a href="/product/delete?product_id=<?= $data['id'] ?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete?')">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </a>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="More">
+                                    <i class="zmdi zmdi-more"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="spacer"></tr>
+                <?php endforeach ?>
             <?php } ?>
         </tbody>
     </table>

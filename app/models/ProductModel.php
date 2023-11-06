@@ -13,37 +13,37 @@ class ProductModel extends Database
     {
         $stmt = $this->conn->prepare("INSERT INTO `products`(`category_id`, `name`, `slug`, `image`, `content`, `price`, `sale_price`, `user_id`) VALUES (?,?,?,?,?,?,?,?)");
         $stmt->bind_param('issssiii', $category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id);
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             header('Location: /product/list');
-        }
-        else {
+        } else {
             header('Location: /product/add');
         }
     }
 
-    public function updateProduct($category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id, $id){
+    public function updateProduct($category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id, $id)
+    {
         $stmt = $this->conn->prepare("UPDATE `products` SET `category_id`= ?,`name`= ?,`slug`= ?,`image`= ?,`content`= ?,`price`= ?,`sale_price`= ?,`user_id`= ? WHERE `id` = ?");
         $stmt->bind_param('issssiiii', $category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id, $id);
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             header('Location: /product/list');
-        }
-        else{
+        } else {
             header('Location: /product/edit');
         }
     }
 
-    public function deleteProduct($id){
+    public function deleteProduct($id)
+    {
         $stmt = $this->conn->prepare("DELETE FROM `products` WHERE `id` = ?");
         $stmt->bind_param('i', $id);
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             header('Location: /product/list');
-        }
-        else{
+        } else {
             header('Location: /product/list');
         }
     }
 
-    public function getOneProduct(){
+    public function getOneProduct()
+    {
         $id = $_GET['product_id'];
         $stmt = "SELECT * FROM `products` WHERE id = $id";
         return $this->execute($stmt);
