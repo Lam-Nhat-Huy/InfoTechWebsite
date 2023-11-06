@@ -11,7 +11,7 @@ class ResetPasswordController extends Controller
 {
 
     
-    private $resetModel;    
+    private $resetModel;
     private $userModel;
     private $mail;
     public function __construct()
@@ -30,7 +30,7 @@ class ResetPasswordController extends Controller
     }
     public function index()
     {
-        $this->view('HomeMasterLayout', [
+        $this->view('LoginMasterLayout', [
             'pages' => 'ResetPasswordPage',
           
         ]);
@@ -76,7 +76,5 @@ if ($_SERVER['SERVER_NAME'] == 'POST') {
             break;
     }
 
-} else {
-    header("Location: /resetpassword/");
-}
+} 
 

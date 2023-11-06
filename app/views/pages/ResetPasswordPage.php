@@ -10,7 +10,7 @@
                     </div>
                     <a class="btn btn-danger btn-primary m-b-100" href="/login/">Back</a>
                     <div class="login-form">
-                        <form action="/controllers/" method="post">
+                        <form action="./app/controllers/ResetPasswordController.php" method="post">
                             <div class="form-group">
                                 <label>Email Address</label>
                                 <input class="au-input au-input--full" type="email" name="UsersEmail" placeholder="Email">
