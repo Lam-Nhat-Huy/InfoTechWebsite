@@ -1,4 +1,9 @@
 <?php
+
+
+
+//Create an instance; passing `true` enables exceptions
+
 class LoginModel extends Database
 {
     private $error = "";
@@ -76,4 +81,7 @@ class LoginModel extends Database
         session_destroy();
         header('Location: /login/');
     }
+
+   
+
 }
