@@ -40,9 +40,9 @@
                                     <a href="/category/edit?id=<?= $data['id'] ?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
                                         <i class="zmdi zmdi-edit"></i>
                                     </a>
-                                    <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
+                                    <a href="/category/delete?delete_id=<?=$data['id']?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete?')">
                                         <i class="zmdi zmdi-delete"></i>
-                                    </button>
+                                    </a>
                                     <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="More">
                                         <i class="zmdi zmdi-more"></i>
                                     </button>

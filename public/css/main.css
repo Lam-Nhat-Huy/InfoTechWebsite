@@ -1,0 +1,11 @@
+.breadcrumb {
+    margin-bottom: 0px !important;
+    background-color: #00a4b6;
+}
+
+.subscribe_area {
+    background-image: url(../images/subscribe_area.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

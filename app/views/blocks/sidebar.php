@@ -2,7 +2,7 @@
 <div class="menu-sidebar d-none d-lg-block">
     <div class="logo">
         <a href="/home/">
-            <img src="<?= ASSETS ?>/images/icon/logo.png" alt="Cool Admin" />
+            <img src="<?= ASSETS ?>/images/infotech-logo.png" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
@@ -190,7 +190,7 @@
                                     </div>
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
-                                            <a href="">
+                                            <a href="/profile/">
                                                 <i class="zmdi zmdi-account"></i>Account</a>
                                         </div>
                                         <div class="account-dropdown__item">
