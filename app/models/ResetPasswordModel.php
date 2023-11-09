@@ -35,7 +35,7 @@ public function insertToken($email, $selector, $hashedToken, $expires) {
 }
 public function resetPassword($selector, $currentDate){
     $stmt = "SELECT * FROM `pwdreset` WHERE `pwdResetSelector` = `$selector` AND `pwdResetExpires` =`$currentDate`";
-   $row = $this-> conn->single();
+   $row = $this->conn->fetch(PDO::FETCH_ASSOC);
    if ($this->conn->rowCount() > 0 ){
     # code...
     return $row;
