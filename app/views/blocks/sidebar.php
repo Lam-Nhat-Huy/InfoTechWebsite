@@ -25,7 +25,7 @@
                         <i class="fas fa-shopping-cart"></i>Order Manager</a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/comment/">
                         <i class="fas fa-comment"></i>Comment Manager</a>
 
                 </li>
