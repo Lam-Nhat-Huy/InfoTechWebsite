@@ -29,9 +29,9 @@
                             <span class="block-email"><?= $data['name'] ?></span>
                         </td>
                         <td><img src="../../../../<?= $data['image'] ?>" alt="" width="80px" height="80px"></td>
-                        <td><?= $data['price'] ?></td>
+                        <td><?= number_format($data['price']) ?></td>
                         <td>
-                            <?= $data['sale_price'] ?>
+                            <?= number_format($data['sale_price']) ?>
                         </td>
                         <td><?= $data['user_name'] ?></td>
                         <td><?= $data['category_name'] ?></td>

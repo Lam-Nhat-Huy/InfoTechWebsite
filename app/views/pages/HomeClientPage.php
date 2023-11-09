@@ -82,46 +82,23 @@
                 <div class="product_list_slider owl-carousel">
                     <div class="single_product_list_slider">
                         <div class="row align-items-center justify-content-between">
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="single_product_item">
-                                    <a href="/detail/"> <img src="<?= ASSETS ?>/images/product/product_1.png" alt=""></a>
-                                    <div class="single_product_text">
-                                        <h4>Quartz Belt Watch</h4>
-                                        <h3>$150.00</h3>
-                                        <a href="#" class="add_cart">+ add to cart<i class="fas fa-heart"></i></a>
+                            <?php if (!empty($data['product'])) : ?>
+                                <?php foreach ($data['product'] as $item) : ?>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="single_product_item">
+                                            <a href="/detail/"> <img src="../../<?= $item['image'] ?>" alt=""></a>
+                                            <div class="single_product_text">
+                                                <h4><?= $item['name']?></h4>
+                                                <div class="d-flex">
+                                                <h3 class="text-danger"><?= number_format($item['sale_price'])?> đ</h3>
+                                                <del class="text-body ml-4"><?= number_format($item['price'])?></del>
+                                                </div>
+                                                <a href="#" class="add_cart">+ add to cart<i class="fas fa-heart"></i></a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="single_product_item">
-                                    <a href="/detail/"> <img src="<?= ASSETS ?>/images/product/product_2.png" alt=""></a>
-                                    <div class="single_product_text">
-                                        <h4>Quartz Belt Watch</h4>
-                                        <h3>$150.00</h3>
-                                        <a href="#" class="add_cart">+ add to cart<i class="fas fa-heart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="single_product_item">
-                                    <a href="/detail/"><img src="<?= ASSETS ?>/images/product/product_3.png" alt=""></a>
-                                    <div class="single_product_text">
-                                        <h4>Quartz Belt Watch</h4>
-                                        <h3>$150.00</h3>
-                                        <a href="#" class="add_cart">+ add to cart<i class="fas fa-heart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="single_product_item">
-                                    <a href="/detail/"><img src="<?= ASSETS ?>/images/product/product_4.png" alt=""></a>
-                                    <div class="single_product_text">
-                                        <h4>Quartz Belt Watch</h4>
-                                        <h3>$150.00</h3>
-                                        <a href="#" class="add_cart">+ add to cart<i class="fas fa-heart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                                <?php endforeach ?>
+                            <?php endif ?>
                         </div>
                     </div>
                 </div>
