@@ -7,6 +7,7 @@
         </div>
     </div>
 </div>
+<?= $_SESSION['username'] ?>
 <div class="row m-t-25">
     <div class="col-sm-6 col-lg-3">
         <div class="overview-item overview-item--c1">

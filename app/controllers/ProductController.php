@@ -7,6 +7,7 @@ class ProductController extends Controller
     {
         $this->ProductModel = $this->model('ProductModel');
         $this->CategoryModel = $this->model('CategoryModel');
+        checkLogin();
     }
 
     public function index()

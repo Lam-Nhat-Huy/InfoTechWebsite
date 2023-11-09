@@ -30,8 +30,8 @@
 
                 </li>
                 <li>
-                    <a href="">
-                        <i class="fas fa-flag"></i>Banner Manager</a>
+                    <a href="/post/">
+                        <i class="fas fa-send"></i>Post Manager</a>
                 </li>
 
             </ul>
