@@ -73,7 +73,7 @@ class ResetPasswordController extends Controller
         
        
     }
-    public function resetPassword() {
+    public function resetPasswords() {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $data = [
             'selector'=> trim($_POST['selector']),
@@ -119,7 +119,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->sendEmail();
             break;
         case 'reset':
-            $init->resetPassword();
+            $init->resetPasswords();
             break;
         default:
         echo 'Lỗi Reset password';
