@@ -10,7 +10,7 @@
                         <label for="text-input" class=" form-control-label">Title</label>
                     </div>
                     <div class="col-12 col-md-9">
-                        <input type="text" id="text-input" name="name" placeholder="Name product..." class="form-control">
+                        <input type="text" id="text-input" name="title" placeholder="Title post..." class="form-control">
                         <small class="form-text text-muted">This is a help text</small>
                     </div>
                 </div>
