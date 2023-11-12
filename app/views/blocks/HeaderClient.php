@@ -56,29 +56,18 @@
                                 <li class=" nav-item">
                                     <a class="nav-link" href="/blog/">Blog</a>
                                 </li>
-                                <li class=" nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        pages
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> login</a>
-                                        <a class="dropdown-item" href="tracking.html">tracking</a>
-                                        <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                        <a class="dropdown-item" href="cart.html">shopping cart</a>
-                                        <a class="dropdown-item" href="confirmation.html">confirmation</a>
-                                        <a class="dropdown-item" href="elements.html">elements</a>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex">
                             <a id="search_1" href=""><i class="fas fa-search"></i></a>
-                            <a href=""><i class="fas fa-heart"></i></a>
-                            <div class="dropdown cart">
+                            <a href="/signup/"><i class="fas fa-user"></i></a>
+                            <div class="dropdown cart mr-3">
                                 <a class="dropdown-toggle" href="/cart/">
                                     <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </div>
+                            <?= (isset($_SESSION['authentication'])) ? "<h4>{$_SESSION['username']}</h4>" : " "; ?>
+                            <?= (isset($_SESSION['authentication'])) ? "<a href='/signin/logout/'><i class='fas fa-sign-out-alt'></i></a>" : " "; ?>
                         </div>
                     </nav>
                 </div>

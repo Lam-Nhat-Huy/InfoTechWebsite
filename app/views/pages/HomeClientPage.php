@@ -9,8 +9,7 @@
                             <div class="col-lg-5 col-md-8">
                                 <div class="banner_text">
                                     <div class="banner_text_iner">
-                                        <h1>Wood & Cloth
-                                            Sofa</h1>
+                                        <h1>Tech & Infomation</h1>
                                         <p>Incididunt ut labore et dolore magna aliqua quis ipsum
                                             suspendisse ultrices gravida. Risus commodo viverra</p>
                                         <a href="#" class="btn_2">buy now</a>
@@ -18,7 +17,7 @@
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="<?= ASSETS ?>/images/banner_img.png" alt="">
+                                <img src="<?= ASSETS ?>/images/banner2.jpg" style="width: 706px; height: 303px" alt="">
                             </div>
                         </div>
                     </div>
@@ -36,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="<?= ASSETS ?>/images/banner_img.png" alt="">
+                                <img src="<?= ASSETS ?>/images/banner3.webp" style="width: 706px; height: 303px" alt="">
                             </div>
                         </div>
                     </div>
@@ -54,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="<?= ASSETS ?>/images/banner_img.png" alt="">
+                                <img src="<?= ASSETS ?>/images/banner4.jpg" style="width: 706px; height: 303px" alt="">
                             </div>
                         </div>
                     </div>
@@ -84,7 +83,7 @@
                         <div class="row align-items-center justify-content-between">
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
-                                    <a href="/detail/"> <img src="<?= ASSETS ?>/images/product/product_1.png" alt=""></a>
+                                    <a href="/detail/"> <img src="<?= ASSETS ?>/images/product/p1.jpg" alt=""></a>
                                     <div class="single_product_text">
                                         <h4>Quartz Belt Watch</h4>
                                         <h3>$150.00</h3>
@@ -94,7 +93,7 @@
                             </div>
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
-                                    <a href="/detail/"> <img src="<?= ASSETS ?>/images/product/product_2.png" alt=""></a>
+                                    <a href="/detail/"> <img src="<?= ASSETS ?>/images/product/p2.jpg" alt=""></a>
                                     <div class="single_product_text">
                                         <h4>Quartz Belt Watch</h4>
                                         <h3>$150.00</h3>
@@ -104,7 +103,7 @@
                             </div>
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
-                                    <a href="/detail/"><img src="<?= ASSETS ?>/images/product/product_3.png" alt=""></a>
+                                    <a href="/detail/"><img src="<?= ASSETS ?>/images/product/p3.jpg" alt=""></a>
                                     <div class="single_product_text">
                                         <h4>Quartz Belt Watch</h4>
                                         <h3>$150.00</h3>
@@ -114,7 +113,7 @@
                             </div>
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
-                                    <a href="/detail/"><img src="<?= ASSETS ?>/images/product/product_4.png" alt=""></a>
+                                    <a href="/detail/"><img src="<?= ASSETS ?>/images/product/p4.png" alt=""></a>
                                     <div class="single_product_text">
                                         <h4>Quartz Belt Watch</h4>
                                         <h3>$150.00</h3>

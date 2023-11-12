@@ -5,8 +5,8 @@
             <div class="col-lg-8">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
-                        <h2>Signup Page</h2>
-                        <p>Home <span>-</span> Register</p>
+                        <h2>Signin Page</h2>
+                        <p>Home <span>-</span> Login</p>
                     </div>
                 </div>
             </div>
@@ -33,23 +33,17 @@
                 <div class="login_part_form">
                     <div class="login_part_form_iner">
                         <h3>Welcome Back ! <br>
-                            Please Sign in now</h3>
-                        <form class="row contact_form" action="/signup/" method="post" novalidate="novalidate">
-                            <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="name" name="username" value="" placeholder="Username">
-                            </div>
+                            Please Sign up now</h3>
+                        <form class="row contact_form" action="/signin/" method="post" novalidate="novalidate">
                             <div class="col-md-12 form-group p_star">
                                 <input type="email" class="form-control" id="email" name="email" value="" placeholder="Email">
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 <input type="password" class="form-control" id="password" name="password" value="" placeholder="Password">
                             </div>
-                            <div class="col-md-12 form-group p_star">
-                                <input type="password" class="form-control" id="cpassword" name="cpassword" value="" placeholder="Password repeat">
-                            </div>
                             <div class="col-md-12 form-group">
                                 <div class="creat_account d-flex align-items-center justify-content-end">
-                                    <a href="/signin/">Login</a>
+                                    <a href="/signup/">Register</a>
                                 </div>
                                 <button type="submit" value="submit" class="btn_3">
                                     log in
