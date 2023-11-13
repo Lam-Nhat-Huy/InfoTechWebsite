@@ -6,6 +6,7 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->CategoryModel = $this->model('CategoryModel');
+        checkLogin();
     }
 
     public function index()
@@ -44,8 +45,9 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function delete(){
-        if(isset($_GET['delete_id'])) {
+    public function delete()
+    {
+        if (isset($_GET['delete_id'])) {
             $id = $_GET['delete_id'];
             $this->CategoryModel->deleteCategory($id);
         }

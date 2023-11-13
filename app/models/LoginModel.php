@@ -1,4 +1,9 @@
 <?php
+require './library/jwt/autoload.php';
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 class LoginModel extends Database
 {
     private $error = "";
@@ -37,9 +42,9 @@ class LoginModel extends Database
 
     public function loginAdminAccount($email, $password)
     {
+        $secret_key = '85ldofi';
         // Kiểm tra email và mật khẩu
         if ($email == "" || $password == "") {
-            $this->error = "Email and Password must be filled in";
             return false;
         }
 
@@ -50,24 +55,36 @@ class LoginModel extends Database
         if ($stmt->execute()) {
             $result = $stmt->get_result();
             $user = $result->fetch_assoc();
-
             // Kiểm tra mật khẩu và role_id
             if (password_verify($password, $user['password']) && $user['role_id'] == 0) {
-                // Tạo session id cho người dùng
                 $_SESSION['authentication'] = "yes";
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['user_name'] = $user['name'];
-                $_SESSION['user_avatar'] = $user['avatar'];
-                $_SESSION['user_email'] = $user['email'];
-                header('Location: /home/');
-                return true;
+                $payload = [
+                    'isd' => 'localhost',
+                    'aud' => 'root',
+                    'user_id' => $user['id'],
+                    'username' => $user['name'],
+                    'email' => $user['email'],
+                    'phone' => $user['phone'],
+                    'avatar' => $user['avatar'],
+                    'address' => $user['address']
+                ];
+
+                try {
+                    $jwt = $this->encode($payload, $secret_key);
+                    $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
+                    $_SESSION['username'] = $decoded->username;
+                    $_SESSION['user_id'] = $decoded->user_id;
+                    $_SESSION['user_name'] =  $decoded->username;
+                    $_SESSION['user_avatar'] =  $decoded->avatar;
+                    $_SESSION['user_email'] =  $decoded->email;
+                } catch (Exception $e) {
+                    echo "Lỗi: " . $e->getMessage();
+                }
+
+                header('Location: /home?jwt=' . $jwt);
             } else {
-                $this->error = "Invalid password or not authorized";
                 return false;
             }
-        } else {
-            $this->error = "User not found";
-            return false;
         }
     }
 
@@ -75,5 +92,15 @@ class LoginModel extends Database
     {
         session_destroy();
         header('Location: /login/');
+    }
+
+    public function encode($payload, $secret_key, $alg = 'HS256')
+    {
+        try {
+            $encode = JWT::encode($payload, $secret_key, $alg);
+            return $encode;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }

@@ -1,35 +1,31 @@
 <?php
-class ProductController extends Controller
+class PostController extends Controller
 {
-    private $ProductModel;
-    private $CategoryModel;
+    private $PostModel;
     public function __construct()
     {
-        $this->ProductModel = $this->model('ProductModel');
-        $this->CategoryModel = $this->model('CategoryModel');
+        $this->PostModel = $this->model('PostModel');
         checkLogin();
     }
 
     public function index()
     {
         $this->view('HomeMasterLayout', [
-            'pages' => 'ProductAdminPage',
-            'block' => 'product/list',
-            'product' => $this->ProductModel->getAllProductByAccount()
+            'pages' => 'PostAdminPage',
+            'block' => 'post/list',
+            'post'  => $this->PostModel->GetAllPostByAccout()
         ]);
     }
 
     public function add()
     {
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $category_id = $_POST['category'];
-            $name = $_POST['name'];
-            $slug = createSlug($name);
-            $image = $_FILES['image']['name'];
-            $content = $_POST['content'];
-            $price = $_POST['price'];
-            $sale_price = $_POST['sale_price'];
+
             $user_id = $_SESSION['user_id'];
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+            $image = $_FILES['image']['name'];
             $upload = $_FILES['image'];
             if ($upload['error'] === UPLOAD_ERR_OK) {
                 $tempName = $upload['tmp_name'];
@@ -45,7 +41,7 @@ class ProductController extends Controller
                 if (move_uploaded_file($tempName, $uploadDir . $newFileName)) {
                     // Trả về đường dẫn ảnh mới
                     $image = $uploadDir . $newFileName;
-                    $this->ProductModel->createProduct($category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id);
+                    $this->PostModel->CreatePost($user_id, $title, $image, $content);
                 } else {
                     echo "<div class='alert alert-danger style='width: 400px;
                             margin-left: 250px;'>Có lỗi xảy ra khi lưu trữ file ảnh.</div>";
@@ -55,25 +51,22 @@ class ProductController extends Controller
                              margin-left: 250px;'>Có lỗi khi upload hình ảnh</div>";
             }
         }
+
         $this->view('HomeMasterLayout', [
-            'pages' => 'ProductAdminPage',
-            'block' => 'product/add',
-            'category' => $this->CategoryModel->getAllCategoryByAccount()
+            'pages' => 'PostAdminPage',
+            'block' => 'post/add',
+
         ]);
     }
 
     public function edit()
     {
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id = $_GET['product_id'];
-            $category_id = $_POST['category'];
-            $name = $_POST['name'];
-            $slug = createSlug($name);
-            $image = $_FILES['image']['name'];
+            $id = $_GET['post_id'];
+            $title = $_POST['title'];
             $content = $_POST['content'];
-            $price = $_POST['price'];
-            $sale_price = $_POST['sale_price'];
-            $user_id = $_SESSION['user_id'];
+            $image = $_FILES['image']['name'];
             $upload = $_FILES['image'];
             if ($upload['error'] === UPLOAD_ERR_OK) {
                 $tempName = $upload['tmp_name'];
@@ -83,7 +76,7 @@ class ProductController extends Controller
                 $newFileName = uniqid() . '_' . $originalName; // Thêm một giá trị duy nhất vào tên file
 
                 // Thư mục lưu trữ ảnh
-                $uploadDir = './app/views/resource/product/upload/';
+                $uploadDir = 'public/upload/';
 
                 // Di chuyển file ảnh đến thư mục lưu trữ
                 if (move_uploaded_file($tempName, $uploadDir . $newFileName)) {
@@ -91,24 +84,23 @@ class ProductController extends Controller
                     $image = $uploadDir . $newFileName;
                 } else {
                     echo "<div class='alert alert-danger style='width: 400px;
-                            margin-left: 250px;'>Có lỗi xảy ra khi lưu trữ file ảnh.</div>";
+                        margin-left: 250px;'>Có lỗi xảy ra khi lưu trữ file ảnh.</div>";
                 }
             } else {
                 $image = $_POST['thumbnail'];
             }
-            $this->ProductModel->updateProduct($category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id, $id);
+            $this->PostModel->UpdatePost($title, $image, $content, $id);
         }
         $this->view('HomeMasterLayout', [
-            'pages' => 'ProductAdminPage',
-            'block' => 'product/edit',
-            'category' => $this->CategoryModel->getAllCategoryByAccount(),
-            'product' => $this->ProductModel->getOneProduct()
+            'pages' => 'PostAdminPage',
+            'block' => 'post/edit',
+            'post'  =>  $this->PostModel->GetOnePostById()
         ]);
     }
 
     public function delete()
     {
-        $id = $_GET['product_id'];
-        $this->ProductModel->deleteProduct($id);
+        $id = $_GET['post_id'];
+        $this->PostModel->DeletePost($id);
     }
 }

@@ -25,13 +25,13 @@
                         <i class="fas fa-shopping-cart"></i>Order Manager</a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/comment/">
                         <i class="fas fa-comment"></i>Comment Manager</a>
 
                 </li>
                 <li>
-                    <a href="">
-                        <i class="fas fa-flag"></i>Banner Manager</a>
+                    <a href="/post/">
+                        <i class="fas fa-send"></i>Post Manager</a>
                 </li>
 
             </ul>
