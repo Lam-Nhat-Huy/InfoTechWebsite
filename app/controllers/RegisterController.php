@@ -30,7 +30,7 @@ class RegisterController extends Controller
 
 
             if ($result == true) {
-                header('Location: /login/');
+                header('Location: /admin/');
             } else {
                 header('Location: /register/');
             }

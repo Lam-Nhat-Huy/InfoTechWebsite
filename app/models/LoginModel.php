@@ -66,7 +66,8 @@ class LoginModel extends Database
                     'email' => $user['email'],
                     'phone' => $user['phone'],
                     'avatar' => $user['avatar'],
-                    'address' => $user['address']
+                    'address' => $user['address'],
+                    'exp' => time() + 10,
                 ];
 
                 try {
@@ -81,7 +82,11 @@ class LoginModel extends Database
                     echo "Lỗi: " . $e->getMessage();
                 }
 
-                header('Location: /home?jwt=' . $jwt);
+                echo '<script>
+                    localStorage.setItem("jwt_token", "' . $jwt . '");
+                    window.location.href = "/home/";
+                  </script>';
+
             } else {
                 return false;
             }
@@ -91,7 +96,7 @@ class LoginModel extends Database
     public function logoutAdminAccount()
     {
         session_destroy();
-        header('Location: /login/');
+        header('Location: /admin/');
     }
 
     public function encode($payload, $secret_key, $alg = 'HS256')
