@@ -82,11 +82,11 @@
                 <div class="product_list_slider owl-carousel">
                     <div class="single_product_list_slider">
                         <div class="row align-items-center justify-content-between">
-                            <?php if (!empty($data['product'])) : ?>
+                            <?php if (!empty($data['product'])) { ?>
                                 <?php foreach ($data['product'] as $item) : ?>
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="single_product_item">
-                                            <a href="/detail/"> <img src="../../<?= $item['image'] ?>" alt=""></a>
+                                            <a href="/detail/id=<?= $item['id']?>"> <img src="../../<?= $item['image'] ?>" alt=""></a>
                                             <div class="single_product_text">
                                                 <h4><?= $item['name']?></h4>
                                                 <div class="d-flex">
@@ -97,8 +97,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                <?php endforeach ?>
-                            <?php endif ?>
+                                <?php endforeach?>
+                            <?php } else{
+                                echo '';
+                            } ?>
                         </div>
                     </div>
                 </div>

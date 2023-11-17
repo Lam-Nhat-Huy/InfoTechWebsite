@@ -3,10 +3,14 @@ class ProductController extends Controller
 {
     private $ProductModel;
     private $CategoryModel;
+    private $ColorModel;
+    private $RamModel;
     public function __construct()
     {
         $this->ProductModel = $this->model('ProductModel');
         $this->CategoryModel = $this->model('CategoryModel');
+        $this->ColorModel = $this->model('ColorModel');
+        $this->RamModel = $this->model('RamModel');
         checkLogin();
     }
 
@@ -31,6 +35,14 @@ class ProductController extends Controller
             $sale_price = $_POST['sale_price'];
             $user_id = $_SESSION['user_id'];
             $upload = $_FILES['image'];
+            $color = $_POST['color'];
+            $ram = $_POST['ram'];
+            echo '<pre>';
+            print_r($color);
+            print_r($ram);
+            print_r($price);
+            echo '</pre>';
+            die();
             if ($upload['error'] === UPLOAD_ERR_OK) {
                 $tempName = $upload['tmp_name'];
                 // Xác định tên file mới
@@ -58,7 +70,9 @@ class ProductController extends Controller
         $this->view('HomeMasterLayout', [
             'pages' => 'ProductAdminPage',
             'block' => 'product/add',
-            'category' => $this->CategoryModel->getAllCategoryByAccount()
+            'category' => $this->CategoryModel->getAllCategoryByAccount(),
+            'color' => $this->ColorModel->getAllColorByAccount(),
+            'ram' => $this->RamModel->getAllRamByAccount()
         ]);
     }
 

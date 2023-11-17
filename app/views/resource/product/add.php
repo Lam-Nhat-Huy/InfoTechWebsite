@@ -28,21 +28,45 @@
                     </div>
                     <div class="col-12 col-md-9">
                         <select name="category" id="select" class="form-control">
-                            <?php if (!empty($data['category'])) { ?>
-                                <?php foreach ($data['category'] as $data) : ?>
-                                    <option value="<?= $data['id']?>"><?= $data['name'] ?></option>
+                            <?php if (!empty($data['category'])) : ?>
+                                <?php foreach ($data['category'] as $item) : ?>
+                                    <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
                                 <?php endforeach ?>
-                            <?php } ?>
+                            <?php endif ?>
                         </select>
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col col-md-3">
-                        <label for="email-input" class=" form-control-label">Price</label>
-                    </div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" id="email-input" name="price" placeholder="Price product" class="form-control">
-                        <small class="help-block form-text">Please enter your email</small>
+                <div id="product_attr">
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="color-input" class="form-control-label">Option</label>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <label for="" class="mr-2">Color</label>
+                            <select name="color[]" id="select">
+                                <?php if (!empty($data['color'])) : ?>
+                                    <?php foreach ($data['color'] as $color) : ?>
+                                        <option value="<?= $color['id'] ?>"><?= $color['name'] ?></option>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <label for="" class="mr-2">Ram</label>
+                            <select name="ram[]" id="">
+                                <?php if (!empty($data['ram'])) : ?>
+                                    <?php foreach ($data['ram'] as $ram) : ?>
+                                        <option value="<?= $ram['id'] ?>"><?= $ram['name'] ?></option>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-2 mb-2">
+                            <input type="text" name="price[]" class="form-control" placeholder="Price">
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <button class="btn btn-primary" onclick="add_product_attribute()" type="button">Add more</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row form-group">

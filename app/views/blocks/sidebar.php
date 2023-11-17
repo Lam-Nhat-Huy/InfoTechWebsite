@@ -17,6 +17,10 @@
                         <i class="fas fa-clipboard-list"></i>Product Manager</a>
                 </li>
                 <li>
+                    <a href="/color/">
+                        <i class="fas fa-gear"></i>Color Manager</a>
+                </li>
+                <li>
                     <a href="/category/">
                         <i class="fas fa-table"></i>Category Manager</a>
                 </li>
