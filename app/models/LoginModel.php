@@ -47,15 +47,12 @@ class LoginModel extends Database
         if ($email == "" || $password == "") {
             return false;
         }
-
-        // Tìm kiếm người dùng trong cơ sở dữ liệu
         $stmt = $this->conn->prepare("SELECT * FROM `users` WHERE email = ?");
         $stmt->bind_param('s', $email);
 
         if ($stmt->execute()) {
             $result = $stmt->get_result();
             $user = $result->fetch_assoc();
-            // Kiểm tra mật khẩu và role_id
             if (password_verify($password, $user['password']) && $user['role_id'] == 0) {
                 $_SESSION['authentication'] = "yes";
                 $payload = [
@@ -65,6 +62,7 @@ class LoginModel extends Database
                     'phone' => $user['phone'],
                     'avatar' => $user['avatar'],
                     'address' => $user['address'],
+                    'exp' => time() + 1200
                 ];
 
                 try {
@@ -75,12 +73,13 @@ class LoginModel extends Database
                     $_SESSION['user_name'] =  $decoded->username;
                     $_SESSION['user_avatar'] =  $decoded->avatar;
                     $_SESSION['user_email'] =  $decoded->email;
+                    $_SESSION['exp'] = $decoded->exp;
                     } catch (Exception $e) {
                     echo "Lỗi: " . $e->getMessage();
                 }
 
                 echo '<script>
-                    localStorage.setItem("jwt_token", "' . $jwt . '");
+                    localStorage.setItem("jwt_token_admin", "' . $jwt . '");
                     window.location.href = "/home/";
                   </script>';
 
@@ -90,11 +89,23 @@ class LoginModel extends Database
         }
     }
 
+    public function setTimeLogoutAdmin()
+    {
+        if ($_SESSION['exp'] < time()) {
+           return $this->logoutAdminAccount();
+        }
+    }
+
     public function logoutAdminAccount()
     {
         session_destroy();
-        header('Location: /admin/');
+        echo '<script>';
+        echo 'localStorage.clear();';
+        echo 'window.location.href = "/admin/";';
+        echo '</script>';
+        exit();
     }
+
 
     public function encode($payload, $secret_key, $alg = 'HS256')
     {

@@ -45,41 +45,56 @@ class SigninModel extends  Database {
             $user = $result->fetch_assoc();
             // Kiểm tra mật khẩu và role_id
             if (password_verify($password, $user['password']) && $user['role_id'] == 1) {
-                $_SESSION['authentication'] = "yes";
+                $_SESSION['authentication_user'] = "yes";
                 $payload = [
-                    'isd' => 'localhost',
-                    'aud' => 'root',
                     'user_id' => $user['id'],
                     'username' => $user['name'],
                     'email' => $user['email'],
                     'phone' => $user['phone'],
                     'avatar' => $user['avatar'],
-                    'address' => $user['address']
+                    'address' => $user['address'],
+                    'exp' => time() + 1200
                 ];
 
                 try {
                     $jwt = $this->encode($payload, $secret_key);
                     $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
-                    $_SESSION['username'] = $decoded->username;
-                    $_SESSION['user_id'] = $decoded->user_id;
-                    $_SESSION['user_name'] =  $decoded->username;
-                    $_SESSION['user_avatar'] =  $decoded->avatar;
-                    $_SESSION['user_email'] =  $decoded->email;
+                    $_SESSION['client_username'] = $decoded->username;
+                    $_SESSION['client_user_id'] = $decoded->user_id;
+                    $_SESSION['client_user_name'] =  $decoded->username;
+                    $_SESSION['client_user_avatar'] =  $decoded->avatar;
+                    $_SESSION['client_user_email'] =  $decoded->email;
+                    $_SESSION['client_user_exp'] =  $decoded->exp;
                 } catch (Exception $e) {
                     echo "Lỗi: " . $e->getMessage();
                 }
 
-                header('Location: /dashboard?jwt=' . $jwt);
+                echo '<script>
+                    localStorage.setItem("jwt_token_client", "' . $jwt . '");
+                    window.location.href = "/dashboard/";
+                  </script>';
             } else {
                 return false;
             }
         }
     }
 
+    public function setTimeLogoutClient()
+    {
+        if ($_SESSION['client_user_exp'] < time()) {
+            return $this->logoutClientAccount();
+        }
+    }
+
     public function logoutClientAccount()
     {
+        // Hủy bỏ phiên đăng nhập
         session_destroy();
-        header('Location: /dashboard/');
+        echo '<script>';
+        echo 'localStorage.clear();';
+        echo 'window.location.href = "/dashboard/";';
+        echo '</script>';
+        exit();
     }
 
     public function encode($payload, $secret_key, $alg = 'HS256')

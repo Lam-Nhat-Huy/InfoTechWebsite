@@ -4,9 +4,7 @@ class HomeModel extends Database {
 
     public function productStatistics()
     {
-        $user_id = $_SESSION['user_id'];
-        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM products WHERE user_id = ?");
-        $stmt->bind_param('i', $user_id);
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM products");
         $stmt->execute();
         $stmt->bind_result($productCount);
         $stmt->fetch();
@@ -14,5 +12,23 @@ class HomeModel extends Database {
         return $productCount;
     }
 
+    public function categoryStatistics()
+    {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM categories");
+        $stmt->execute();
+        $stmt->bind_result($categoryCount);
+        $stmt->fetch();
+        $stmt->close();
+        return $categoryCount;
+    }
 
+    public function orderStatistics()
+    {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM orders");
+        $stmt->execute();
+        $stmt->bind_result($orderStatistics);
+        $stmt->fetch();
+        $stmt->close();
+        return $orderStatistics;
+    }
 }

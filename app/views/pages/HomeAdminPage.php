@@ -13,11 +13,11 @@
             <div class="overview__inner">
                 <div class="overview-box clearfix">
                     <div class="icon">
-                        <i class="zmdi zmdi-account-o"></i>
+                        <i class="fas fa-clipboard-list"></i>
                     </div>
                     <div class="text">
                         <h2><?= $data['productStatistics'] ?></h2>
-                        <span>members online</span>
+                        <span>Product Quantity</span>
                     </div>
                 </div>
                 <div class="overview-chart">
@@ -31,11 +31,11 @@
             <div class="overview__inner">
                 <div class="overview-box clearfix">
                     <div class="icon">
-                        <i class="zmdi zmdi-shopping-cart"></i>
+                        <i class="fas fa-table"></i>
                     </div>
                     <div class="text">
-                        <h2>388,688</h2>
-                        <span>items solid</span>
+                        <h2><?= $data['categoryStatistics'] ?></h2>
+                        <span>Category Quantity</span>
                     </div>
                 </div>
                 <div class="overview-chart">
@@ -49,11 +49,11 @@
             <div class="overview__inner">
                 <div class="overview-box clearfix">
                     <div class="icon">
-                        <i class="zmdi zmdi-calendar-note"></i>
+                        <i class="fas fa-shopping-cart"></i>
                     </div>
                     <div class="text">
-                        <h2>1,086</h2>
-                        <span>this week</span>
+                        <h2><?= $data['orderStatistics'] ?></h2>
+                        <span>Order Quantity1</span>
                     </div>
                 </div>
                 <div class="overview-chart">

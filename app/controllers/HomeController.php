@@ -13,10 +13,15 @@ class HomeController extends Controller
 
     public function index()
     {
+        $setTimeLogoutAdmin = $this->LoginModel->setTimeLogoutAdmin();
         $productStatistics = $this->HomeModel->productStatistics();
+        $categoryStatistics = $this->HomeModel->categoryStatistics();
+        $orderStatistics = $this->HomeModel->orderStatistics();
         $this->view('HomeMasterLayout', [
             'pages' => 'HomeAdminPage',
             'productStatistics' => $productStatistics,
+            'categoryStatistics' => $categoryStatistics,
+            'orderStatistics' => $orderStatistics
         ]);
     }
 }

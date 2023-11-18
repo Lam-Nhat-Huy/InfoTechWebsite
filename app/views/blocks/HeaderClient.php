@@ -60,14 +60,14 @@
                         </div>
                         <div class="hearer_icon d-flex">
                             <a id="search_1" href=""><i class="fas fa-search"></i></a>
-                            <a href="/signup/"><i class="fas fa-user"></i></a>
+                            <a href="/signin/"><i class="fas fa-user"></i></a>
                             <div class="dropdown cart mr-3">
                                 <a class="dropdown-toggle" href="/cart/">
                                     <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </div>
-                            <?= (isset($_SESSION['authentication'])) ? "<h4>{$_SESSION['username']}</h4>" : " "; ?>
-                            <?= (isset($_SESSION['authentication'])) ? "<a href='/signin/logout/'><i class='fas fa-sign-out-alt'></i></a>" : " "; ?>
+                            <?= (isset($_SESSION['authentication_user'])) ? "<h4>{$_SESSION['client_username']}</h4>" : " "; ?>
+                            <?= (isset($_SESSION['authentication_user'])) ? "<a href='/signin/logout/'><i class='fas fa-sign-out-alt'></i></a>" : " "; ?>
                         </div>
                     </nav>
                 </div>
