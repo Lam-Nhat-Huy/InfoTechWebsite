@@ -17,11 +17,20 @@ class HomeController extends Controller
         $productStatistics = $this->HomeModel->productStatistics();
         $categoryStatistics = $this->HomeModel->categoryStatistics();
         $orderStatistics = $this->HomeModel->orderStatistics();
+        $postStatistics = $this->HomeModel->postStatistics();
+        $totalProductStatistics = $this->HomeModel->totalProductStatistics();
+        $userStatistics = $this->HomeModel->userStatistics();
+        $chartData = $this->HomeModel->productJson();
+
         $this->view('HomeMasterLayout', [
             'pages' => 'HomeAdminPage',
             'productStatistics' => $productStatistics,
             'categoryStatistics' => $categoryStatistics,
-            'orderStatistics' => $orderStatistics
+            'orderStatistics' => $orderStatistics,
+            'postStatistics' => $postStatistics,
+            'totalProductStatistics' => $totalProductStatistics,
+            'userStatistics' => $userStatistics,
+            'chartData' => $chartData,
         ]);
     }
 }

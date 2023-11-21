@@ -28,7 +28,21 @@
 
 <!-- Main JS-->
 <script src="<?= ASSETS ?>/js/main.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var chartData = <?php echo json_encode($data['chartData']); ?>;
+        new Morris.Bar({
+            element: 'column-chart',
+            data: chartData,
+            xkey: 'label',
+            ykeys: ['product_count', 'total_price'],
+            labels: ['Số lượng', 'Tổng giá']
+        });
+    });
+</script>
 </body>
 
 </html>

@@ -31,6 +31,7 @@
 
     <!-- Main CSS-->
     <link href="<?= ASSETS ?>/css/theme.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
 </head>
 
