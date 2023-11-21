@@ -20,7 +20,7 @@ class HomeController extends Controller
         $postStatistics = $this->HomeModel->postStatistics();
         $totalProductStatistics = $this->HomeModel->totalProductStatistics();
         $userStatistics = $this->HomeModel->userStatistics();
-        $chartData = $this->HomeModel->productJson();
+        $chartData = $this->HomeModel->productJsons();
 
         $this->view('HomeMasterLayout', [
             'pages' => 'HomeAdminPage',

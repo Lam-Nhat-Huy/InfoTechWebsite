@@ -68,26 +68,30 @@ class HomeModel extends Database {
         }
     }
 
-    public function productJson()
+    public function productJsons()
     {
-        $sql = "SELECT c.id AS category_id, c.name AS category_name, COUNT(p.id) AS product_count, SUM(p.price) AS total_price
-                FROM categories c
-                LEFT JOIN products p ON p.category_id = c.id
-                GROUP BY c.id, c.name";
-        $query = $this->conn->query($sql);
-
-        $chartData = [];
-        while ($row = $query->fetch_assoc()) {
-            $chartData[] = array(
-                'label' => $row['category_name'],
-                'product_count' => $row['product_count'],
-                'total_price' => $row['total_price']
-            );
+        try {
+            $sql = "SELECT c.id AS category_id, c.name AS category_name, COUNT(p.id) AS product_count, SUM(p.price) AS total_price
+            FROM categories c
+            LEFT JOIN products p ON p.category_id = c.id
+            GROUP BY c.id, c.name";
+            $stmt = $this->conn->prepare($sql);
+            if ($stmt === false) {
+                die("Error preparing statement: " . $this->conn->error);
+            }
+            $stmt->execute();
+            $stmt->bind_result($category_id, $category_name, $product_count, $total_price);
+            $chartData = [];
+            while ($stmt->fetch()) {
+                $chartData[] = array(
+                    'label' => $category_name,
+                    'product_count' => $product_count,
+                    'total_price' => $total_price
+                );
+            }
+            return $chartData;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
-        return $chartData;
     }
-
-
-
-
 }
