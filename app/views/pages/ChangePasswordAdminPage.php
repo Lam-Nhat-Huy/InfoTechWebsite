@@ -1,17 +1,4 @@
-<?php 
-if(empty($_GET['selector']) || empty($_GET['validator'])){
 
-    echo 'Không Thấy Mã Code';
-}else{
-    $selector = $_GET['selector'];
-    $validator = $_GET['validator'];
-
-   
-
-    }
-
-
-?>
 
 
 <div class="page-wrapper">
@@ -26,19 +13,17 @@ if(empty($_GET['selector']) || empty($_GET['validator'])){
                     </div>
                     <a class="btn btn-danger btn-primary m-b-100" href="/login/">Back</a>
                     <div class="login-form">
-                        <form action="/ResetPassword/" method="post">
-
+                        <form action="" method="post">
+                        <input type="hidden" name="type" value="reset">
+                        
                             <div class="form-group">
-                                <input type="hidden" name="type" value="reset" >
-                                <input type="hidden" name="selector" value=" <?php echo $selector ?> " >
-                                <input type="hidden" name="validator" value=" <?php echo $validator ?> " >
-                                
+                            <label>Email</label>
+                                <input class="au-input au-input--full" type="text" name="usersEmail" placeholder="Email">
                                 <label>Password</label>
-                                <input class="au-input au-input--full" type="password" name="pwd" placeholder="Password">
-                                <label>Repeat Password</label>
-                                <input class="au-input au-input--full" type="password" name="pwd-repeat" placeholder="Password">
+                                <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                               
                             </div>
-                            <button class="au-btn au-btn--block au-btn--green m-b-20" name="submit"
+                            <button class="au-btn au-btn--block au-btn--green m-b-20" name="doimatkhau"
                                 type="submit">submit</button>
                         </form>
                     </div>

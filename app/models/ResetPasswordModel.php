@@ -1,56 +1,64 @@
-<?php 
+<?php
 
 
-class ResetPasswordModel extends Database{
+class ResetPasswordModel extends Database
+{
+
+    public function SelectUser($email)
+    {
+        $stmt = ("SELECT * FROM `users` WHERE email='$email'");
+    }
+    public function CreateCode($code, $email)
+    {
 
 
+        $stmt = $this->conn->prepare("UPDATE `users` SET code = ? WHERE email = ?");
+            $stmt->bind_param("ss", $code, $email);
+        // Execute the statement
+        $stmt->execute();
+        // Check if the update was successful
+        if ($stmt->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
 
-public function deleteEmail($email) {
-    // Sử dụng lệnh DELETE và truyền tham số :email
-   
-    $stmt = $this->conn->prepare("DELETE FROM `pwdreset` WHERE `pwdResetEmail` = ?");
-    $stmt->bind_param('s', $email);
-    if ($stmt->execute()) {
-        return true;
-    } else {
-        return false;
+
     }
 
 
-}
-public function insertToken($email, $selector, $hashedToken, $expires) {
-    // Sử dụng PDO để chuẩn bị câu lệnh INSERT
- 
 
-    $stmt = $this->conn->prepare("INSERT INTO `pwdreset`(`pwdResetEmail`, `pwdResetSelector`, `pwdResetToken`, `pwdResetExpires`) VALUES (?,?,?,?)");
-        $stmt->bind_param('isss', $email, $selector, $hashedToken, $expires);
-        if ($stmt->execute()) {
+
+
+    public function SelectCode($code)
+    {
+        if (!isset($code)) {
+            echo'loi ';
+        }else {
+           $stmt = ("SELECT * FROM `users` WHERE code = '$code' "); 
+        }
+        
+
+    }
+
+
+    public function ChangePassword($new_password,$email,$code)
+    {
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+        $stmt = $this->conn->prepare("UPDATE `users` SET password = ? WHERE email = ? AND code = ? ");
+        $stmt->bind_param("sss", $hashed_password,$email,$code);
+        // Execute the statement
+       
+
+        $stmt->execute();
+        // Check if the update was successful
+        if ($stmt->affected_rows > 0) {
             return true;
         } else {
             return false;
         }
+    }
 
 
-
-}
-public function resetPassword($selector, $currentDate){
-    $stmt = "SELECT * FROM `pwdreset` WHERE `pwdResetSelector` = `$selector` AND `pwdResetExpires` =`$currentDate`";
-   $row = $this-> conn->single();
-   if ($this->conn->rowCount() > 0 ){
-    # code...
-    return $row;
-   }else {
-    return false;
-   }
-}
-public function resetPasswordUser($newPwdHash, $tokenEmail){
-    $stmt = $this->conn->prepare("UPDATE `users` SET `usersPwd`= ? WHERE `email` = ?");
-        $stmt->bind_param('ss', $newPwdHash, $tokenEmail);
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-
-        }
-}
 }

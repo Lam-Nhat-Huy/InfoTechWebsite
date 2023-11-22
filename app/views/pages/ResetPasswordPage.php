@@ -10,7 +10,7 @@
                     </div>
                     <a class="btn btn-danger btn-primary m-b-100" href="/login/">Back</a>
                     <div class="login-form">
-                        <form action="/ResetPassword/" method="post">
+                        <form action="" method="post">
                             <input type="hidden" name="type" value="send" >
                         <div class="form-group">
                                 <label>Email Address</label>

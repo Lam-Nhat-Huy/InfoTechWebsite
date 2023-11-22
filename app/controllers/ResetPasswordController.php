@@ -1,120 +1,126 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-require_once './app/models/ResetPasswordModel.php';
 
 require_once './app/PHPMailer/src/PHPMailer.php';
 require_once './app/PHPMailer/src/Exception.php';
 require_once './app/PHPMailer/src/SMTP.php';
 
+
 class ResetPasswordController extends Controller
 {
 
-    
-    private $resetModel;
-    private $userModel;
-    private $mail;
+    private $conn;
+    private $ResetPasswordModel;
     public function __construct()
     {
-        
-        $this->resetModel = $this->model('ResetPasswordModel');
+        $this->ResetPasswordModel = $this->model('ResetPasswordModel');
 
-        $this->resetModel = new ResetPasswordModel;
-        
-        $this->mail = new PHPMailer;
-        $this->mail->CharSet = 'UTF-8';
-        $this->mail->isSMTP();
-        $this->mail->Host = 'smtp.gmail.com';  // Thay đổi nếu bạn sử dụng máy chủ email khác
-        $this->mail->SMTPAuth = true;
-        $this->mail->Username = 'phamanhhoaipl@gmail.com'; // Thay đổi bằng địa chỉ email của bạn
-        $this->mail->Password = 'hlrhwmqytiauuygu';  // Thay đổi bằng mật khẩu của bạn
-        $this->mail->SMTPSecure = 'ssl';
-        $this->mail->Port = 465;  // Thay đổi nếu máy chủ email của bạn yêu cầu cổng khác
     }
+
+
     public function index()
     {
         $this->view('LoginMasterLayout', [
             'pages' => 'ResetPasswordPage',
-          
+
         ]);
     }
-    
-    public function sendEmail(){
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $usersEmail = trim($_POST['usersEmail']);
-        if (empty($usersEmail)) {
-            header ('Location:/login/');
-        }
-        $selector = bin2hex(random_bytes(8));
 
-        $token = random_bytes(32);
-        $url ='http://infotech/forget?selector='.$selector.'&validator='.bin2hex($token);
-        $expires = date("U") + 1800;
-        if (!$this->resetModel->deleteEmail($usersEmail)) {
-            # code...
-            die("Lỗi ");
-        }
-        $hashedToken = password_hash($token,PASSWORD_DEFAULT);
-        if (!$this->resetModel->insertToken($usersEmail,$selector,$hashedToken,$expires)) {
-            die("lỗi");
-        }
-        $subject ="Reset your password";
-        $message = "<p>Me recieved a password reset request</p>";
-        $message .= "<p>Here is your password reset link:</p>";
-        $message .= "<a href='".$url."'>".$url."</a>";
+    public function sendEmail()
+    {
 
-        $this->mail->setFrom('phamanhhoaipl@gmail.com');
-        $this->mail->isHTML(true);
-        $this->mail->Subject = $subject;
-        $this->mail->Body = $message;
-        $this->mail->addAddress($usersEmail);
-        
-        $this->mail->send();
-        
-       
+        $email = $_POST['usersEmail'];
+        $mail = new PHPMailer(true);
+        try {
+            // Cấu hình thông tin máy chủ email và tài khoản gửi
+            $mail->CharSet = 'UTF-8';
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';  // Thay đổi nếu bạn sử dụng máy chủ email khác
+            $mail->SMTPAuth = true;
+            $mail->Username = 'phamanhhoaipl@gmail.com'; // Thay đổi bằng địa chỉ email của bạn
+            $mail->Password = 'ufdsdcmzkajihxox';  // Thay đổi bằng mật khẩu của bạn
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;  // Thay đổi nếu máy chủ email của bạn yêu cầu cổng khác
+
+            // Thiết lập người gửi và người nhận
+            $mail->setFrom('phamanhhoaipl@gmail.com', 'AnhHoai');  // Thay đổi bằng địa chỉ email và tên của bạn
+            $mail->addAddress($email);  // Sử dụng địa chỉ email người nhận được truyền vào hàm
+            $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
+            $encodedCode = urlencode($code);
+            $mail->isHTML(true);
+
+            // Đặt tiêu đề và nội dung của email
+            $mail->Subject = 'Password Reset';
+            $mail->Body = 'ĐỔI MẬT KHẨU THEO LINK: <a href="http://infotech/forget/ResetPassword?code=' . $encodedCode . '">Tại Đây</a>';
+
+
+            $this->ResetPasswordModel->SelectUser($email);
+
+            if (isset($code)) {
+                $this->ResetPasswordModel->CreateCode($code, $email);
+                $mail->send();
+                echo 'Message has been sent';
+            }
+
+
+
+        } catch (Exception $e) {
+            echo "Lỗi khi gửi email: " . $mail->ErrorInfo;
+            return false;
+        }
+
+
     }
-    public function resetPasswords() {
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $data = [
-            'selector'=> trim($_POST['selector']),
-            'validator'=> trim($_POST['validator']),
-            'pwd'=> trim($_POST['pwd']),
-            'pwd-repeat'=> trim($_POST['pwd-repeat'])
-        ];
-        $url ='/forget?selector='.$data['selector'].'&validator='.$data['validator'];
-         if(empty($_POST['pwd'] || $_POST['pwd-repeat'])){
-            header($url);
-         }else if($data['pwd'] != $data['pwd-repeat']){
-            header($url);
-         }elseif (strlen($data['pwd']) < 6){ 
-            header($url);
-            # code...
-         }
-         $currentDate = date('U');
-         if (!$row =$this->resetModel->resetPassword($data['selector'],$currentDate)) {
-            header($url);
-         }
-         $tokenBin = hex2bin($data['validator']);
-         $tokenCheck = password_verify($tokenBin, $row->pwdResetToken);
-         if (!$tokenCheck) {
-            header($url);
-         }
-         $tokenEmail = $row->pwdResetEmail;
-       
-
-
-         $newPwdHash =password_hash($data['pwd'],PASSWORD_DEFAULT);
-       if (!$this->resetModel->deleteEmail($tokenEmail)) {
-        header($url);
-       }
-       header($url);
-    }
+    public function resetPasswords()
+    {
+        if (isset($_GET['code'])) {
+        
     
+      
+
+            $code = $_GET['code'];
+
+
+            $this->ResetPasswordModel->SelectCode($code);
+
+            $email = $_POST['usersEmail'];
+            $new_password = $_POST['password'];
+
+
+            $changeQuery=$this->ResetPasswordModel->ChangePassword($new_password, $email, $code);
+
+                if($changeQuery) {
+                header("Location: /login/");
+
+            }else {
+                echo'Lỗi Update Mật Khẩu';
+            }
+
+
+
+        
+
+
+
+
+
+        }else {
+        
+        
+
+   
+            echo 'Invalid reset request';
+                }
+    }
+
+
 }
-
 $init = new ResetPasswordController;
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    switch($_POST['type']) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    switch ($_POST['type']) {
         case 'send':
             $init->sendEmail();
             break;
@@ -122,8 +128,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->resetPasswords();
             break;
         default:
-        echo 'Lỗi Reset password';
+            echo 'Lỗi Email Không Gửi';
+
+
+
+
     }
 
 }
+
+
 
