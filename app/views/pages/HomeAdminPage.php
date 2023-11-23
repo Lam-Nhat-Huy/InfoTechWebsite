@@ -139,7 +139,7 @@
     <div class="col-lg-12">
         <div class="au-card recent-report">
             <div class="au-card-inner">
-                <canvas id="myChart" width="400" height="200"></canvas>
+                <canvas id="myChart" width="600" height="200"></canvas>
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@ use Firebase\JWT\Key;
 class LoginModel extends Database
 {
     private $error = "";
-    
+
     public function registerAdminAccount($name, $email, $phone, $address, $role_id, $password, $cpassword, $avatar)
     {
         // Kiểm tra xem mật khẩu và mật khẩu xác nhận có khớp nhau hay không
@@ -74,7 +74,7 @@ class LoginModel extends Database
                     $_SESSION['user_avatar'] =  $decoded->avatar;
                     $_SESSION['user_email'] =  $decoded->email;
                     $_SESSION['exp'] = $decoded->exp;
-                    } catch (Exception $e) {
+                } catch (Exception $e) {
                     echo "Lỗi: " . $e->getMessage();
                 }
 
@@ -92,7 +92,7 @@ class LoginModel extends Database
     public function setTimeLogoutAdmin()
     {
         if ($_SESSION['exp'] < time()) {
-           return $this->logoutAdminAccount();
+            return $this->logoutAdminAccount();
         }
     }
 
