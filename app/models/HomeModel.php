@@ -1,4 +1,7 @@
 <?php
+require_once './library/carbon/autoload.php';
+
+use Carbon\Carbon;
 
 class HomeModel extends Database {
 
@@ -58,7 +61,7 @@ class HomeModel extends Database {
     public function userStatistics()
     {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM users WHERE role_id = 1 ORDER BY id DESC LIMIT 5");
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE role_id = 1 ORDER BY id DESC LIMIT 6");
             $stmt->execute();
             $result = $stmt->get_result();
             $fetch = $result->fetch_assoc();

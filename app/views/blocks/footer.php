@@ -31,6 +31,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     $(document).ready(function() {
         var chartData = <?php echo json_encode($data['chartData']); ?>;
@@ -41,6 +42,39 @@
             ykeys: ['product_count', 'total_price'],
             labels: ['Số lượng', 'Tổng giá']
         });
+    });
+</script>
+<script>
+    // Dữ liệu từ PHP
+    var weeklyCounts = <?php echo json_encode($data['weeklyProductStatistics']); ?>;
+
+    // Tạo mảng các tuần và số lượng tương ứng
+    var weeks = Object.keys(weeklyCounts);
+    var counts = Object.values(weeklyCounts);
+
+    // Lấy canvas element
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    // Vẽ biểu đồ cột
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: weeks,
+            datasets: [{
+                label: 'Số lượng sản phẩm',
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
     });
 </script>
 </body>
