@@ -1,6 +1,6 @@
-
-
-
+<?php 
+$token = $_GET['token'];
+?>
 <div class="page-wrapper">
     <div class="page-content--bge5">
         <div class="container">
@@ -13,22 +13,24 @@
                     </div>
                     <a class="btn btn-danger btn-primary m-b-100" href="/login/">Back</a>
                     <div class="login-form">
-                        <form action="" method="post">
-                        <input type="hidden" name="type" value="reset">
-                        
+                        <form action="/processresetpassword/" method="post">
+                                <input type="hidden" name="token" value="<?=$token?>" >
                             <div class="form-group">
-                            <label>Email</label>
+                            <label>Email Address</label>
                                 <input class="au-input au-input--full" type="text" name="usersEmail" placeholder="Email">
-                                <label>Password</label>
-                                <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
-                               
+                                <label>New Password</label>
+                                <input class="au-input au-input--full" type="password" id="password" name="password"
+                                    placeholder="Password">
+                                    <label>Password Confirmation</label>
+                                <input class="au-input au-input--full" type="password" id="password_Confirmation" name="password_Confirmation"
+                                    placeholder="password_Confirmation">
                             </div>
-                            <button class="au-btn au-btn--block au-btn--green m-b-20" name="doimatkhau"
-                                type="submit">submit</button>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-  
