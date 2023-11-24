@@ -3,10 +3,15 @@ class ProductController extends Controller
 {
     private $ProductModel;
     private $CategoryModel;
+    private $ColorModel;
+    private $RamModel;
     public function __construct()
     {
         $this->ProductModel = $this->model('ProductModel');
         $this->CategoryModel = $this->model('CategoryModel');
+        $this->ColorModel = $this->model('ColorModel');
+        $this->RamModel = $this->model('RamModel');
+        checkLogin();
     }
 
     public function index()
@@ -27,7 +32,9 @@ class ProductController extends Controller
             $image = $_FILES['image']['name'];
             $content = $_POST['content'];
             $price = $_POST['price'];
-            $sale_price = $_POST['sale_price'];
+            $color = !empty($_POST['color']) ? $_POST['color'] : 0;
+            $ram = !empty($_POST['ram']) ? $_POST['ram'] : 0;
+            $qty = $_POST['qty'];
             $user_id = $_SESSION['user_id'];
             $upload = $_FILES['image'];
             if ($upload['error'] === UPLOAD_ERR_OK) {
@@ -44,7 +51,19 @@ class ProductController extends Controller
                 if (move_uploaded_file($tempName, $uploadDir . $newFileName)) {
                     // Trả về đường dẫn ảnh mới
                     $image = $uploadDir . $newFileName;
-                    $this->ProductModel->createProduct($category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id);
+                    $this->ProductModel->createProduct($category_id, $name, $slug, $image, $content, $color, $ram, $price, $qty, $user_id);
+                    if (isset($_POST['color'])) {
+                        $id = !empty($_SESSION['product_id']) ? $_SESSION['product_id'] : '';
+                        foreach ($_POST['color'] as $key => $value) {
+                            $color = $_POST['color'][$key];
+                            $ram = $_POST['ram'][$key];
+                            $price = $_POST['price'][$key];
+                            $qty = $_POST['qty'][$key];
+                            $this->ProductModel->createProductAttribute($color, $ram, $id, $price, $qty);
+                        }
+                    } else {
+                        header('Location: /product/list/');
+                    }
                 } else {
                     echo "<div class='alert alert-danger style='width: 400px;
                             margin-left: 250px;'>Có lỗi xảy ra khi lưu trữ file ảnh.</div>";
@@ -57,7 +76,9 @@ class ProductController extends Controller
         $this->view('HomeMasterLayout', [
             'pages' => 'ProductAdminPage',
             'block' => 'product/add',
-            'category' => $this->CategoryModel->getAllCategoryByAccount()
+            'category' => $this->CategoryModel->getAllCategoryByAccount(),
+            'color' => $this->ColorModel->getAllColorByAccount(),
+            'ram' => $this->RamModel->getAllRamByAccount()
         ]);
     }
 
@@ -71,7 +92,9 @@ class ProductController extends Controller
             $image = $_FILES['image']['name'];
             $content = $_POST['content'];
             $price = $_POST['price'];
-            $sale_price = $_POST['sale_price'];
+            $color = !empty($_POST['color']) ? $_POST['color'] : 0;
+            $ram = !empty($_POST['ram']) ? $_POST['ram'] : 0;
+            $qty = $_POST['qty'];
             $user_id = $_SESSION['user_id'];
             $upload = $_FILES['image'];
             if ($upload['error'] === UPLOAD_ERR_OK) {
@@ -95,13 +118,32 @@ class ProductController extends Controller
             } else {
                 $image = $_POST['thumbnail'];
             }
-            $this->ProductModel->updateProduct($category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id, $id);
+            $this->ProductModel->updateProduct($category_id, $name, $slug, $image, $content, $user_id, $id);
+            if (isset($_POST['color'])) {
+                $product_id = !empty($_SESSION['product_id']) ? $_SESSION['product_id'] : '';
+                foreach ($_POST['color'] as $key => $value) {
+                    $color = $_POST['color'][$key];
+                    $ram = $_POST['ram'][$key];
+                    $price = $_POST['price'][$key];
+                    $qty = $_POST['qty'][$key];
+                    $id_attr = $_POST['attr_id'][$key];
+                    if($id_attr >0){
+                        $this->ProductModel->updateAttribute($id_attr, $color, $ram, $price, $qty);
+                    }
+                    else{
+                        $this->ProductModel->createProductAttribute($color, $ram, $product_id, $price, $qty);
+                    }
+                }
+            }
         }
         $this->view('HomeMasterLayout', [
             'pages' => 'ProductAdminPage',
             'block' => 'product/edit',
+            'attribute' => $this->ProductModel->getOneAttribute(),
             'category' => $this->CategoryModel->getAllCategoryByAccount(),
-            'product' => $this->ProductModel->getOneProduct()
+            'product' => $this->ProductModel->getOneProduct(),
+            'color' => $this->ColorModel->getAllColorByAccount(),
+            'ram' => $this->RamModel->getAllRamByAccount(),
         ]);
     }
 
@@ -109,5 +151,10 @@ class ProductController extends Controller
     {
         $id = $_GET['product_id'];
         $this->ProductModel->deleteProduct($id);
+    }
+
+    public function del(){
+        $id = $_POST['id'];
+        $this->ProductModel->deleteAttribute($id);
     }
 }

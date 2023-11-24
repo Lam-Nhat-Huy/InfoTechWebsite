@@ -28,31 +28,28 @@
                     </div>
                     <div class="col-12 col-md-9">
                         <select name="category" id="select" class="form-control">
-                            <?php if (!empty($data['category'])) { ?>
-                                <?php foreach ($data['category'] as $data) : ?>
-                                    <option value="<?= $data['id']?>"><?= $data['name'] ?></option>
+                            <?php if (!empty($data['category'])) : ?>
+                                <?php foreach ($data['category'] as $item) : ?>
+                                    <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
                                 <?php endforeach ?>
-                            <?php } ?>
+                            <?php endif ?>
                         </select>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3">
-                        <label for="email-input" class=" form-control-label">Price</label>
+                        Option
                     </div>
                     <div class="col-12 col-md-9">
-                        <input type="text" id="email-input" name="price" placeholder="Price product" class="form-control">
-                        <small class="help-block form-text">Please enter your email</small>
+                        <button class="btn btn-outline-primary" id="buttonA" onclick="add_attr()" type="button">Variants</button>
+                        <button class="btn btn-outline-primary" id="buttonB" onclick="one_attr()" type="button">Single Variant</button>
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col col-md-3">
-                        <label for="password-input" class=" form-control-label">Sale price</label>
-                    </div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" id="password-input" name="sale_price" placeholder="Sale price" class="form-control">
-                        <small class="help-block form-text">Please enter a complex password</small>
-                    </div>
+                <div id="add_attr">
+                   
+                </div>
+                <div id="one_attr">
+                
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3">

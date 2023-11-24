@@ -12,8 +12,6 @@
                 <th>id</th>
                 <th>name</th>
                 <th>image</th>
-                <th>price</th>
-                <th>sale_price</th>
                 <th>Add by</th>
                 <th>category</th>
                 <th>created_at</th>
@@ -29,10 +27,6 @@
                             <span class="block-email"><?= $data['name'] ?></span>
                         </td>
                         <td><img src="../../../../<?= $data['image'] ?>" alt="" width="80px" height="80px"></td>
-                        <td><?= $data['price'] ?></td>
-                        <td>
-                            <?= $data['sale_price'] ?>
-                        </td>
                         <td><?= $data['user_name'] ?></td>
                         <td><?= $data['category_name'] ?></td>
                         <td><?= $data['created_at'] ?></td>
