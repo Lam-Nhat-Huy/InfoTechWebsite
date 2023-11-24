@@ -11,25 +11,25 @@ class ProductModel extends Database
         }
     }
 
-    public function createProduct($category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id)
+    public function createProduct($category_id, $name, $slug, $image, $content, $color, $ram, $price, $qty, $user_id)
     {
-        $stmt = $this->conn->prepare("INSERT INTO `products`(`category_id`, `name`, `slug`, `image`, `content`, `price`, `sale_price`, `user_id`) VALUES (?,?,?,?,?,?,?,?)");
-        $stmt->bind_param('issssiii', $category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id);
+        $stmt = $this->conn->prepare("INSERT INTO `products`(`category_id`, `name`, `slug`, `image`, `content`, `color_id`, `ram_id`, `price`, `qty`, `user_id`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $stmt->bind_param('issssiiiii', $category_id, $name, $slug, $image, $content, $color, $ram, $price, $qty, $user_id);
         if ($stmt->execute()) {
-            header('Location: /product/list');
+            return $_SESSION['product_id'] = mysqli_insert_id($this->conn);
         } else {
             header('Location: /product/add');
         }
     }
 
-    public function updateProduct($category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id, $id)
+    public function updateProduct($category_id, $name, $slug, $image, $content, $user_id, $id)
     {
-        $stmt = $this->conn->prepare("UPDATE `products` SET `category_id`= ?,`name`= ?,`slug`= ?,`image`= ?,`content`= ?,`price`= ?,`sale_price`= ?,`user_id`= ? WHERE `id` = ?");
-        $stmt->bind_param('issssiiii', $category_id, $name, $slug, $image, $content, $price, $sale_price, $user_id, $id);
+        $stmt = $this->conn->prepare("UPDATE `products` SET `category_id`= ?,`name`= ?,`slug`= ?,`image`= ?,`content`= ?, `user_id`= ? WHERE `id` = ?");
+        $sql = $stmt->bind_param('issssii', $category_id, $name, $slug, $image, $content, $user_id, $id);
         if ($stmt->execute()) {
-            header('Location: /product/list');
+           return '';
         } else {
-            header('Location: /product/edit');
+            header('Location: /product/list');
         }
     }
 
@@ -44,10 +44,47 @@ class ProductModel extends Database
         }
     }
 
+    public function deleteAttribute($id){
+        $stmt = $this->conn->prepare("DELETE FROM `product_attributes` WHERE `id` = ?");
+        $stmt->bind_param('i', $id);
+        if ($stmt->execute()) {
+            header('Location: /product/list');
+        } else {
+            header('Location: /product/list');
+        }
+    }
+
     public function getOneProduct()
     {
         $id = $_GET['product_id'];
-        $stmt = "SELECT * FROM `products` WHERE id = $id";
+        $stmt = "SELECT * FROM `products` WHERE id = '$id'";
+        return $this->execute($stmt);
+    }
+
+    public function createProductAttribute($color_id, $ram_id, $product_id, $price, $qty)
+    {
+        $stmt = $this->conn->prepare("INSERT INTO `product_attributes`(`color_id`, `ram_id`, `product_id`, `price`, `qty`) VALUES (?,?,?,?,?)");
+        $stmt->bind_param('iiiii', $color_id, $ram_id, $product_id, $price, $qty);
+        if ($stmt->execute()) {
+            header('Location: /product/list');
+        } else {
+            header('Location: /product/list');
+        }
+    }
+
+    public function updateAttribute($id_attr, $color_id, $ram_id, $price, $qty){
+        $stmt = $this->conn->prepare("UPDATE `product_attributes` SET `color_id`= ?,`ram_id`= ? ,`price`= ?, `qty`= ? WHERE `id` = ?");
+        $stmt->bind_param('iiiii', $color_id, $ram_id, $price, $qty, $id_attr);
+        if ($stmt->execute()) {
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
+        } else {
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
+        }
+    }
+
+    public function getOneAttribute(){
+        $id = $_GET['product_id'];
+        $stmt = "SELECT p.*, c.name as color FROM `product_attributes` p, `colors` c WHERE `product_id` = '$id' and p.color_id = c.id";
         return $this->execute($stmt);
     }
 }

@@ -36,47 +36,20 @@
                         </select>
                     </div>
                 </div>
-                <div id="product_attr">
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="color-input" class="form-control-label">Option</label>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <label for="" class="mr-2">Color</label>
-                            <select name="color[]" id="select">
-                                <?php if (!empty($data['color'])) : ?>
-                                    <?php foreach ($data['color'] as $color) : ?>
-                                        <option value="<?= $color['id'] ?>"><?= $color['name'] ?></option>
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <label for="" class="mr-2">Ram</label>
-                            <select name="ram[]" id="">
-                                <?php if (!empty($data['ram'])) : ?>
-                                    <?php foreach ($data['ram'] as $ram) : ?>
-                                        <option value="<?= $ram['id'] ?>"><?= $ram['name'] ?></option>
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-2 mb-2">
-                            <input type="text" name="price[]" class="form-control" placeholder="Price">
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <button class="btn btn-primary" onclick="add_product_attribute()" type="button">Add more</button>
-                        </div>
-                    </div>
-                </div>
                 <div class="row form-group">
                     <div class="col col-md-3">
-                        <label for="password-input" class=" form-control-label">Sale price</label>
+                        Option
                     </div>
                     <div class="col-12 col-md-9">
-                        <input type="text" id="password-input" name="sale_price" placeholder="Sale price" class="form-control">
-                        <small class="help-block form-text">Please enter a complex password</small>
+                        <button class="btn btn-outline-primary" id="buttonA" onclick="add_attr()" type="button">Variants</button>
+                        <button class="btn btn-outline-primary" id="buttonB" onclick="one_attr()" type="button">Single Variant</button>
                     </div>
+                </div>
+                <div id="add_attr">
+                   
+                </div>
+                <div id="one_attr">
+                
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3">

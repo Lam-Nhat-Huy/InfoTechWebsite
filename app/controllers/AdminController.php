@@ -1,5 +1,5 @@
 <?php
-class LoginController extends Controller
+class AdminController extends Controller
 {
     private $LoginModel;
 

@@ -31,13 +31,48 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     var attr_count = 1;
+
     function add_product_attribute() {
         attr_count++;
-        var html = '<div class="row form-group" id="attr_'+attr_count+'"> <div class="col col-md-3"> <label for="color-input" class="form-control-label">Option</label> </div> <div class="col-12 col-md-3"> <label for="" class="mr-2">Color</label> <select name="color[]" id="select"> <?php if (!empty($data['color'])) : ?> <?php foreach ($data['color'] as $color) : ?> <option value="<?= $color['id'] ?>"><?= $color['name'] ?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2"> <label for="" class="mr-2">Ram</label> <select name="ram[]" id=""> <?php if (!empty($data['ram'])) : ?> <?php foreach ($data['ram'] as $ram) : ?> <option value="<?= $ram['id']?>"><?= $ram['name']?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2 mb-2"><input type="text" name="price[]" class="form-control" placeholder="Price"> </div> <div class="col-12 col-md-2 mb-2"><button class="btn btn-danger" onclick=remove_attr("'+attr_count+'") type="button">Remove</button></div> </div>';
+        var html = '<div class="row form-group" id="attr_' + attr_count + '"> <div class="col col-md-3"> <label for="color-input" class="form-control-label">Variants</label> </div> <div class="col-12 col-md-2"> <label for="" class="mr-2">Color</label> <select name="color[]" id="select"> <?php if (!empty($data['color'])) : ?> <?php foreach ($data['color'] as $color) : ?> <option value="<?= $color['id'] ?>"><?= $color['name'] ?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2"> <label for="" class="mr-2">Ram</label> <select name="ram[]" id=""> <?php if (!empty($data['ram'])) : ?> <?php foreach ($data['ram'] as $ram) : ?> <option value="<?= $ram['id'] ?>"><?= $ram['name'] ?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2 mb-2"><input type="text" name="price[]" class="form-control" placeholder="Price"> </div> <div class="col-12 col-md-1 mb-2"><input type="text" name="qty[]" class="form-control" placeholder="Qty"></div> <div class="col-12 col-md-2 mb-2"><button class="btn btn-danger" onclick=remove_attr("' + attr_count + '") type="button">Remove</button></div><input type="hidden" value="" name="attr_id[]"> </div>';
         jQuery('#product_attr').append(html);
     }
-    function remove_attr(attr_count){
-        jQuery('#attr_'+attr_count).remove();
+
+    function remove_attr(attr_count, id) {
+        jQuery.ajax({
+            url: '/product/del/',
+            data: 'id='+id,
+            type: 'post',
+            success: function(result) {
+                jQuery('#attr_' + attr_count).remove();
+            }
+        })
+
+
+    }
+
+    function add_attr() {
+        var html = '<div id="product_attr"> <div class="row form-group"> <div class="col col-md-3"> <label for="color-input" class="form-control-label">Variants</label> </div> <div class="col-12 col-md-2"> <label for="" class="mr-2">Color</label> <select name="color[]" id="select"> <?php if (!empty($data['color'])) : ?> <?php foreach ($data['color'] as $color) : ?> <option value="<?= $color['id'] ?>"><?= $color['name'] ?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2"> <label for="" class="mr-2">Ram</label> <select name="ram[]" id=""> <?php if (!empty($data['ram'])) : ?> <?php foreach ($data['ram'] as $ram) : ?> <option value="<?= $ram['id'] ?>"><?= $ram['name'] ?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2 mb-2"> <input type="text" name="price[]" class="form-control" placeholder="Price"> </div> <div class="col-12 col-md-1 mb-2"> <input type="text" name="qty[]" class="form-control" placeholder="Qty"> </div> <div class="col-12 col-md-2"> <button class="btn btn-primary" onclick="add_product_attribute()" type="button">Add more</button> </div> </div> <input type="hidden" value="" name="attr_id[]"> </div>';
+        jQuery('#add_attr').append(html);
+        jQuery('#one_attr').empty();
+        document.getElementById("buttonA").disabled = true;
+        document.getElementById("buttonA").style.background = 'blue';
+        document.getElementById("buttonA").style.color = 'white';
+        document.getElementById("buttonB").style.background = 'white';
+        document.getElementById("buttonB").style.color = 'blue';
+        document.getElementById("buttonB").disabled = false;
+    }
+
+    function one_attr() {
+        var html = '<div id="b"> <div class="row form-group"> <div class="col col-md-3"> <label for="password-input" class=" form-control-label">Price</label> </div> <div class="col-12 col-md-9"> <input type="text" id="password-input" name="price" placeholder="Price" class="form-control"> <small class="help-block form-text">Please enter a complex password</small> </div> <div class="col col-md-3"> <label for="password-input" class=" form-control-label">Quantity</label> </div> <div class="col-12 col-md-9"> <input type="text" id="password-input" name="qty" placeholder="Quantity" class="form-control"> <small class="help-block form-text">Please enter a complex password</small> </div> </div> </div>';
+        jQuery('#one_attr').append(html);
+        jQuery('#add_attr').empty();
+        document.getElementById("buttonA").disabled = false;
+        document.getElementById("buttonB").style.background = 'blue';
+        document.getElementById("buttonB").style.color = 'white';
+        document.getElementById("buttonA").style.background = 'white';
+        document.getElementById("buttonA").style.color = 'blue';
+        document.getElementById("buttonB").disabled = true;
     }
 </script>
 </body>

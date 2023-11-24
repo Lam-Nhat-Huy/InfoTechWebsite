@@ -4,43 +4,31 @@ require './library/jwt/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-class LoginModel extends Database
-{
+class SigninModel extends  Database {
     private $error = "";
-    
-    public function registerAdminAccount($name, $email, $phone, $address, $role_id, $password, $cpassword, $avatar)
+
+    public function registerClientAccount($name, $email, $password, $cpassword, $role_id)
     {
-        // Kiểm tra xem mật khẩu và mật khẩu xác nhận có khớp nhau hay không
-        if ($password != $cpassword) {
-            $this->error = "Mật khẩu và mật khẩu xác nhận không khớp.";
-            return false;
-        }
-
-        // Mã hóa mật khẩu
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        if ($this->error == "") {
-            // Thêm người dùng vào cơ sở dữ liệu
-            $stmt = $this->conn->prepare("INSERT INTO `users` (name, email, password, phone, avatar, address, role_id) VALUES (?, ?, ?, ?, ? , ?, ?)");
-
-            $stmt->bind_param('sssissi', $name, $email, $hashed_password, $phone, $avatar, $address, $role_id);
-
-            if ($stmt->execute()) {
-                return true;
-            } else {
-                // Thêm thông báo lỗi từ cơ sở dữ liệu
-                $this->error = "Không thể thêm người dùng: " . $this->conn->error;
-                return false;
+        try {
+            if ($password != $cpassword) {
+                $this->error .= "Mật khẩu không trùng khớp";
             }
-        } else {
-            // Thêm thông báo lỗi từ biến error
-            echo "Lỗi: " . $this->error;
-            return false;
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            if ($this->error == '') {
+                $stmt = $this->conn->prepare("INSERT INTO `users` (name, email, password, role_id) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param('sssi', $name, $email, $hashed_password, $role_id);
+                if ($stmt->execute()) {
+                    return true;
+                } else {
+                    $this->error .= "Thêm người dùng không thành công";
+                }
+            }
+        } catch (Exception $e) {
+            echo "Đã xảy ra lỗi: " . $e->getMessage();
         }
     }
 
-
-    public function loginAdminAccount($email, $password)
+    public function loginClientAccount($email, $password)
     {
         $secret_key = '85ldofi';
         // Kiểm tra email và mật khẩu
@@ -56,15 +44,17 @@ class LoginModel extends Database
             $result = $stmt->get_result();
             $user = $result->fetch_assoc();
             // Kiểm tra mật khẩu và role_id
-            if (password_verify($password, $user['password']) && $user['role_id'] == 0) {
+            if (password_verify($password, $user['password']) && $user['role_id'] == 1) {
                 $_SESSION['authentication'] = "yes";
                 $payload = [
+                    'isd' => 'localhost',
+                    'aud' => 'root',
                     'user_id' => $user['id'],
                     'username' => $user['name'],
                     'email' => $user['email'],
                     'phone' => $user['phone'],
                     'avatar' => $user['avatar'],
-                    'address' => $user['address'],
+                    'address' => $user['address']
                 ];
 
                 try {
@@ -75,25 +65,21 @@ class LoginModel extends Database
                     $_SESSION['user_name'] =  $decoded->username;
                     $_SESSION['user_avatar'] =  $decoded->avatar;
                     $_SESSION['user_email'] =  $decoded->email;
-                    } catch (Exception $e) {
+                } catch (Exception $e) {
                     echo "Lỗi: " . $e->getMessage();
                 }
 
-                echo '<script>
-                    localStorage.setItem("jwt_token", "' . $jwt . '");
-                    window.location.href = "/home/";
-                  </script>';
-
+                header('Location: /dashboard?jwt=' . $jwt);
             } else {
                 return false;
             }
         }
     }
 
-    public function logoutAdminAccount()
+    public function logoutClientAccount()
     {
         session_destroy();
-        header('Location: /admin/');
+        header('Location: /dashboard/');
     }
 
     public function encode($payload, $secret_key, $alg = 'HS256')

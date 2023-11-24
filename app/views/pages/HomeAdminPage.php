@@ -16,7 +16,7 @@
                         <i class="zmdi zmdi-account-o"></i>
                     </div>
                     <div class="text">
-                        <h2>10368</h2>
+                        <h2><?= $data['productStatistics'] ?></h2>
                         <span>members online</span>
                     </div>
                 </div>

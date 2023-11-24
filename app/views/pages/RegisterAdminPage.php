@@ -68,7 +68,7 @@
                         <div class="register-link">
                             <p>
                                 Already have an account?
-                                <a href="/login/">Sign In</a>
+                                <a href="/admin/">Sign In</a>
                             </p>
                         </div>
                     </div>
