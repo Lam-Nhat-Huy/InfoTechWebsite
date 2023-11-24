@@ -126,21 +126,12 @@
         </div>
     </div>
 </div>
-<!--<div class="row">-->
-<!--    <div class="col-lg-12">-->
-<!--        <div class="au-card recent-report">-->
-<!--            <div class="au-card-inner">-->
-<!--                <div id="column-chart"></div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="row">-->
-<!--    <div class="col-lg-12">-->
-<!--        <div class="au-card recent-report">-->
-<!--            <div class="au-card-inner">-->
-<!--                <canvas id="myChart" width="600" height="200"></canvas>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="au-card recent-report">
+            <div class="au-card-inner">
+                <canvas id="myChart" width="600" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

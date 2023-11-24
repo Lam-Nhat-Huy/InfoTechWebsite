@@ -79,6 +79,39 @@
         document.getElementById("buttonB").disabled = true;
     }
 </script>
+<script>
+    // Dữ liệu từ PHP
+    var weeklyCounts = <?php echo json_encode($data['weeklyProductStatistics']); ?>;
+
+    // Tạo mảng các tuần và số lượng tương ứng
+    var weeks = Object.keys(weeklyCounts);
+    var counts = Object.values(weeklyCounts);
+
+    // Lấy canvas element
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    // Vẽ biểu đồ cột
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: weeks,
+            datasets: [{
+                label: 'Số lượng sản phẩm',
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 </body>
 
 </html>
