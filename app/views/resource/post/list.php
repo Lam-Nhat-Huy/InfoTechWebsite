@@ -23,7 +23,7 @@
                 <td><?= $data['id'];?></td>
                 <td><img src="../../../../<?= $data['image'] ?>" alt="" width="80px" height="80px"></td>
                 <td><?=$data['title']?></td>
-                <td><?=$data['content']?></td>
+                <td><?= substr($data['content'], 0 , 100)?>...</td>
                 <td><?=$data['cr']?></td>
                 <td>
                     <div class="table-data-feature">

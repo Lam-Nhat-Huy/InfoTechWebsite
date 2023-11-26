@@ -25,7 +25,7 @@
                         <i class="fas fa-table"></i>Category Manager</a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/order/">
                         <i class="fas fa-shopping-cart"></i>Order Manager</a>
                 </li>
                 <li>
