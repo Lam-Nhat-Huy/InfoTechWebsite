@@ -2,19 +2,25 @@
 class PostModel extends Database
 {
     // xử lý database ở đây
-    public function GetAllPostByAccout(){ 
+    public function GetAllPostByAccout()
+    {
 
         $user_id = $_SESSION['user_id'];
 
-        $stmt="SELECT p.id as id, u.id as u_id, p.title as title, p.image as image, p.content as content, p.create_at as cr
+        $stmt = "SELECT p.id as id, u.id as u_id, p.title as title, p.image as image, p.content as content, p.create_at as cr
         From posts p, users u 
         WHERE p.user_id = u.id AND p.user_id = $user_id";
-
         return $this->execute($stmt);
-        
     }
 
-    public function CreatePost( $user_id, $title, $image, $content)
+    public function GetAllPost()
+    {
+
+        $stmt = " SELECT * FROM posts ";
+        return $this->execute($stmt);
+    }
+
+    public function CreatePost($user_id, $title, $image, $content)
     {
 
         $stmt = $this->conn->prepare("INSERT INTO `posts`(`user_id`, `title`, `image`, `content`) VALUES (?,?,?,?)");
@@ -24,7 +30,6 @@ class PostModel extends Database
         } else {
             header('Location: /post/add');
         }
-
     }
 
     public function GetOnePostById()
@@ -35,21 +40,20 @@ class PostModel extends Database
     }
 
 
-    public function UpdatePost($title,$image,$content,$id)
+    public function UpdatePost($title, $image, $content, $id)
     {
         $stmt = $this->conn->prepare(" UPDATE `posts` set `title`= ?, `image` = ?, `content` = ? WHERE `id` = ? ");
-        $stmt->bind_param('sssi',$title , $image , $content, $id );
+        $stmt->bind_param('sssi', $title, $image, $content, $id);
         if ($stmt->execute()) {
             header('Location: /post/list');
         } else {
             header('Location: /post/edit');
         }
-
     }
 
 
     public function DeletePost($id)
-    { 
+    {
         $stmt = $this->conn->prepare("DELETE FROM `posts` WHERE `id` = ? ");
         $stmt->bind_param('i', $id);
 
@@ -60,5 +64,17 @@ class PostModel extends Database
         }
     }
 
-}
+    public function CountPost()
 
+    {
+        $stmt = " SELECT COUNT(*) FROM posts ";
+        return $this->execute($stmt);
+    }
+
+
+    public function GetPostLimit($this_page_first_result, $result_per_page)
+    {
+        $stmt = "SELECT * FROM posts LIMIT $this_page_first_result, $result_per_page";
+        return $this->execute($stmt);
+    }
+}
