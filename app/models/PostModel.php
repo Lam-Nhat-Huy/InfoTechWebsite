@@ -7,7 +7,7 @@ class PostModel extends Database
 
         $user_id = $_SESSION['user_id'];
 
-        $stmt = "SELECT p.id as id, u.id as u_id, p.title as title, p.image as image, p.content as content, p.create_at as cr
+        $stmt = "SELECT p.id as id, u.id as u_id, p.title as title, p.image as image, p.content as content, p.create_at as cr, u.name as user_name
         From posts p, users u 
         WHERE p.user_id = u.id AND p.user_id = $user_id";
         return $this->execute($stmt);

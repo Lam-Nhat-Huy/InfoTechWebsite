@@ -1,5 +1,5 @@
 <div class="table-data__tool">
-    <h3 class="title-5 m-b-35">Order Table</h3>
+    <h3 class="title-5 m-b-35">Comment Table</h3>
     <div class="table-data__tool-right">
         <a href="/post/add/" class="au-btn au-btn-icon au-btn--green au-btn--small">
             <i class="zmdi zmdi-plus"></i>add item</a>
@@ -10,22 +10,20 @@
         <thead>
             <tr>
                 <th>id</th>
-                <th>user_name</th>
-                <th>user_email</th>
-                <th>user_address</th>
-                <th>cart_code</th>
-                <th>cart_status</th>
+                <th>User name</th>
+                <th>Product</th>
+                <th>Content</th>
+                <th>Create_at</th>
+            </tr>
         </thead>
         <tbody>
-            <?php foreach ($data['order'] as $data) : ?>
+            <?php foreach ($data['comment'] as $data) : ?>
                 <tr>
                     <td><?= $data['id']; ?></td>
-                    <td><?= $data['user_name']; ?></td>
-                    <td><?= $data['user_email']; ?></td>
-                    <td><?= $data['user_address'] ?></td>
-                    <td><?= $data['cart_code'] ?></td>
-                    <td><?= $data['cart_status'] ?></td>
-
+                    <td><?= $data['username'] ?></td>
+                    <td><?= $data['product_name'] ?></td>
+                    <td><?= $data['content'] ?></td>
+                    <td><?= $data['cr'] ?></td>
                 </tr>
             <?php endforeach ?>
         </tbody>

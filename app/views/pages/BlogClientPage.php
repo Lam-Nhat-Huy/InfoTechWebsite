@@ -22,6 +22,7 @@
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
+                        <?php if(!empty($data['blog'])): ?>
                         <?php foreach ($data['blog'] as $Data) : ?>
                             <article class="blog_item">
                                 <div class="blog_item_img">
@@ -42,11 +43,11 @@
                                 </div>
                             </article>
                         <?php endforeach ?>
-
+                        <?php endif?>
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <a href=" /blog/?page=<?= $_GET['page'] - 1 ?>" class="page-link" aria-label="Previous">
+                                    <a href=" /blog/?page=<?= $_GET['page'] - 1?>" class="page-link" aria-label="Previous">
                                         <i class="fas fa-arrow-left"></i>
                                     </a>
                                 </li>
