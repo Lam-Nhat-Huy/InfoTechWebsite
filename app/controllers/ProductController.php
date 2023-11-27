@@ -120,7 +120,7 @@ class ProductController extends Controller
             }
             $this->ProductModel->updateProduct($category_id, $name, $slug, $image, $content, $user_id, $id);
             if (isset($_POST['color'])) {
-                $product_id = !empty($_SESSION['product_id']) ? $_SESSION['product_id'] : '';
+                $product_id = $_GET['product_id'];
                 foreach ($_POST['color'] as $key => $value) {
                     $color = $_POST['color'][$key];
                     $ram = $_POST['ram'][$key];

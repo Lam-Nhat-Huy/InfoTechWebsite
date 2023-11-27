@@ -25,7 +25,6 @@
 <script src="<?= ASSETS ?>/vendor/chartjs/Chart.bundle.min.js"></script>
 <script src="<?= ASSETS ?>/vendor/select2/select2.min.js">
 </script>
-
 <!-- Main JS-->
 <script src="<?= ASSETS ?>/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -78,6 +77,7 @@
         document.getElementById("buttonA").style.color = 'blue';
         document.getElementById("buttonB").disabled = true;
     }
+
 </script>
 <script>
     // Dữ liệu từ PHP

@@ -123,7 +123,19 @@
 
 <!-- custom js -->
 <script src="<?= ASSETS ?>/js/custom.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    function loadAttr(color_id, product_id, type){
+        jQuery.ajax({
+            url: '/detail/loadAttr/',
+            data: 'color_id='+color_id+'&product_id='+product_id+'&type='+type,
+            type: 'post',
+            success: function(result){
+                jQuery('#price_attr').html(result);
+            }
+        })
+    }
+</script>
 </body>
 
 </html>

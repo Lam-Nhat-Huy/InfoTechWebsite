@@ -1,4 +1,5 @@
   <!-- breadcrumb start-->
+
   <section class="breadcrumb breadcrumb_bg">
       <div class="container">
           <div class="row justify-content-center">
@@ -18,48 +19,87 @@
 
   <!--================Single Product Area =================-->
   <div class="product_image_area section_padding">
-      <div class="container">
-          <div class="row s_product_inner justify-content-between">
-              <div class="col-lg-7 col-xl-7">
-                  <div class="product_slider_img">
-                      <div id="vertical">
-                          <div>
-                              <img src="<?= ASSETS ?>/images/product/single-product/product_1.png" />
+      <?php
+        foreach ($data['product'] as $item) {
+        ?>
+          <div class="container">
+              <div class="row s_product_inner justify-content-between">
+                  <div class="col-lg-7 col-xl-7">
+                      <div class="product_slider_img">
+                          <div id="vertical">
+                              <div>
+                                  <img src="../../<?= $item['image'] ?> ">
+                              </div>
                           </div>
                       </div>
                   </div>
-              </div>
-              <div class="col-lg-5 col-xl-4">
-                  <div class="s_product_text">
-                      <h5>previous <span>|</span> next</h5>
-                      <h3>Faded SkyBlu Denim Jeans</h3>
-                      <h2>$149.99</h2>
-                      <ul class="list">
-                          <li>
-                              <a class="active" href="#">
-                                  <span>Category</span> : Household</a>
-                          </li>
-                          <li>
-                              <a href="#"> <span>Availibility</span> : In Stock</a>
-                          </li>
-                      </ul>
-                      <p>
-                          First replenish living. Creepeth image image. Creeping can't, won't called.
-                          Two fruitful let days signs sea together all land fly subdue
-                      </p>
-                      <div class="card_area d-flex justify-content-between align-items-center">
-                          <div class="product_count">
-                              <span class="inumber-decrement"><i class="fas fa-minus"></i></span>
-                              <input class="input-number" type="text" value="1" min="0" max="10">
-                              <span class="number-increment"><i class="fas fa-plus"></i></span>
+                  <div class="col-lg-5 col-xl-4">
+                      <div class="s_product_text">
+                          <h5>previous <span>|</span> next</h5>
+                          <h3><?= $item['name'] ?></h3>
+                          <div id="price_attr"></div>
+                          <ul class="list">
+                              <li>
+                                  <a class="active" href="#">
+                                      <span>Category</span> : <?= $item['category_name'] ?></a>
+                              </li>
+                              <li class="mb-3">
+                                  <?php
+                                    if ($item['color_id'] > 0) {
+                                        echo "<span class='mr-3'>Color:</span>";
+                                        $uniqueColors = array();
+                                        foreach ($data['attribute'] as $color) {
+                                            if (!array_key_exists($color['color'], $uniqueColors)) { // Kiểm tra xem giá trị đã tồn tại trong mảng chưa
+                                                $uniqueColors[$color['color']] = true; // Đánh dấu giá trị là đã xuất hiện
+                                    ?>
+                                          <a href="javascript:void(0)" onclick="loadAttr('<?= $color['color_id']?>','<?= $item['id']?>','color')" class="btn" style="border: solid 1px #ff9ea2;margin-right:4px" id="color_select"><?= $color['color'] ?></a>
+                                  <?php
+                                            }
+                                        }
+                                    }
+                                    ?>
+                              </li>
+                              <li>
+                                  <?php
+                                    if ($item['ram_id'] > 0) {
+                                        echo "<span class='mr-3'>Ram:</span>";
+                                        $uniqueRams = array(); //đay là mảng chứa giá trị duy nhất
+                                        foreach ($data['attribute'] as $ram) {
+                                            if (!array_key_exists($ram['ram_name'], $uniqueRams)) { // Kiểm tra xem giá trị đã tồn tại trong mảng chưa
+                                                $uniqueRams[$ram['ram_name']] = true; // Đánh dấu giá trị là đã xuất hiện
+                                    ?>
+                                              <a href="" class="btn" style="border: solid 1px #ff9ea2;margin-right:4px" id="ram_select"><?= $ram['ram_name'] ?></a>
+                                  <?php
+                                            }
+                                        }
+                                    }
+                                    ?>
+                              </li>
+                              <li>
+
+                                  <a href="#"> <span>Availibility</span> : In Stock</a>
+
+                              </li>
+                          </ul>
+                          <p>
+                              <?= $item['content'] ?>
+                          </p>
+                          <div class="card_area d-flex justify-content-between align-items-center">
+                              <div class="product_count">
+                                  <span class="inumber-decrement"><i class="fas fa-minus"></i></span>
+                                  <input class="input-number" type="text" value="1" min="0" max="10">
+                                  <span class="number-increment"><i class="fas fa-plus"></i></span>
+                              </div>
+                              <a href="#" class="btn_3">add to cart</a>
+                              <a href="#" class="like_us"><i class="fas fa-heart"></i></a>
                           </div>
-                          <a href="#" class="btn_3">add to cart</a>
-                          <a href="#" class="like_us"><i class="fas fa-heart"></i></a>
                       </div>
                   </div>
               </div>
           </div>
-      </div>
+      <?php
+        }
+        ?>
   </div>
   <!--================End Single Product Area =================-->
 
@@ -188,8 +228,8 @@
                   <div class="row">
                       <div class="col-lg-6">
                           <div class="comment_list">
-                         
-                    
+
+
                               <div class="review_item">
                                   <div class="media">
                                       <div class="d-flex">
@@ -214,7 +254,7 @@
                           <div class="review_box">
                               <h4>Post a comment</h4>
                               <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                            
+
                                   <div class="col-md-12">
                                       <div class="form-group">
                                           <textarea class="form-control" name="noidungs" id="message" rows="1" placeholder="Message"></textarea>
@@ -476,4 +516,9 @@
           </div>
       </div>
   </section>
+  <h1>
+    <?php
+    var_dump($data['attribute']);
+    ?>
+  </h1>
   <!-- product_list part end-->
