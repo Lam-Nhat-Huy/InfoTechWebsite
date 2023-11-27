@@ -85,12 +85,11 @@
                                 <?php foreach ($data['product'] as $item) : ?>
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="single_product_item">
-                                            <a href="/detail/id=<?= $item['id']?>"> <img src="../../<?= $item['image'] ?>" alt=""></a>
+                                            <a href="/detail?product_id=<?= $item['id']?>"> <img src="../../<?= $item['image'] ?>" alt=""></a>
                                             <div class="single_product_text">
                                                 <h4><?= $item['name']?></h4>
                                                 <div class="d-flex">
-                                                <h3 class="text-danger"><?= number_format($item['sale_price'])?> đ</h3>
-                                                <del class="text-body ml-4"><?= number_format($item['price'])?></del>
+                                                <h3 class="text-body ml-4"><?= number_format($item['price'])?></h3>
                                                 </div>
                                                 <a href="#" class="add_cart">+ add to cart<i class="fas fa-heart"></i></a>
                                             </div>

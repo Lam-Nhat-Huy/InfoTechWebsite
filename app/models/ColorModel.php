@@ -21,9 +21,7 @@ class ColorModel extends Database{
 
     public function getAllColorByAccount()
     {
-        $user_id = $_SESSION['user_id'];
-
-        $stmt = "SELECT c.name as name, c.id as id, u.name as user_name, c.created_at as cr, c.updated_at as ud FROM `colors` c, `users` u WHERE u.id = c.user_id AND c.user_id = $user_id";
+        $stmt = "SELECT c.name as name, c.id as id, u.name as user_name, c.created_at as cr, c.updated_at as ud FROM `colors` c, `users` u WHERE u.id = c.user_id";
         return $this->execute($stmt);
     }
 
