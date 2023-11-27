@@ -56,3 +56,32 @@ function createSlug($string)
     $string = strtolower($string);
     return $string;
 }
+
+function calculateTimeDifference($timestamp)
+{
+    $currentTimestamp = time();
+    $difference = $currentTimestamp - $timestamp;
+
+    $seconds = $difference;
+    $minutes = round($difference / 60);
+    $hours = round($difference / 3600);
+    $days = round($difference / 86400);
+
+    if ($seconds < 60) {
+        return $seconds . " seconds ago";
+    } elseif ($minutes < 60) {
+        return $minutes . " minute ago";
+    } elseif ($hours < 24) {
+        return $hours . " hours ago";
+    } elseif ($days < 30) {
+        return $days . " days ago";
+    } else {
+        $months = round($days / 30);
+        $years = round($days / 365);
+        if ($months < 12) {
+            return $months . " last month";
+        } else {
+            return $years . " last year";
+        }
+    }
+}

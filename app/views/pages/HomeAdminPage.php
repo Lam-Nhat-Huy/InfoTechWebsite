@@ -81,7 +81,6 @@
                     <tr>
                         <th>Image</th>
                         <th>name</th>
-                        <th class="text-right">price</th>
                         <th>date</th>
                     </tr>
                 </thead>
@@ -92,8 +91,7 @@
                         <tr>
                             <td><img src="../../../../<?= $row['image'] ?>" alt="" width="40px" height="40px"></td>
                             <td><?= $row['name'] ?></td>
-                            <td class="text-right"><?= currency_format($row['price']) ?></td>
-                            <td><?= date("d-m-Y", strtotime($row['created_at'])) ?></td>
+                            <td><?= calculateTimeDifference(strtotime($row['created_at'])) ?></td>
                         </tr>
                         <?php
                     }
@@ -114,7 +112,7 @@
                                     ?>
                                         <tr>
                                             <td><?= $row['email'] ?></td>
-                                            <td class="text-right"><?= date("d-m-Y", strtotime($row['created_at'])) ?></td>
+                                            <td><?= calculateTimeDifference(strtotime($row['created_at'])) ?></td>
                                         </tr>
                                     <?php
                                 }
