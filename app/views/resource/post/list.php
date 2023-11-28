@@ -14,6 +14,7 @@
                 <th>Title</th>
                 <th>Content</th>
                 <th>Date of posting</th>
+                <th>Add by</th>
                 <th class="text-center">Ation</th>
             </tr>
         </thead>
@@ -25,20 +26,15 @@
                 <td><?=$data['title']?></td>
                 <td><?= substr($data['content'], 0 , 100)?>...</td>
                 <td><?=$data['cr']?></td>
+                <td><?=$data['user_name']?></td>
                 <td>
                     <div class="table-data-feature">
-                        <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send">
-                            <i class="zmdi zmdi-mail-send"></i>
-                        </button>
                         <a href="/post/edit/?post_id=<?=$data['id']?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
                             <i class="zmdi zmdi-edit"></i>
                         </a>
                         <a href="/post/delete/?post_id=<?=$data['id']?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete?')">
                             <i class="zmdi zmdi-delete"></i>
                         </a>
-                        <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="More">
-                            <i class="zmdi zmdi-more"></i>
-                        </button>
                     </div>
                 </td>
             </tr>

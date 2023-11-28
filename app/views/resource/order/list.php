@@ -1,5 +1,5 @@
 <div class="table-data__tool">
-    <h3 class="title-5 m-b-35">Post Table</h3>
+    <h3 class="title-5 m-b-35">Order Table</h3>
     <div class="table-data__tool-right">
         <a href="/post/add/" class="au-btn au-btn-icon au-btn--green au-btn--small">
             <i class="zmdi zmdi-plus"></i>add item</a>
