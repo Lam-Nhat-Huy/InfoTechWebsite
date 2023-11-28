@@ -49,8 +49,8 @@
                                     <div id="attr_<?= $loop ?>">
                                         <div class="row form-group">
                                             <div class="col col-md-3"> <label for="ram-input" class="form-control-label">Variants</label> </div>
-                                            <div class="col-12 col-md-2"> <label for="" class="mr-2">Color</label>
-                                                <select name="color[]" id="select">
+                                            <div class="col-12 col-md-2">
+                                                <select name="color[]" id="select" class="form-control">
                                                     <?php
                                                     foreach ($data['color'] as $color) {
                                                     ?>
@@ -60,8 +60,8 @@
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="col-12 col-md-2"> <label for="" class="mr-2">Ram</label>
-                                                <select name="ram[]" id="">
+                                            <div class="col-12 col-md-2">
+                                                <select name="ram[]" id="" class="form-control">
                                                 <?php
                                                     foreach ($data['ram'] as $ram) {
                                                     ?>

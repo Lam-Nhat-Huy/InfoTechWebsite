@@ -33,10 +33,10 @@
                         <i class="fas fa-comment"></i>Comment Manager</a>
 
                 </li>
-                <li>
+                <!-- <li>
                     <a href="">
                         <i class="fas fa-flag"></i>Banner Manager</a>
-                </li>
+                </li> -->
                 <li>
                     <a href="/post">
                         <i class="fas fa-send"></i>Post Manager</a>
