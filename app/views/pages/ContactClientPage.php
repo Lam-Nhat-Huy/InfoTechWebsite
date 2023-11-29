@@ -29,11 +29,14 @@
                   <h2 class="contact-title">Get in Touch</h2>
               </div>
               <div class="col-lg-8">
-                  <form class="form-contact contact_form" action="" method="post" id="contactForm" novalidate="novalidate">
+                  <form class="form-contact contact_form" action="" method="post" id="contactForm" class="needs-validation was-validated">
                       <div class="row">
                           <div class="col-12">
                               <div class="form-group mb-5">
-                                  <textarea class="form-control w-100" name="body" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder='Enter Message'><?php echo isset($_POST['body']) ? htmlspecialchars($_POST['body']) : ''; ?></textarea>
+                                  <textarea class="form-control w-100" required name="body" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder='Enter Message'><?php echo isset($_POST['body']) ? htmlspecialchars($_POST['body']) : ''; ?></textarea>
+                                  <div class="invalid-feedback">
+                                      Please enter a valid content
+                                  </div>
                               </div>
                           </div>
                           <div class="col-sm-6">
@@ -64,21 +67,20 @@
                   <div class="media contact-info">
                       <span class="contact-info__icon"><i class="fas fa-home"></i></span>
                       <div class="media-body">
-                          <h3>Buttonwood, California.</h3>
-                          <p>Rosemead, CA 91770</p>
+                          <h3>Cần Thơ, Việt Nam</h3>
+                          <p>Thường Thạnh, Cái Răng</p>
                       </div>
                   </div>
                   <div class="media contact-info">
                       <span class="contact-info__icon"><i class="fas fa-tablet"></i></span>
                       <div class="media-body">
-                          <h3>00 (440) 9865 562</h3>
-                          <p>Mon to Fri 9am to 6pm</p>
+                          <h3>0393379856</h3>
                       </div>
                   </div>
                   <div class="media contact-info">
                       <span class="contact-info__icon"><i class="fas fa-send"></i></span>
                       <div class="media-body">
-                          <h3>support@colorlib.com</h3>
+                          <h3>infotech@gmail.com</h3>
                           <p>Send us your query anytime!</p>
                       </div>
                   </div>
