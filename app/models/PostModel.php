@@ -113,4 +113,15 @@ class PostModel extends Database
                   WHERE category_id = $category_id";
         return $this->execute($stmt);
     }
+
+
+    public function SearchPost($SearchKey)
+    {
+        $stmt = " SELECT p.id as id, u.id as u_id, p.title as title, p.image as image, p.content as content, p.create_at as cr, u.name as user_name, cp.name as caterogy_name 
+        FROM posts p
+        INNER JOIN posts_category cp ON p.category_id = cp.id
+        INNER JOIN users u ON p.user_id = u.id
+        WHERE p.title LIKE '%$SearchKey%' ";
+        return $this->execute($stmt);
+    }
 }

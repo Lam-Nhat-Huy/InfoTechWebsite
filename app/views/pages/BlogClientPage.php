@@ -45,36 +45,35 @@
                             <?php endforeach ?>
                         <?php endif ?>
                         <nav class="blog-pagination justify-content-center d-flex">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="<?= $data['param'] . ($_GET['page'] - 1) ?>" class="page-link" aria-label="Previous">
-                                        <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </li>
-                                <?php for ($i = 1; $i <=  $data['number']; $i++) : ?>
+                            <? if (!isset($_GET['SearchKey'])) : ?>
+                                <ul class="pagination">
                                     <li class="page-item">
-                                        <a href="<?= $data['param'] . $i ?>" class="page-link"><?= $i ?></a>
+                                        <a href="<?= $data['param'] . ($_GET['page'] - 1) ?>" class="page-link" aria-label="Previous">
+                                            <i class="fas fa-arrow-left"></i>
+                                        </a>
                                     </li>
-                                <?php endfor ?>
-                                <li class="page-item">
-                                    <a href=" <?= $data['param'] . ($_GET['page'] + 1) ?> " class="page-link" aria-label="Next">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                                    <?php for ($i = 1; $i <=  $data['number']; $i++) : ?>
+                                        <li class="page-item">
+                                            <a href="<?= $data['param'] . $i ?>" class="page-link"><?= $i ?></a>
+                                        </li>
+                                    <?php endfor ?>
+                                    <li class="page-item">
+                                        <a href=" <?= $data['param'] . ($_GET['page'] + 1) ?> " class="page-link" aria-label="Next">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php endif ?>
                         </nav>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
+                            <form action="">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
-                                        <div class="input-group-append">
-                                            <button class="btn" type="button"><i class="ti-search"></i></button>
-                                        </div>
+                                        <input name="SearchKey" type="text" class="form-control" placeholder='Search Keyword' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
                                     </div>
                                 </div>
                                 <button class="button rounded-0 primary-bg text-white w-100 btn_1" type="submit">Search</button>
@@ -84,30 +83,33 @@
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Category</h4>
                             <ul class="list cat-list">
-                                <? foreach ($data['posts_category'] as $Pcategory) : ?>
-                                    <li>
-                                        <a href="/blog/?category=<?= $Pcategory['id'] ?>&page=1" class="d-flex">
-                                            <p> <?= $Pcategory['name'] ?></p>
-                                        </a>
-                                    </li>
-                                <? endforeach ?>
-
+                                <? if (isset($data['posts_category'])) : ?>
+                                    <? foreach ($data['posts_category'] as $Pcategory) : ?>
+                                        <li>
+                                            <a href="/blog/?category=<?= $Pcategory['id'] ?>&page=1" class="d-flex">
+                                                <p> <?= $Pcategory['name'] ?></p>
+                                            </a>
+                                        </li>
+                                    <? endforeach ?>
+                                <? endif ?>
                             </ul>
                         </aside>
 
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Recent Post</h3>
-                            <? foreach ($data['RecentBlog'] as $data) : ?>
-                                <div class="media post_item">
-                                    <img src="../../../../<?= $data['image'] ?>" alt="post" width="80px">
-                                    <div class="media-body">
-                                        <a href="single-blog.html">
-                                            <h3><?= substr($data['content'], 0, 20) ?>...</h3>
-                                        </a>
-                                        <p><?= calculateTimeDifference(strtotime($data['create_at'])) ?></p>
+                            <?php if (isset($data['RecentBlog'])) : ?>
+                                <? foreach ($data['RecentBlog'] as $data) : ?>
+                                    <div class="media post_item">
+                                        <img src="../../../../<?= $data['image'] ?>" alt="post" width="80px">
+                                        <div class="media-body">
+                                            <a href="single-blog.html">
+                                                <h3><?= substr($data['content'], 0, 20) ?>...</h3>
+                                            </a>
+                                            <p><?= calculateTimeDifference(strtotime($data['create_at'])) ?></p>
+                                        </div>
                                     </div>
-                                </div>
-                            <? endforeach ?>
+                                <? endforeach ?>
+                            <? endif ?>
                         </aside>
                     </div>
                 </div>

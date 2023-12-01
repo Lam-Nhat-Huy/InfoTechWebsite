@@ -1,10 +1,7 @@
 <?php
 class BlogController extends Controller
 {
-
     private $blogModel;
-
-
     public function __construct()
     {
         $this->blogModel = $this->model('PostModel');
@@ -18,39 +15,37 @@ class BlogController extends Controller
             $page = $_GET['page'];
         }
 
-        if (isset($_GET['category'])) {
-            $category = $_GET['category'];
+        $result_per_page = 4;
+
+        if (isset($_GET['SearchKey'])) {
+            $number_of_results =  mysqli_num_rows($this->blogModel->SearchPost($_GET['SearchKey']));
         } else {
-            $category = '';
+            if (!isset($_GET['category'])) {
+                $number_of_results =  mysqli_num_rows($this->blogModel->GetAllPost());
+            } else {
+                $number_of_results =  mysqli_num_rows($this->blogModel->GetPostByCategory($_GET['category']));
+            }
         }
 
-        $result_per_page = 4;
-        if (empty($category)) {
-            $number_of_results =  mysqli_num_rows($this->blogModel->GetAllPost());
-        } else {
-            $number_of_results =  mysqli_num_rows($this->blogModel->GetPostByCategory($category));
-        }
 
         $this_page_first_result = ($page - 1) * $result_per_page;
         $number_of_pages = ceil($number_of_results / $result_per_page);
 
-
-        // điều hướng chỉ mục
-
-        if (isset($_GET['category'])) {
-            $param = '/blog/?category=' . $_GET['category'] . '&page=';
-        } else {
-            $param = '/blog/?page=';
-        }
-
         // điều hướng phân trang
-        if (isset($_GET['category'])) {
-            $funtion =  $this->blogModel->GetPostByCategoryLimit($category, $this_page_first_result, $result_per_page);
+        if (isset($_GET['SearchKey'])) {
+            $SearchKey = $_GET['SearchKey'];
+            $function = $this->blogModel->SearchPost($SearchKey);
+            $param = '';
         } else {
-            $funtion = $this->blogModel->GetPostLimit($this_page_first_result, $result_per_page);
+            if (isset($_GET['category'])) {
+                $category = $_GET['category'];
+                $param = '/blog/?category=' . $_GET['category'] . '&page=';
+                $function =  $this->blogModel->GetPostByCategoryLimit($category, $this_page_first_result, $result_per_page);
+            } else {
+                $function = $this->blogModel->GetPostLimit($this_page_first_result, $result_per_page);
+                $param = '/blog/?page=';
+            }
         }
-
-
 
         $this->view('ClientMasterLayout', [
             'pages' => 'BlogClientPage',
@@ -58,10 +53,7 @@ class BlogController extends Controller
             'RecentBlog' => $this->blogModel->GetPostRecent(),
             'posts_category' => $this->blogModel->GetPostCategory(),
             'param' => $param,
-            'function' => $funtion
-
-
-
+            'function' => $function
         ]);
     }
 }
