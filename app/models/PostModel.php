@@ -74,7 +74,43 @@ class PostModel extends Database
 
     public function GetPostLimit($this_page_first_result, $result_per_page)
     {
-        $stmt = "SELECT * FROM posts LIMIT $this_page_first_result, $result_per_page";
+        $stmt = "SELECT p.id as id, u.id as u_id, p.title as title, p.image as image, p.content as content, p.create_at as cr, u.name as user_name, cp.name as caterogy_name
+        FROM posts p
+        INNER JOIN posts_category cp ON p.category_id = cp.id
+        INNER JOIN users u ON p.user_id = u.id
+        LIMIT $this_page_first_result, $result_per_page";
+        return $this->execute($stmt);
+    }
+
+    public function GetPostRecent()
+    {
+        $stmt = "SELECT * FROM posts
+        ORDER BY create_at DESC
+        LIMIT 5";
+        return $this->execute($stmt);
+    }
+
+    public function GetPostCategory()
+    {
+        $stmt = "SELECT * FROM posts_category";
+        return $this->execute($stmt);
+    }
+
+    public function GetPostByCategoryLimit($category_id, $this_page_first_result, $result_per_page)
+    {
+        $stmt = "SELECT p.id as id, u.id as u_id, p.title as title, p.image as image, p.content as content, p.create_at as cr, u.name as user_name, cp.name as caterogy_name
+        FROM posts p
+        INNER JOIN posts_category cp ON p.category_id = cp.id
+        INNER JOIN users u ON p.user_id = u.id
+        WHERE  p.category_id = $category_id
+        LIMIT $this_page_first_result, $result_per_page";
+        return $this->execute($stmt);
+    }
+
+    public function GetPostByCategory($category_id)
+    {
+        $stmt = " SELECT * FROM posts
+                  WHERE category_id = $category_id";
         return $this->execute($stmt);
     }
 }

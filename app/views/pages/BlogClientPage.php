@@ -22,42 +22,42 @@
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
-                        <?php if(!empty($data['blog'])): ?>
-                        <?php foreach ($data['blog'] as $Data) : ?>
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" src="../../../<?= $Data['image'] ?>" alt="">
-                                    <a href="#" class="blog_item_date">
-                                        <h3> <?= substr($Data['create_at'], 5, 5) ?> </h3>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="single-blog.html">
-                                        <h2> <?= $Data['title'] ?> </h2>
-                                    </a>
-                                    <p> <?= substr($Data['content'], 0, 100) ?>... </p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                        <?php endforeach ?>
-                        <?php endif?>
+                        <?php if (!empty($data['function'])) : ?>
+                            <?php foreach ($data['function'] as $Data) : ?>
+                                <article class="blog_item">
+                                    <div class="blog_item_img">
+                                        <img class="card-img rounded-0" src="../../../<?= $Data['image'] ?>" alt="">
+                                        <a href="#" class="blog_item_date">
+                                            <h3> <?= substr($Data['cr'], 5, 5) ?> </h3>
+                                        </a>
+                                    </div>
+                                    <div class="blog_details">
+                                        <a class="d-inline-block" href="single-blog.html">
+                                            <h2> <?= $Data['title'] ?> </h2>
+                                        </a>
+                                        <p> <?= substr($Data['content'], 0, 100) ?>... </p>
+                                        <ul class="blog-info-link">
+                                            <li><a href="#"><i class="far fa-user"></i> <?= $Data['user_name'] ?></a></li>
+                                            <li><a href="#"><i class="far fa-comments"></i> <?= $Data['caterogy_name'] ?> </a></li>
+                                        </ul>
+                                    </div>
+                                </article>
+                            <?php endforeach ?>
+                        <?php endif ?>
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <a href=" /blog/?page=<?= $_GET['page'] - 1?>" class="page-link" aria-label="Previous">
+                                    <a href="<?= $data['param'] . ($_GET['page'] - 1) ?>" class="page-link" aria-label="Previous">
                                         <i class="fas fa-arrow-left"></i>
                                     </a>
                                 </li>
                                 <?php for ($i = 1; $i <=  $data['number']; $i++) : ?>
                                     <li class="page-item">
-                                        <a href="/blog/?page=<?= $i ?>" class="page-link"><?= $i ?></a>
+                                        <a href="<?= $data['param'] . $i ?>" class="page-link"><?= $i ?></a>
                                     </li>
                                 <?php endfor ?>
                                 <li class="page-item">
-                                    <a href=" /blog/?page=<?= $_GET['page'] + 1 ?> " class="page-link" aria-label="Next">
+                                    <a href=" <?= $data['param'] . ($_GET['page'] + 1) ?> " class="page-link" aria-label="Next">
                                         <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </li>
@@ -84,161 +84,30 @@
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Category</h4>
                             <ul class="list cat-list">
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Resaurant food</p>
-                                        <p>(37)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Travel news</p>
-                                        <p>(10)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Modern technology</p>
-                                        <p>(03)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Product</p>
-                                        <p>(11)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Inspiration</p>
-                                        <p>21</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Health Care (21)</p>
-                                        <p>09</p>
-                                    </a>
-                                </li>
+                                <? foreach ($data['posts_category'] as $Pcategory) : ?>
+                                    <li>
+                                        <a href="/blog/?category=<?= $Pcategory['id'] ?>&page=1" class="d-flex">
+                                            <p> <?= $Pcategory['name'] ?></p>
+                                        </a>
+                                    </li>
+                                <? endforeach ?>
+
                             </ul>
                         </aside>
 
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Recent Post</h3>
-                            <div class="media post_item">
-                                <img src="<?= ASSETS ?>/images/post/post_1.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>From life was you fish...</h3>
-                                    </a>
-                                    <p>January 12, 2019</p>
+                            <? foreach ($data['RecentBlog'] as $data) : ?>
+                                <div class="media post_item">
+                                    <img src="../../../../<?= $data['image'] ?>" alt="post" width="80px">
+                                    <div class="media-body">
+                                        <a href="single-blog.html">
+                                            <h3><?= substr($data['content'], 0, 20) ?>...</h3>
+                                        </a>
+                                        <p><?= calculateTimeDifference(strtotime($data['create_at'])) ?></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="<?= ASSETS ?>/images/post/post_2.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="<?= ASSETS ?>/images/post/post_3.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="<?= ASSETS ?>/images/post/post_4.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
-                        </aside>
-                        <aside class="single_sidebar_widget tag_cloud_widget">
-                            <h4 class="widget_title">Tag Clouds</h4>
-                            <ul class="list">
-                                <li>
-                                    <a href="#">project</a>
-                                </li>
-                                <li>
-                                    <a href="#">love</a>
-                                </li>
-                                <li>
-                                    <a href="#">technology</a>
-                                </li>
-                                <li>
-                                    <a href="#">travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">restaurant</a>
-                                </li>
-                                <li>
-                                    <a href="#">life style</a>
-                                </li>
-                                <li>
-                                    <a href="#">design</a>
-                                </li>
-                                <li>
-                                    <a href="#">illustration</a>
-                                </li>
-                            </ul>
-                        </aside>
-
-
-                        <aside class="single_sidebar_widget instagram_feeds">
-                            <h4 class="widget_title">Instagram Feeds</h4>
-                            <ul class="instagram_row flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="<?= ASSETS ?>/images/post/post_5.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="<?= ASSETS ?>/images/post/post_6.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="<?= ASSETS ?>/images/post/post_7.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="<?= ASSETS ?>/images/post/post_8.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="<?= ASSETS ?>/images/post/post_9.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="<?= ASSETS ?>/images/post/post_10.png" alt="">
-                                    </a>
-                                </li>
-                            </ul>
-                        </aside>
-
-
-                        <aside class="single_sidebar_widget newsletter_widget">
-                            <h4 class="widget_title">Newsletter</h4>
-
-                            <form action="#">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
-                                </div>
-                                <button class="button rounded-0 primary-bg text-white w-100 btn_1" type="submit">Subscribe</button>
-                            </form>
+                            <? endforeach ?>
                         </aside>
                     </div>
                 </div>
