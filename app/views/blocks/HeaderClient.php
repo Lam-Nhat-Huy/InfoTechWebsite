@@ -46,7 +46,7 @@
                                     <a class="nav-link" href="/dashboard/">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link" href="/list/" ">
+                                    <a class="nav-link" href="/list/?page=1" ">
                                         Shop
                                     </a>
                                 </li>
@@ -54,7 +54,7 @@
                                         <a class="nav-link" href="/contact/">Contact</a>
                                 </li>
                                 <li class=" nav-item">
-                                    <a class="nav-link" href="/blog/">Blog</a>
+                                    <a class="nav-link" href="/blog/?page=1">Blog</a>
                                 </li>
                             </ul>
                         </div>
