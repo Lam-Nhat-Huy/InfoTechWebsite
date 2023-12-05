@@ -60,8 +60,8 @@ class SigninModel extends  Database {
                     $jwt = $this->encode($payload, $secret_key);
                     $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
                     $_SESSION['client_username'] = $decoded->username;
-                    $_SESSION['client_user_id'] = $decoded->user_id;
-                    $_SESSION['client_user_name'] =  $decoded->username;
+                    $_SESSION['user_id'] = $decoded->user_id;
+                    $_SESSION['username'] = $decoded->username;
                     $_SESSION['client_user_avatar'] =  $decoded->avatar;
                     $_SESSION['client_user_email'] =  $decoded->email;
                     $_SESSION['client_user_exp'] =  $decoded->exp;
