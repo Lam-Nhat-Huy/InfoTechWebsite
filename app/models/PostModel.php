@@ -7,9 +7,11 @@ class PostModel extends Database
 
         $user_id = $_SESSION['user_id'];
 
-        $stmt = "SELECT p.id as id, u.id as u_id, p.title as title, p.image as image, p.content as content, p.create_at as cr, u.name as user_name
-        From posts p, users u 
-        WHERE p.user_id = u.id AND p.user_id = $user_id";
+        $stmt = "SELECT p.id as id, u.id as u_id, p.title as title, p.image as image, p.content as content, p.create_at as cr, u.name as user_name, cp.name as category_name, p.category_id as category_id
+        FROM posts p
+        INNER JOIN users u on p.user_id = u.id
+        INNER JOIN posts_category cp on p.category_id = cp.id
+        WHERE  p.user_id = $user_id";
         return $this->execute($stmt);
     }
 
@@ -20,11 +22,11 @@ class PostModel extends Database
         return $this->execute($stmt);
     }
 
-    public function CreatePost($user_id, $title, $image, $content)
+    public function CreatePost($user_id, $category_id, $title, $image, $content)
     {
 
-        $stmt = $this->conn->prepare("INSERT INTO `posts`(`user_id`, `title`, `image`, `content`) VALUES (?,?,?,?)");
-        $stmt->bind_param('isss', $user_id, $title, $image, $content);
+        $stmt = $this->conn->prepare("INSERT INTO `posts`(`user_id`, `category_id` , `title`, `image`, `content`) VALUES (?,?,?,?,?)");
+        $stmt->bind_param('iisss', $user_id,$category_id, $title, $image, $content);
         if ($stmt->execute()) {
             header('Location: /post/list');
         } else {
@@ -40,10 +42,10 @@ class PostModel extends Database
     }
 
 
-    public function UpdatePost($title, $image, $content, $id)
+    public function UpdatePost($title, $image, $content, $category_id, $id)
     {
-        $stmt = $this->conn->prepare(" UPDATE `posts` set `title`= ?, `image` = ?, `content` = ? WHERE `id` = ? ");
-        $stmt->bind_param('sssi', $title, $image, $content, $id);
+        $stmt = $this->conn->prepare(" UPDATE `posts` set `title`= ?, `image` = ?, `content` = ?, `category_id` = ? WHERE `id` = ? ");
+        $stmt->bind_param('sssii', $title, $image, $content, $category_id, $id);
         if ($stmt->execute()) {
             header('Location: /post/list');
         } else {

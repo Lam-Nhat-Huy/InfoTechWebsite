@@ -24,6 +24,21 @@
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3">
+                        <label for="select" class=" form-control-label">Select</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <select name="category" id="select" class="form-control">
+                            <?php if (!empty($data['category'])) : ?>
+                                <?php foreach ($data['category'] as $item) : ?>
+                                    <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
+                                <?php endforeach ?>
+                            <?php endif ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
                         <label for="textarea-input" class=" form-control-label">Content</label>
                     </div>
                     <div class="col-12 col-md-9">

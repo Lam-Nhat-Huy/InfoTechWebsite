@@ -2,9 +2,11 @@
 class PostController extends Controller
 {
     private $PostModel;
+    private $PostsCategory;
     public function __construct()
     {
         $this->PostModel = $this->model('PostModel');
+        $this->PostsCategory = $this->model('PostsCategoryModel');
         checkLogin();
     }
 
@@ -21,7 +23,7 @@ class PostController extends Controller
     {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+            $category_id = $_POST['category'];
             $user_id = $_SESSION['user_id'];
             $title = $_POST['title'];
             $content = $_POST['content'];
@@ -41,7 +43,7 @@ class PostController extends Controller
                 if (move_uploaded_file($tempName, $uploadDir . $newFileName)) {
                     // Trả về đường dẫn ảnh mới
                     $image = $uploadDir . $newFileName;
-                    $this->PostModel->CreatePost($user_id, $title, $image, $content);
+                    $this->PostModel->CreatePost($user_id,  $category_id, $title, $image, $content);
                 } else {
                     echo "<div class='alert alert-danger style='width: 400px;
                             margin-left: 250px;'>Có lỗi xảy ra khi lưu trữ file ảnh.</div>";
@@ -55,7 +57,7 @@ class PostController extends Controller
         $this->view('HomeMasterLayout', [
             'pages' => 'PostAdminPage',
             'block' => 'post/add',
-
+            'category' =>  $this->PostModel->GetPostCategory()
         ]);
     }
 
@@ -64,6 +66,7 @@ class PostController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = $_GET['post_id'];
+            $category_id = $_POST['category'];
             $title = $_POST['title'];
             $content = $_POST['content'];
             $image = $_FILES['image']['name'];
@@ -89,12 +92,13 @@ class PostController extends Controller
             } else {
                 $image = $_POST['thumbnail'];
             }
-            $this->PostModel->UpdatePost($title, $image, $content, $id);
+            $this->PostModel->UpdatePost($title, $image, $content, $category_id, $id);
         }
         $this->view('HomeMasterLayout', [
             'pages' => 'PostAdminPage',
             'block' => 'post/edit',
-            'post'  =>  $this->PostModel->GetOnePostById()
+            'post'  =>  $this->PostModel->GetOnePostById(),
+            'category' => $this->PostsCategory->GetPostCategoryByAccout()
         ]);
     }
 

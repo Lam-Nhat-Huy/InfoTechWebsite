@@ -12,6 +12,7 @@
                 <th>id</th>
                 <th>Image</th>
                 <th>Title</th>
+                <th>category</th>
                 <th>Content</th>
                 <th>Date of posting</th>
                 <th>Add by</th>
@@ -19,17 +20,19 @@
             </tr>
         </thead>
         <tbody>
+            <?php if(isset($data['post'])) :?>
             <?php foreach($data['post'] as $data) : ?>
             <tr>
                 <td><?= $data['id'];?></td>
                 <td><img src="../../../../<?= $data['image'] ?>" alt="" width="80px" height="80px"></td>
                 <td><?=$data['title']?></td>
+                <td><?=$data['category_name']?></td>
                 <td><?= substr($data['content'], 0 , 100)?>...</td>
                 <td><?=$data['cr']?></td>
                 <td><?=$data['user_name']?></td>
                 <td>
                     <div class="table-data-feature">
-                        <a href="/post/edit/?post_id=<?=$data['id']?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
+                        <a href="/post/edit/?post_id=<?= $data['id'] ?>&category_id=<?= $data['category_id'] ?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
                             <i class="zmdi zmdi-edit"></i>
                         </a>
                         <a href="/post/delete/?post_id=<?=$data['id']?>" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="return confirm('Are you sure you want to delete?')">
@@ -39,6 +42,7 @@
                 </td>
             </tr>
             <?php endforeach ?>
+            <?php endif ?>
         </tbody>
     </table>
 </div>

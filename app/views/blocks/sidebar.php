@@ -42,6 +42,11 @@
                         <i class="fas fa-send"></i>Post Manager</a>
                 </li>
 
+                <li>
+                    <a href="/postscategory/">
+                        <i class="fas fa-send"></i>Post category</a>
+                </li>
+
             </ul>
         </nav>
     </div>
