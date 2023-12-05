@@ -1,5 +1,4 @@
 <?php
-
 class CommentModel extends Database
 {
     // Hiện thị comment bên product
@@ -23,7 +22,6 @@ INNER JOIN products pr ON pr.id = bl.product_id
         return $this->execute($sql);
 
     }
-
 //Insert vào database
     public function comment_insert($noidung, $id_sp, $id_user, $date)
     {
@@ -35,7 +33,7 @@ INNER JOIN products pr ON pr.id = bl.product_id
         } else {
             false;
         }
-
+            
     }
 
 
@@ -82,5 +80,5 @@ INNER JOIN products pr ON pr.id = bl.product_id
         } else {
             echo 'Lỗi Thầy';
         }
-    }
+    }    
 }

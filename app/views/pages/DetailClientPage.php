@@ -788,7 +788,6 @@ if (isset($_GET['product_id'])) {
         var replyForm = document.getElementById('replyForm_' + commentId);
         replyForm.style.display = (replyForm.style.display === 'none' || replyForm.style.display === '') ? 'block' : 'none';
     }
-
     document.addEventListener('DOMContentLoaded', function () {
         var replyLinks = document.querySelectorAll('.reply-link');
 

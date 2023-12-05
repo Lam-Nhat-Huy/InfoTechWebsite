@@ -14,7 +14,7 @@ class DetailController extends Controller
         if (isset($_GET['product_id'])) {
             $id_sp = $_GET['product_id'];
         }
-
+       
         // Check if the form is submitted for adding a new comment
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insert_comment'])) {
             $noidung = $_POST['noidung'];
