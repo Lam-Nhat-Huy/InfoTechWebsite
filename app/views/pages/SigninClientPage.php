@@ -35,12 +35,17 @@
                         <h3>Welcome Back ! <br>
                             Please Sign up now</h3>
                         <form class="row contact_form" action="/signin/" method="post" novalidate="novalidate">
+                            <!-- ... -->
                             <div class="col-md-12 form-group p_star">
                                 <input type="email" class="form-control" id="email" name="email" value="" placeholder="Email">
+                                <div class="error-container"></div>
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 <input type="password" class="form-control" id="password" name="password" value="" placeholder="Password">
+                                <div class="error-container"></div>
                             </div>
+                            <!-- ... -->
+
                             <div class="col-md-12 form-group">
                                 <div class="creat_account d-flex align-items-center justify-content-end">
                                     <a href="/signup/">Register</a>
@@ -57,4 +62,68 @@
         </div>
     </div>
 </section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const loginForm = document.querySelector('.contact_form');
+
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+
+            // Reset previous error messages
+            clearErrors();
+
+            let hasErrors = false;
+
+            // Simple email validation
+            if (!validateEmail(email.value)) {
+                showError(email, 'Please enter a valid email address.');
+                hasErrors = true;
+            }
+
+            // Password should not be empty
+            if (!password.value.trim()) {
+                showError(password, 'Please enter your password.');
+                hasErrors = true;
+            }
+
+            if (hasErrors) {
+                return;
+            }
+
+            // If all validations pass, you can submit the form
+            this.submit();
+        });
+
+        function validateEmail(email) {
+            // Basic email validation using regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showError(input, message) {
+            const errorElement = document.createElement('div');
+            errorElement.className = 'error-message';
+            errorElement.innerText = message;
+            errorElement.style.color = 'red'; // Set the color to red
+
+            const parent = input.parentElement;
+            const errorContainer = parent.querySelector('.error-container');
+            errorContainer.innerHTML = ''; // Clear previous errors
+            errorContainer.appendChild(errorElement);
+        }
+
+        function clearErrors() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(function (error) {
+                error.parentNode.removeChild(error);
+            });
+        }
+    });
+</script>
+
+
+
 <!--================login_part end =================-->

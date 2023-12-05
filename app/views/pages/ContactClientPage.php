@@ -33,7 +33,7 @@
                       <div class="row">
                           <div class="col-12">
                               <div class="form-group mb-5">
-                                  <textarea class="form-control w-100" required name="body" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder='Enter Message'><?php echo isset($_POST['body']) ? htmlspecialchars($_POST['body']) : ''; ?></textarea>
+                                  <textarea class="form-control w-100"  name="body" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder='Enter Message'><?php echo isset($_POST['body']) ? htmlspecialchars($_POST['body']) : ''; ?></textarea>
                                   <div class="invalid-feedback">
                                       Please enter a valid content
                                   </div>
@@ -88,4 +88,68 @@
           </div>
       </div>
   </section>
-  <!--
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          var form = document.getElementById('contactForm');
+          form.addEventListener('submit', function (event) {
+              var message = document.getElementById('message').value;
+              var name = document.getElementById('name').value;
+              var email = document.getElementById('email').value;
+              var subject = document.getElementById('subject').value;
+
+              // Reset previous error messages
+              clearErrors();
+
+              var hasErrors = false;
+
+              // Validate message
+              if (message.trim() === '') {
+                  displayError('Please enter a message', 'message');
+                  hasErrors = true;
+              }
+
+              // Validate name
+              if (name.trim() === '') {
+                  displayError('Please enter your name', 'name');
+                  hasErrors = true;
+              }
+
+              // Validate email
+              if (email.trim() === '' || !isValidEmail(email)) {
+                  displayError('Please enter a valid email address', 'email');
+                  hasErrors = true;
+              }
+
+              // Validate subject
+              if (subject.trim() === '') {
+                  displayError('Please enter a subject', 'subject');
+                  hasErrors = true;
+              }
+
+              if (hasErrors) {
+                  event.preventDefault();
+              }
+          });
+
+          function displayError(message, fieldId) {
+              var errorDiv = document.createElement('div');
+              errorDiv.className = 'error-message';
+              errorDiv.style.color = 'red'; // Set text color to red
+              errorDiv.innerText = message;
+              document.getElementById(fieldId).parentNode.appendChild(errorDiv);
+          }
+
+          function clearErrors() {
+              var errorMessages = document.querySelectorAll('.error-message');
+              errorMessages.forEach(function (error) {
+                  error.parentNode.removeChild(error);
+              });
+          }
+
+          function isValidEmail(email) {
+              // Simple email validation using regular expression
+              var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              return emailRegex.test(email);
+          }
+      });
+  </script>

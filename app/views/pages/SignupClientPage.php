@@ -63,4 +63,79 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var form = document.querySelector('.contact_form');
+        form.addEventListener('submit', function (event) {
+            var username = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var cpassword = document.getElementById('cpassword').value;
+
+            // Reset previous error messages
+            clearErrors();
+
+            var hasErrors = false;
+
+            // Validate username
+            if (username.trim() === '') {
+                displayError('Please enter a username', 'name');
+                hasErrors = true;
+            }
+
+            // Validate email
+            if (email.trim() === '' || !isValidEmail(email)) {
+                displayError('Please enter a valid email address', 'email');
+                hasErrors = true;
+            }
+
+            // Validate password
+            if (password.trim() === '') {
+                displayError('Please enter a password', 'password');
+                hasErrors = true;
+            }
+
+            // Validate confirm password
+            if (cpassword.trim() === '') {
+                displayError('Please confirm your password', 'cpassword');
+                hasErrors = true;
+            }
+
+            // Check if passwords match
+            if (password !== cpassword) {
+                displayError('Passwords do not match', 'password');
+                displayError('Passwords do not match', 'cpassword');
+                hasErrors = true;
+            }
+
+            if (hasErrors) {
+                event.preventDefault();
+            }
+        });
+
+        function displayError(message, fieldId) {
+            var errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.color = 'red'; // Set text color to red
+            errorDiv.innerText = message;
+            document.getElementById(fieldId).parentNode.appendChild(errorDiv);
+        }
+
+        function clearErrors() {
+            var errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(function (error) {
+                error.parentNode.removeChild(error);
+            });
+        }
+
+        function isValidEmail(email) {
+            // Simple email validation using regular expression
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    });
+</script>
+
+
 <!--================login_part end =================-->
