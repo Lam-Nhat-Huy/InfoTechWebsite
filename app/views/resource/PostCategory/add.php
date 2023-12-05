@@ -26,3 +26,52 @@
         </form>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the form element
+        var form = document.querySelector('.form-horizontal');
+
+        // Add a submit event listener to the form
+        form.addEventListener('submit', function (event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Validate the form fields
+            if (validateForm()) {
+                // If the form is valid, submit it
+                form.submit();
+            }
+        });
+
+        // Function to validate the form fields
+        function validateForm() {
+            // Get the name input element
+            var nameInput = document.getElementById('text-input');
+            // Get the value of the name input
+            var nameValue = nameInput.value.trim();
+
+            // Get the small element for error messages
+            var errorElement = nameInput.nextElementSibling;
+
+            // Check if the name is empty
+            if (nameValue === '') {
+                // Display an error message with red text color
+                errorElement.textContent = 'Name is required';
+                // Set the text color directly
+                errorElement.style.color = 'red';
+                // Focus on the name input
+                nameInput.focus();
+                // Form is not valid
+                return false;
+            } else {
+                // Clear any existing error message
+                errorElement.textContent = '';
+                // Reset the text color
+                errorElement.style.color = ''; // Reset to default
+                // Form is valid
+                return true;
+            }
+        }
+    });
+</script>
