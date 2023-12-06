@@ -9,15 +9,15 @@
                             <div class="col-lg-5 col-md-8">
                                 <div class="banner_text">
                                     <div class="banner_text_iner">
-                                        <h1>Tech & Infomation</h1>
+                                        <h1>Black Friday</h1>
                                         <p>Incididunt ut labore et dolore magna aliqua quis ipsum
                                             suspendisse ultrices gravida. Risus commodo viverra</p>
-                                        <a href="#" class="btn_2">buy now</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="<?= ASSETS ?>/images/banner2.jpg" style="width: 706px; height: 303px" alt="">
+                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/12/banner/dh-befit-720-220-720x220.png"
+                                     style="width: 706px; height: 303px" alt="">
                             </div>
                         </div>
                     </div>
@@ -26,16 +26,15 @@
                             <div class="col-lg-5 col-md-8">
                                 <div class="banner_text">
                                     <div class="banner_text_iner">
-                                        <h1>Cloth & Wood
-                                            Sofa</h1>
+                                        <h1>Laptop Gaming</h1>
                                         <p>Incididunt ut labore et dolore magna aliqua quis ipsum
                                             suspendisse ultrices gravida. Risus commodo viverra</p>
-                                        <a href="#" class="btn_2">buy now</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="<?= ASSETS ?>/images/banner3.webp" style="width: 706px; height: 303px" alt="">
+                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/10/banner/LAP-GAMING-720-220-720x220.png"
+                                     style="width: 706px; height: 303px" alt="">
                             </div>
                         </div>
                     </div>
@@ -44,16 +43,15 @@
                             <div class="col-lg-5 col-md-8">
                                 <div class="banner_text">
                                     <div class="banner_text_iner">
-                                        <h1>Wood & Cloth
-                                            Sofa</h1>
+                                        <h1>Iphone 15 Promax</h1>
                                         <p>Incididunt ut labore et dolore magna aliqua quis ipsum
                                             suspendisse ultrices gravida. Risus commodo viverra</p>
-                                        <a href="#" class="btn_2">buy now</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="<?= ASSETS ?>/images/banner4.jpg" style="width: 706px; height: 303px" alt="">
+                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/11/banner/IP15-720-220-720x220-3.png"
+                                     style="width: 706px; height: 303px" alt="">
                             </div>
                         </div>
                     </div>
@@ -64,10 +62,59 @@
     </div>
 </section>
 <!-- banner part start-->
+<section class="client_logo" style="margin-top: 60px">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/12/banner/123232-1920x450.jpg"
+                     alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<!--::subscribe_area part end::-->
+<section class="client_logo padding_top">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="single_client_logo">
+                    <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/9775925-120x120.png"
+                         alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-laptop-lenovo-120x120.png"
+                         alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/9775925-120x120.png"
+                         alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-laptop-lenovo-120x120.png"
+                         alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/9775925-120x120.png"
+                         alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+<section class="client_logo" style="margin-top: 60px">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/12/banner/1200x100-1200x100-2.jpg"
+                     alt="">
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- product_list start-->
-<section class="product_list section_padding">
+<section class="product_list" style="margin-top: 100px">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -83,7 +130,7 @@
                         <div class="row align-items-center justify-content-between">
                             <?php if (!empty($data['product'])) { ?>
                                 <?php foreach ($data['product'] as $key => $item) {
-                                    if ($key > 12) {
+                                    if ($key > 11) {
                                         break;
                                     }
                                     ?>
@@ -118,7 +165,7 @@
 <!-- product_list part start-->
 
 <!-- awesome_shop start-->
-<section class="our_offer section_padding">
+<section class="our_offer">
     <div class="container">
         <div class="row align-items-center justify-content-between">
             <div class="col-lg-6 col-md-6">
@@ -152,42 +199,3 @@
 <!-- awesome_shop part start-->
 
 <!-- subscribe_area part start-->
-<section class="client_logo padding_top">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-12">
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_1.png" alt="">
-                </div>
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_2.png" alt="">
-                </div>
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_3.png" alt="">
-                </div>
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_4.png" alt="">
-                </div>
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_5.png" alt="">
-                </div>
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_3.png" alt="">
-                </div>
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_1.png" alt="">
-                </div>
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_2.png" alt="">
-                </div>
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_3.png" alt="">
-                </div>
-                <div class="single_client_logo">
-                    <img src="<?= ASSETS ?>/images/client_logo/client_logo_4.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--::subscribe_area part end::-->
