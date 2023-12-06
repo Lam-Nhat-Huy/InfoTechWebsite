@@ -95,8 +95,8 @@
                                             <div class="single_product_text">
                                                 <h4><?= $item['name']?></h4>
                                                 <div class="d-flex">
-                                                    <h3 class="text-body ml-4"><?= number_format($item['price']) ?>
-                                                        VND</h3>
+                                                    <h3 class="text-body ml-4">$<?= number_format($item['price']) ?>
+                                                    </h3>
                                                 </div>
                                                 <a href="/detail?product_id=<?= $item['id'] ?>" class="add_cart">View
                                                     more<i

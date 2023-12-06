@@ -240,7 +240,7 @@ if (isset($_GET['product_id'])) {
                                     ?>
                                 </li>
                                 <li class="mb-3 d-flex">
-                                    <span class="mr-3">Ram:</span>
+                                    <span class="mr-3"><?= !empty($item['ram_id']) ? 'Ram:' : '' ?></span>
                                     <div id="hihi">
                                         <?php
                                         if ($item['ram_id'] > 0) {
