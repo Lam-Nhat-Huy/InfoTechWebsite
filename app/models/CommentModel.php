@@ -29,7 +29,7 @@ INNER JOIN products pr ON pr.id = bl.product_id
         $stmt = $this->conn->prepare("INSERT INTO comments (content,product_id,user_id,date) VALUES (?,?,?,?) ");
         $stmt->bind_param('siis', $noidung, $id_sp, $id_user, $date);
         if ($stmt->execute()) {
-            header("Location: /dashboard/ ");
+            header("Location: /detail/?product_id=$id_sp ");
         } else {
             false;
         }
@@ -54,29 +54,29 @@ INNER JOIN products pr ON pr.id = bl.product_id
         $stmt = $this->conn->prepare(" INSERT INTO comments ( content,product_id, user_id,date ,parent_id) VALUES (?,?, ?, ?, ?)");
         $stmt->bind_param('siisi', $noidung, $product_id, $id_user, $date, $parent_id);
         if ($stmt->execute()) {
-            header("Location: /dashboard/ ");
+            header("Location:  /detail/?product_id=$product_id ");
         } else {
             false;
         }
     }
 
-    public function deleteComment($id_user, $parent_id)
+    public function deleteComment($id_user, $parent_id,$id_sp)
     {
         $stmt = $this->conn->prepare("DELETE FROM `comments` WHERE `user_id` = ? AND `id` = ? ");
         $stmt->bind_param('ii', $id_user, $parent_id);
         if ($stmt->execute()) {
-            header("Location: /dashboard/ ");
+            header("Location:  /detail/?product_id=$id_sp ");
         } else {
             echo 'Lỗi Thầy';
         }
     }
 
-    public function updateComment($noidung, $parent_id)
+    public function updateComment($noidung, $parent_id,$id_sp)
     {
         $stmt = $this->conn->prepare("UPDATE `comments` SET `content`= ? WHERE `id` = ?");
         $stmt->bind_param('si', $noidung, $parent_id);
         if ($stmt->execute()) {
-            header("Location: /dashboard/ ");
+            header("Location: /detail/?product_id=$id_sp ");
         } else {
             echo 'Lỗi Thầy';
         }

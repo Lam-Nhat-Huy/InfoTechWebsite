@@ -40,14 +40,15 @@ class DetailController extends Controller
             $this->CommentModel->ReplyComment($noidung, $product_id, $id_user, $date, $parent_id);
         }
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['DeleteComment'])) {
+
             $id_user = $_SESSION['user_id'];
             $parent_id = $_POST['parent_comment_id'];
-            $this->CommentModel->deleteComment($id_user, $parent_id);
+            $this->CommentModel->deleteComment($id_user, $parent_id,$id_sp);
         }
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['EditComment'])) {
             $noidung = $_POST['noidung'];
             $parent_id = $_POST['parent_comment_id'];
-            $this->CommentModel->updateComment($noidung, $parent_id);
+            $this->CommentModel->updateComment($noidung, $parent_id,$id_sp);
         }
         $this->view('ClientMasterLayout', [
             'pages' => 'DetailClientPage',
