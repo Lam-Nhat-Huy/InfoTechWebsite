@@ -67,7 +67,7 @@
                                 </a>
                             </div>
                             <?= (isset($_SESSION['authentication_user'])) ? "<h4>{$_SESSION['client_username']}</h4>" : " "; ?>
-                            <?= (isset($_SESSION['authentication_user'])) ? "<a href='/signin/logout/'><i class='fas fa-sign-out-alt'></i></a>" : " "; ?>
+                            <?= (isset($_SESSION['authentication_user'])) ? "<a href='/signin/logout/' onclick='return confirm(\"Bạn có muốn đăng xuất?\");'><i class='fas fa-sign-out-alt'></i></a>" : " "; ?>
                         </div>
                     </nav>
                 </div>
