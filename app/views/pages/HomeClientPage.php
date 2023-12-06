@@ -83,7 +83,7 @@
                         <div class="row align-items-center justify-content-between">
                             <?php if (!empty($data['product'])) { ?>
                                 <?php foreach ($data['product'] as $key => $item) {
-                                    if ($key > 5) {
+                                    if ($key > 12) {
                                         break;
                                     }
                                     ?>
