@@ -248,10 +248,12 @@ if (isset($_GET['product_id'])) {
                                             foreach ($data['attribute'] as $ram) {
                                                 if (!array_key_exists($ram['ram_name'], $uniqueRams)) { // Kiểm tra xem giá trị đã tồn tại trong mảng chưa
                                                     $uniqueRams[$ram['ram_name']] = true; // Đánh dấu giá trị là đã xuất hiện
+                                                    if ($ram['ram_id'] == $attr['ram_id']) {
                                                     ?>
                                                     <a class="btn <?= ($ram['ram_id'] === $attr['ram_id']) ? 'btn-danger' : '' ?> ram "
                                                        style="border: solid 1px #ff9ea2;margin-right:4px"><?= $ram['ram_name'] ?></a>
                                                     <?php
+                                                    }
                                                 }
                                             }
                                         }

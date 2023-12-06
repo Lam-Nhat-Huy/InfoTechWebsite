@@ -62,7 +62,7 @@
                                 ?>
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="single_product_item text-center">
-                                        <a href="">
+                                        <a href="/detail?product_id=<?= $row['id'] ?>">
                                             <img src="../../../../<?= $row['image'] ?>" alt="" width="200px" height="200px">
                                         </a>
                                         <div class="single_product_text">

@@ -98,7 +98,8 @@
                                                     <h3 class="text-body ml-4"><?= number_format($item['price']) ?>
                                                         VND</h3>
                                                 </div>
-                                                <a href="" class="add_cart">+ add to cart<i
+                                                <a href="/detail?product_id=<?= $item['id'] ?>" class="add_cart">View
+                                                    more<i
                                                             class="fas fa-heart"></i></a>
                                             </div>
                                         </div>
@@ -122,7 +123,7 @@
         <div class="row align-items-center justify-content-between">
             <div class="col-lg-6 col-md-6">
                 <div class="offer_img">
-                    <img src="<?= ASSETS ?>/images/offer_img.png" alt="">
+                    <img src="<?= ASSETS ?>/images/dell.webp" alt="">
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -149,29 +150,6 @@
     </div>
 </section>
 <!-- awesome_shop part start-->
-
-
-<!-- subscribe_area part start-->
-<section class="subscribe_area section_padding">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-                <div class="subscribe_area_text text-center">
-                    <h5>Join Our Newsletter</h5>
-                    <h2>Subscribe to get Updated
-                        with new offers</h2>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="enter email address" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <a href="#" class="input-group-text btn_2" id="basic-addon2">subscribe now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--::subscribe_area part end::-->
 
 <!-- subscribe_area part start-->
 <section class="client_logo padding_top">
