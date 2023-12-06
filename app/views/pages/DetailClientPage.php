@@ -189,50 +189,120 @@ if (isset($_GET['product_id'])) {
 <!--================End Home Banner Area =================-->
 
 <!--================Single Product Area =================-->
-<div class="product_image_area section_padding">
-    <div class="container">
-        <div class="row s_product_inner justify-content-between">
-            <div class="col-lg-7 col-xl-7">
-                <div class="product_slider_img">
-                    <div id="vertical">
-                        <div>
-                            <img src="<?= ASSETS ?>/images/product/single-product/product_1.png"/>
+<form class="product_image_area section_padding" action="" method="post">
+    <?php
+    foreach ($data['product'] as $item) {
+        if (!empty($data['attribute'])) {
+            foreach ($data['attribute'] as $attr) {
+            }
+            ?>
+            <div class="container">
+                <div class="row s_product_inner justify-content-between">
+                    <div class="col-lg-7 col-xl-7">
+                        <div class="product_slider_img">
+                            <div id="vertical">
+                                <div>
+                                    <img src="../../<?= $item['image'] ?> ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-xl-4">
+                        <div class="s_product_text">
+                            <h5>previous <span>|</span> next</h5>
+                            <h3><?= $item['name'] ?></h3>
+                            <div id="price_attr">
+                                <h2><?= !empty($attr['price']) ? number_format($attr['price']) : number_format($item['price']) ?></h2>
+                            </div>
+                            <ul class="list">
+                                <li>
+                                    <a class="active" href="#">
+                                        <span>Category</span> : <?= $item['category_name'] ?></a>
+                                </li>
+                                <li class="mb-3">
+                                    <?php
+                                    if ($item['color_id'] > 0) {
+                                        echo "<span class='mr-3'>Color:</span>";
+                                        $uniqueColors = array();
+                                        foreach ($data['attribute'] as $color) {
+                                            if (!array_key_exists($color['color'], $uniqueColors)) { // Kiểm tra xem giá trị đã tồn tại trong mảng chưa
+                                                $uniqueColors[$color['color']] = true; // Đánh dấu giá trị là đã xuất hiện
+                                                ?>
+                                                <a href="javascript:void(0)"
+                                                   onclick="loadAttr('<?= $color['color_id'] ?>','<?= $item['id'] ?>','color')"
+                                                   class="btn <?= ($color['color_id'] === $attr['color_id']) ? 'btn-danger' : '' ?> color"
+                                                   style="border: solid 1px #ff9ea2;margin-right:4px;"
+                                                   id="color_select"><?= $color['color'] ?></a>
+                                                <?php
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </li>
+                                <li class="mb-3 d-flex">
+                                    <span class="mr-3">Ram:</span>
+                                    <div id="hihi">
+                                        <?php
+                                        if ($item['ram_id'] > 0) {
+                                            $uniqueRams = array(); //đay là mảng chứa giá trị duy nhất
+                                            foreach ($data['attribute'] as $ram) {
+                                                if (!array_key_exists($ram['ram_name'], $uniqueRams)) { // Kiểm tra xem giá trị đã tồn tại trong mảng chưa
+                                                    $uniqueRams[$ram['ram_name']] = true; // Đánh dấu giá trị là đã xuất hiện
+                                                    ?>
+                                                    <a class="btn <?= ($ram['ram_id'] === $attr['ram_id']) ? 'btn-danger' : '' ?> ram "
+                                                       style="border: solid 1px #ff9ea2;margin-right:4px"><?= $ram['ram_name'] ?></a>
+                                                    <?php
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p>
+                                <?= $item['content'] ?>
+                            </p>
+                            <div class="card_area d-flex justify-content-between align-items-center">
+                                <!-- <div class="product_count">
+                                    <span class="inumber-decrement"><i class="fas fa-minus"></i></span>
+                                    <input class="input-number" type="text" value="1" min="0" max="10" name="qty">
+                                    <span class="number-increment"><i class="fas fa-plus"></i></span>
+                                </div> -->
+                                <div id="add_to_cart">
+                                    <?php
+                                    if ($item['color_id'] > 0) {
+                                        foreach ($data['attribute'] as $cart) {
+                                            $ram = $attr['ram_id'];
+                                            $color = $attr['color_id'];
+                                            ?>
+
+                                            <?php
+                                        }
+                                        ?>
+                                        <a class='btn_3' href='javascript:void(0)'
+                                           onclick='addToCart(<?= $ram ?>,<?= $color ?>, <?= $item["id"] ?>)'>add to
+                                            cart</a>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <a class='btn_3' href='javascript:void(0)'
+                                           onclick='addCart(<?= $item["id"] ?>)'>add to cart</a>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                                <a href="#" class="like_us"><i class="fas fa-heart"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-xl-4">
-                <div class="s_product_text">
-                    <h5>previous <span>|</span> next</h5>
-                    <h3>Faded SkyBlu Denim Jeans</h3>
-                    <h2>$149.99</h2>
-                    <ul class="list">
-                        <li>
-                            <a class="active" href="#">
-                                <span>Category</span> : Household</a>
-                        </li>
-                        <li>
-                            <a href="#"> <span>Availibility</span> : In Stock</a>
-                        </li>
-                    </ul>
-                    <p>
-                        First replenish living. Creepeth image image. Creeping can't, won't called.
-                        Two fruitful let days signs sea together all land fly subdue
-                    </p>
-                    <div class="card_area d-flex justify-content-between align-items-center">
-                        <div class="product_count">
-                            <span class="inumber-decrement"><i class="fas fa-minus"></i></span>
-                            <input class="input-number" type="text" value="1" min="0" max="10">
-                            <span class="number-increment"><i class="fas fa-plus"></i></span>
-                        </div>
-                        <a href="#" class="btn_3">add to cart</a>
-                        <a href="#" class="like_us"><i class="fas fa-heart"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            <?php
+        }
+    }
+
+    ?>
+</form>
 <!--================End Single Product Area =================-->
 
 <!--================Product Description Area =================-->

@@ -114,18 +114,123 @@
 <!-- custom js -->
 <script src="<?= ASSETS ?>/js/custom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function loadAttr(color_id, product_id, type){
+    function loadAttr(color_id, product_id, type) {
         jQuery.ajax({
             url: '/detail/loadAttr/',
-            data: 'color_id='+color_id+'&product_id='+product_id+'&type='+type,
+            data: 'color_id=' + color_id + '&product_id=' + product_id + '&type=' + type,
             type: 'post',
-            success: function(result){
-                jQuery('#price_attr').html(result);
+            success: function (response) {
+                var data = JSON.parse(response);
+                var price = jQuery(data.price).eq(0);
+                var cart = jQuery(data.cart).eq(0);
+                jQuery('#price_attr').html(price);
+                jQuery('#hihi').html(data['ram']);
+                jQuery('#add_to_cart').html(cart);
             }
         })
+        var elements = document.getElementsByClassName("color");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].classList.remove("btn-danger");
+        }
+
+        // Thêm class "btn-danger" cho phần tử "a" được click
+        var element = event.target;
+        element.classList.add("btn-danger");
+    }
+
+    function loadRam(ram_id, color_id, product_id) {
+        jQuery.ajax({
+            url: '/detail/loadRam/',
+            data: 'ram_id=' + ram_id + '&color_id=' + color_id + '&product_id=' + product_id,
+            type: 'post',
+            success: function (response) {
+                var data = JSON.parse(response);
+                var price = jQuery(data.price);
+                var cart = jQuery(data.cart);
+                jQuery('#price_attr').html(price);
+                jQuery('#add_to_cart').html(cart);
+            }
+        })
+        var elements = document.getElementsByClassName("ram");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].classList.remove("btn-danger");
+        }
+
+        // Thêm class "btn-danger" cho phần tử "a" được click
+        var element = event.target;
+        element.classList.add("btn-danger");
+    }
+
+    function addToCart(ram_id, color_id, product_id) {
+        jQuery.ajax({
+            url: 'detail/addToCart',
+            data: 'ram_id=' + ram_id + '&color_id=' + color_id + '&product_id=' + product_id,
+            type: 'post'
+        })
+            .done(function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đã thêm vào giỏ hàng',
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            })
+
+    }
+
+    function addCart(product_id) {
+        jQuery.ajax({
+            url: 'detail/addCart',
+            data: 'product_id=' + product_id,
+            type: 'post'
+        })
+            .done(function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đã thêm vào giỏ hàng',
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            })
+    }
+
+    function removeCart(cart_id) {
+        jQuery.ajax({
+            url: '/cart/remove',
+            data: 'id=' + cart_id,
+            type: 'post',
+            success: function (response) {
+                var newContent = jQuery(response).find('#cart'); // Giả sử phần nội dung cần tải lại có id là 'content'
+                jQuery('#cart').replaceWith(newContent); // Thay thế phần nội dung cũ bằng phần nội dung mới
+                // Các bước xử lý khác sau khi tải lại nội dung
+            }
+        })
+            .done(function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đã xóa sản phẩm khỏi giỏ hàng',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    onclose
+                });
+            })
+
+    }
+
+    function editCart() {
+        var qty = $('#editQty').val();
+        var id = $('#idCart').val();
+        console.log(id);
+        // jQuery.ajax({
+        //         url: '/cart/remove',
+        //         data: 'qty=' + qty,
+        //         type: 'post',
+        // });
     }
 </script>
+
 </body>
 
 </html>

@@ -77,32 +77,40 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <form class="col-lg-12" action="" method="">
                 <div class="product_list_slider owl-carousel">
                     <div class="single_product_list_slider">
                         <div class="row align-items-center justify-content-between">
                             <?php if (!empty($data['product'])) { ?>
-                                <?php foreach ($data['product'] as $item) : ?>
+                                <?php foreach ($data['product'] as $key => $item) {
+                                    if ($key > 5) {
+                                        break;
+                                    }
+                                    ?>
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="single_product_item">
-                                            <a href="/detail?product_id=<?= $item['id']?>"> <img src="../../<?= $item['image'] ?>" alt=""></a>
+                                            <a href="/detail?product_id=<?= $item['id'] ?>"> <img
+                                                        src="../../<?= $item['image'] ?>" alt="" width="100px"
+                                                        height="240px"></a>
                                             <div class="single_product_text">
                                                 <h4><?= $item['name']?></h4>
                                                 <div class="d-flex">
-                                                <h3 class="text-body ml-4"><?= number_format($item['price'])?></h3>
+                                                    <h3 class="text-body ml-4"><?= number_format($item['price']) ?>
+                                                        VND</h3>
                                                 </div>
-                                                <a href="#" class="add_cart">+ add to cart<i class="fas fa-heart"></i></a>
+                                                <a href="" class="add_cart">+ add to cart<i
+                                                            class="fas fa-heart"></i></a>
                                             </div>
                                         </div>
                                     </div>
-                                <?php endforeach?>
+                                <?php } ?>
                             <?php } else{
                                 echo '';
                             } ?>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>

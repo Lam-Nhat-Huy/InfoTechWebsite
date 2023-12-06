@@ -18,116 +18,96 @@
 
   <!--================Cart Area =================-->
   <section class="cart_area padding_top">
-      <div class="container">
+      <form class="container" action="" method="post">
           <div class="cart_inner">
               <div class="table-responsive">
                   <table class="table">
                       <thead>
                           <tr>
                               <th scope="col">Product</th>
+                              <th scope="col">Option</th>
                               <th scope="col">Price</th>
                               <th scope="col">Quantity</th>
                               <th scope="col">Total</th>
+                              <th scope="col">Action</th>
                           </tr>
                       </thead>
                       <tbody>
-                          <tr>
+                      <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) { ?>
+                          <?php
+                          $total_product = 0;
+                          $total = 0;
+                          ?>
+                          <?php foreach ($_SESSION['cart'] as $key => $item) :
+
+                              ?>
+                              <?php
+                              $total_product = $item['price'] * $item['qty'];
+                              $_SESSION['total'] = $total += $total_product;
+                              ?>
+                              <tr id="cart">
                               <td>
                                   <div class="media">
                                       <div class="d-flex">
-                                          <img src="<?= ASSETS ?>/images/product/single-product/cart-1.jpg" alt="" />
+                                          <img src="/<?= $item['image'] ?>" alt="" width="90px" height="65px">
                                       </div>
                                       <div class="media-body">
-                                          <p>Minimalistic shop for multipurpose use</p>
+                                          <p><?= $item['name'] ?></p>
                                       </div>
                                   </div>
                               </td>
                               <td>
-                                  <h5>$360.00</h5>
+                                  <h5><?= isset($item['ram']) ? $item['ram'] : '' ?></h5>
+                                  <h5><?= isset($item['color']) ? $item['color'] : '' ?></h5>
+                              </td>
+                              <td>
+                                  <h5>$<?= number_format($item['price']) ?></h5>
                               </td>
                               <td>
                                   <div class="product_count">
                                       <span class="input-number-decrement"> <i class="fas fa-arrow-down"></i></span>
-                                      <input class="input-number" type="text" value="1" min="0" max="10">
+                                      <input class="input-number" type="text" value="<?= $item['qty'] ?>" name="editQty"
+                                             id="editQty">
                                       <span class="input-number-increment"><i class="fas fa-arrow-up"></i></span>
                                   </div>
+                                  <input type="hidden" value="<?= $key ?>" id="idCart">
                               </td>
                               <td>
-                                  <h5>$720.00</h5>
+                                  <h5>$<?= number_format($total_product) ?></h5>
+                              </td>
+                              <td>
+                                  <a href="javascript:void(0)" onclick="removeCart(<?= $key ?>)"><i class="fas fa-trash"
+                                                                                                    style="font-size: 30px;color:black;"></i></a>
                               </td>
                           </tr>
-                          <tr>
-                              <td>
-                                  <div class="media">
-                                      <div class="d-flex">
-                                          <img src="<?= ASSETS ?>/images/product/single-product/cart-1.jpg" alt="" />
-                                      </div>
-                                      <div class="media-body">
-                                          <p>Minimalistic shop for multipurpose use</p>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$360.00</h5>
-                              </td>
-                              <td>
-                                  <div class="product_count">
-                                      <span class="input-number-decrement"> <i class="fas fa-arrow-down"></i></span>
-                                      <input class="input-number" type="text" value="1" min="0" max="10">
-                                      <span class="input-number-increment"><i class="fas fa-arrow-up"></i></span>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$720.00</h5>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div class="media">
-                                      <div class="d-flex">
-                                          <img src="<?= ASSETS ?>/images/product/single-product/cart-1.jpg" alt="" />
-                                      </div>
-                                      <div class="media-body">
-                                          <p>Minimalistic shop for multipurpose use</p>
-                                      </div>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$360.00</h5>
-                              </td>
-                              <td>
-                                  <div class="product_count">
-                                      <span class="input-number-decrement"> <i class="fas fa-arrow-down"></i></span>
-                                      <input class="input-number" type="text" value="1" min="0" max="10">
-                                      <span class="input-number-increment"><i class="fas fa-arrow-up"></i></span>
-                                  </div>
-                              </td>
-                              <td>
-                                  <h5>$720.00</h5>
-                              </td>
-                          </tr>
-                          <tr class="bottom_button">
-                              <td>
-                                  <a class="btn_1" href="#">Update Cart</a>
-                              </td>
+                          <?php endforeach ?>
+                      <?php } else {
+                          ?>
+                          <tr id="newcart">
                               <td></td>
                               <td></td>
-                              <td>
-                                  <div class="cupon_text float-right">
-                                      <a class="btn_1" href="#">Close Coupon</a>
-                                  </div>
-                              </td>
+                              <td>Hiện tại không có sản phẩm nào trong giỏ hàng</td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
                           </tr>
-                          <tr>
+                      <?php } ?>
+                      <tr class="bottom_button">
+                              <td>
+                                  <a class="btn_1 border-0" href="javascript:void(0)" onclick="editCart()">Update
+                                      Cart</a>
+                              </td>
                               <td></td>
                               <td></td>
                               <td>
                                   <h5>Subtotal</h5>
                               </td>
                               <td>
-                                  <h5>$2160.00</h5>
+                                  <h5><?= isset($total) ? number_format($total) : '' ?></h5>
                               </td>
+                          <td></td>
                           </tr>
+
                       </tbody>
                   </table>
                   <div class="checkout_btn_inner float-right">
@@ -136,5 +116,6 @@
                   </div>
               </div>
           </div>
+      </form>
   </section>
   <!--================End Cart Area =================-->

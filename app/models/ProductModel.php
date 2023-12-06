@@ -58,6 +58,12 @@ class ProductModel extends Database
         return $this->execute($stmt);
     }
 
+    public function getProduct($id)
+    {
+        $stmt = "SELECT * FROM `products` WHERE id = '$id'";
+        return $this->execute($stmt);
+    }
+
     public function createProductAttribute($color_id, $ram_id, $product_id, $price, $qty)
     {
         $stmt = $this->conn->prepare("INSERT INTO `product_attributes`(`color_id`, `ram_id`, `product_id`, `price`, `qty`) VALUES (?,?,?,?,?)");
@@ -80,13 +86,34 @@ class ProductModel extends Database
     }
 
     public function getOneAttribute(){
-        $id = $_GET['product_id'];
-        $stmt = "SELECT DISTINCT p.*, c.name as color, c.id as color_id, r.name as ram_name FROM `product_attributes` p, `colors` c, `rams` r WHERE `product_id` = '$id' and p.color_id = c.id and p.ram_id = r.id";
+        if (isset($_GET['product_id'])) {
+            $id = $_GET['product_id'];
+        }
+
+        $stmt = "SELECT DISTINCT p.*, c.name as color, c.id as color_id, r.name as ram_name FROM `product_attributes` p, `colors` c, `rams` r WHERE `product_id` = '$id' and p.color_id = c.id and p.ram_id = r.id ORDER BY c.id DESC";
         return $this->execute($stmt);
     }
 
     public function getAttributeByColor($product_id, $color_id){
         $stmt = "SELECT p.*, r.name as ram FROM `product_attributes` p, `rams` r WHERE p.product_id = '$product_id' AND p.color_id = '$color_id' AND p.ram_id = r.id";
+        return $this->execute($stmt);
+    }
+
+    public function getOneAttributeHome($id)
+    {
+        $stmt = "SELECT DISTINCT p.*, c.name as color, c.id as color_id, r.name as ram_name FROM `product_attributes` p, `colors` c, `rams` r WHERE `product_id` = '$id' and p.color_id = c.id and p.ram_id = r.id ORDER BY c.id ASC";
+        return $this->execute($stmt);
+    }
+
+    public function getAttributeByRam($ram_id, $color_id, $product_id)
+    {
+        $stmt = "SELECT * FROM `product_attributes` WHERE ram_id = '$ram_id' AND color_id= '$color_id' AND product_id= '$product_id'";
+        return $this->execute($stmt);
+    }
+
+    public function getAttributeByColorRam($ram_id, $color_id, $product_id)
+    {
+        $stmt = "SELECT a.*, p.name, p.image, c.name as color_name, r.name as ram_name,a.color_id as color_id, a.ram_id as ram_id FROM `product_attributes` a, `products` p, `colors` c, `rams` r WHERE a.ram_id = '$ram_id' AND a.color_id= '$color_id' AND a.product_id= '$product_id' AND a.product_id = p.id AND c.id = a.color_id AND r.id=a.ram_id";
         return $this->execute($stmt);
     }
 }

@@ -44,7 +44,7 @@
     function remove_attr(attr_count, id) {
         jQuery.ajax({
             url: '/product/del/',
-            data: 'id='+id,
+            data: 'id=' + id,
             type: 'post',
             success: function(result) {
                 jQuery('#attr_' + attr_count).remove();
@@ -55,7 +55,7 @@
     }
 
     function add_attr() {
-        var html = '<div id="product_attr"> <div class="row form-group"> <div class="col col-md-3"> <label for="color-input" class="form-control-label">Variants</label> </div> <div class="col-12 col-md-2"> <select name="color[]" id="select" class="form-control"> <?php if (!empty($data['color'])) : ?> <?php foreach ($data['color'] as $color) : ?> <option value="<?= $color['id'] ?>"><?= $color['name'] ?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2"> <select name="ram[]" id="" class="form-control"> <?php if (!empty($data['ram'])) : ?> <?php foreach ($data['ram'] as $ram) : ?> <option value="<?= $ram['id'] ?>"><?= $ram['name'] ?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2 mb-2"> <input type="text" name="price[]" class="form-control" placeholder="Price"> </div> <div class="col-12 col-md-1 mb-2"> <input type="text" name="qty[]" class="form-control" placeholder="Qty"> </div> <div class="col-12 col-md-2"> <button class="btn btn-primary" onclick="add_product_attribute()" type="button">Add more</button> </div> </div> <input type="hidden" value="" name="attr_id[]"> </div>';
+        var html = '<div id="product_attr"> <div class="row form-group"> <div class="col col-md-3"> <label for="color-input" class="form-control-label">Variants</label> </div> <div class="col-12 col-md-2"> <select name="color[]" id="select" class="form-control"> <?php if (!empty($data['color'])) : ?> <?php foreach ($data['color'] as $color) : ?> <option value="<?= $color['id'] ?>"><?= $color['name'] ?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2"><select name="ram[]" id="" class="form-control"> <?php if (!empty($data['ram'])) : ?> <?php foreach ($data['ram'] as $ram) : ?> <option value="<?= $ram['id'] ?>"><?= $ram['name'] ?></option> <?php endforeach ?> <?php endif ?> </select> </div> <div class="col-12 col-md-2 mb-2"> <input type="text" name="price[]" class="form-control" placeholder="Price"> </div> <div class="col-12 col-md-1 mb-2"> <input type="text" name="qty[]" class="form-control" placeholder="Qty"> </div> <div class="col-12 col-md-2"> <button class="btn btn-primary" onclick="add_product_attribute()" type="button">Add more</button> </div> </div> <input type="hidden" value="" name="attr_id[]"> </div>';
         jQuery('#add_attr').append(html);
         jQuery('#one_attr').empty();
         document.getElementById("buttonA").disabled = true;

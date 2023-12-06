@@ -31,7 +31,11 @@ class ProductController extends Controller
             $slug = createSlug($name);
             $image = $_FILES['image']['name'];
             $content = $_POST['content'];
-            $price = $_POST['price'];
+            if (isset($_POST['color'])) {
+                $price = $_POST['price'][0];
+            } else {
+                $price = $_POST['price'];
+            }
             $color = !empty($_POST['color']) ? $_POST['color'] : 0;
             $ram = !empty($_POST['ram']) ? $_POST['ram'] : 0;
             $qty = $_POST['qty'];
