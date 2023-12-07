@@ -43,7 +43,7 @@ class PostController extends Controller
                 if (move_uploaded_file($tempName, $uploadDir . $newFileName)) {
                     // Trả về đường dẫn ảnh mới
                     $image = $uploadDir . $newFileName;
-                    if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($image)) {
+                    if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['image'])) {
                     $this->PostModel->CreatePost($user_id,  $category_id, $title, $image, $content);
                     }
                 } else {

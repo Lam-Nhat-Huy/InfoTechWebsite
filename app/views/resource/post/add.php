@@ -1,17 +1,30 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (empty($_POST['title'])) {
+        $terror = 'title is required';
+    }
+    if (empty($_POST['image'])) {
+        $ierror = 'image is required';
+    }
+    if (empty($_POST['content'])) {
+        $cerror = 'content is required';
+    }
+}
+?>
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
             <strong>Add Post</strong>
         </div>
         <div class="card-body card-block">
-            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="/post/add" method="post" enctype="multipart/form-data" class="form-horizontal">
                 <div class="row form-group">
                     <div class="col col-md-3">
                         <label for="text-input" class=" form-control-label">Title</label>
                     </div>
                     <div class="col-12 col-md-9">
                         <input type="text" id="text-input" name="title" placeholder="Title post..." class="form-control">
-                        <small class="form-text text-muted">This is a help text</small>
+                        <small class="form-text text-danger"><? (isset($terror)) && print($terror) ?></small>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -20,6 +33,7 @@
                     </div>
                     <div class="col-12 col-md-9">
                         <input type="file" id="file-input" name="image" class="form-control-file">
+                        <small class="form-text text-danger"><? (isset($ierror)) && print($ierror) ?></small>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -43,6 +57,7 @@
                     </div>
                     <div class="col-12 col-md-9">
                         <textarea name="content" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                        <small class="form-text text-danger"><? (isset($cerror)) && print($cerror) ?></small>
                     </div>
                 </div>
         </div>

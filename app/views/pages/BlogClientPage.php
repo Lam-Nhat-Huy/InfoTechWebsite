@@ -37,16 +37,16 @@
                                         </a>
                                         <p> <?= substr($Data['content'], 0, 100) ?>... </p>
                                         <ul class="blog-info-link">
-                                            <li><a href="#"><i class="far fa-user"></i> <?= $Data['user_name'] ?></a></li>
-                                            <li><a href="#"><i class="far fa-comments"></i> <?= $Data['caterogy_name'] ?> </a></li>
+                                            <li><i class="far fa-user"></i> <?= $Data['user_name'] ?></a></li>
+                                            <li><i class="far fa-comments"></i> <?= $Data['caterogy_name'] ?> </a></li>
                                         </ul>
                                     </div>
                                 </article>
                             <?php endforeach ?>
                         <?php endif ?>
                         <nav class="blog-pagination justify-content-center d-flex">
-                            <? if (!isset($_GET['SearchKey'])) : ?>
-                                <ul class="pagination">
+
+                            <ul class="pagination">
                                     <li class="page-item">
                                         <a href="<?= $data['param'] . ($_GET['page'] - 1) ?>" class="page-link" aria-label="Previous">
                                             <i class="fas fa-arrow-left"></i>
@@ -63,14 +63,14 @@
                                         </a>
                                     </li>
                                 </ul>
-                            <?php endif ?>
+
                         </nav>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="">
+                            <form action="" method="get">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                         <input name="SearchKey" type="text" class="form-control" placeholder='Search Keyword' onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
@@ -79,7 +79,6 @@
                                 <button class="button rounded-0 primary-bg text-white w-100 btn_1" type="submit">Search</button>
                             </form>
                         </aside>
-
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Category</h4>
                             <ul class="list cat-list">

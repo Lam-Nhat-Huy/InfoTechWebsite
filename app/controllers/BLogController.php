@@ -17,7 +17,7 @@ class BlogController extends Controller
 
         $result_per_page = 4;
 
-        if (isset($_GET['SearchKey'])) {
+        if (isset($_GET['SearchKey']) && !empty($_GET['SearchKey'])) {
             $number_of_results =  mysqli_num_rows($this->blogModel->SearchPost($_GET['SearchKey']));
         } else {
             if (!isset($_GET['category'])) {
@@ -32,10 +32,10 @@ class BlogController extends Controller
         $number_of_pages = ceil($number_of_results / $result_per_page);
 
         // điều hướng phân trang
-        if (isset($_GET['SearchKey'])) {
+        if (isset($_GET['SearchKey']) && !empty($_GET['SearchKey'])) {
             $SearchKey = $_GET['SearchKey'];
-            $function = $this->blogModel->SearchPost($SearchKey);
-            $param = '';
+            $function = $this->blogModel->SearchPostLimit($SearchKey, $this_page_first_result, $result_per_page);
+            $param = '/blog/?SearchKey=' . $_GET['SearchKey'] . '&page=';
         } else {
             if (isset($_GET['category'])) {
                 $category = $_GET['category'];
