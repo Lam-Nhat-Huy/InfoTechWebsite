@@ -73,7 +73,7 @@ class DetailController extends Controller
         if (mysqli_num_rows($sql) > 0) {
             while ($row = mysqli_fetch_assoc($sql)) {
                 $response = array(
-                    'price' => $price .= "<h2>" . number_format($row['price']) . "</h2>",
+                    'price' => $price .= "<h2>$" . number_format($row['price']) . "</h2>",
                     'ram' => $ram .= "<a href='javascript:void(0)' class='btn ram' style='border: solid 1px #ff9ea2;margin-right:4px' onclick='loadRam(" . $row['ram_id'] . "," . $row['color_id'] . "," . $row['product_id'] . ")'>" . $row['ram'] . "</a>",
                     'cart' => $cart .= "<a class='btn_3' href='javascript:void(0)' onclick='addToCart(" . $row['ram_id'] . "," . $row['color_id'] . "," . $row['product_id'] . ")'>add to cart</a>"
                 );
@@ -93,7 +93,7 @@ class DetailController extends Controller
         if (mysqli_num_rows($sql) > 0) {
             while ($row = mysqli_fetch_assoc($sql)) {
                 $response = array(
-                    'price' => $price .= "<h2>" . number_format($row['price']) . "</h2>",
+                    'price' => $price .= "<h2>$" . number_format($row['price']) . "</h2>",
                     'cart' => $cart .= "<a class='btn_3' href='javascript:void(0)' onclick='addToCart(" . $row['ram_id'] . "," . $row['color_id'] . "," . $row['product_id'] . ")'>add to cart</a>"
                 );
             }

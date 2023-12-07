@@ -212,7 +212,8 @@ if (isset($_GET['product_id'])) {
                             <h5>previous <span>|</span> next</h5>
                             <h3><?= $item['name'] ?></h3>
                             <div id="price_attr">
-                                <h2><?= !empty($attr['price']) ? number_format($attr['price']) : number_format($item['price']) ?></h2>
+                                <h2>
+                                    $<?= !empty($attr['price']) ? number_format($attr['price']) : number_format($item['price']) ?></h2>
                             </div>
                             <ul class="list">
                                 <li>
