@@ -8,7 +8,7 @@
                             <img src="<?= ASSETS ?>/images/infotech-logo.png" alt="CoolAdmin">
                         </a>
                     </div>
-                    <a class="btn btn-danger btn-primary m-b-100" href="/login/">Back</a>
+                    <a class="btn btn-danger btn-primary m-b-10" href="/admin/">Back</a>
                     <div class="login-form">
                         <form action="" method="post">
                             <input type="hidden" name="type" value="send" >
