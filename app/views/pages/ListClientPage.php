@@ -15,6 +15,19 @@
     </section>
     <!-- breadcrumb start-->
 
+
+    <!-- banner part start-->
+    <section class="client_logo" style="margin-top: 60px">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/11/banner/IP15-1200-44-1200x44-2.png"
+                         alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!--================Category Product Area =================-->
     <section class="cat_product_area mt-5">
         <div class="container">
@@ -67,8 +80,8 @@
                                         </a>
                                         <div class="single_product_text">
                                             <h4><?= $row['name'] ?></h4>
-                                            <h3>$150.00</h3>
-                                            <a href="#" class="add_cart">+ add to cart<i class="fas fa-heart"></i></a>
+                                            <a href="/detail?product_id=<?= $row['id'] ?>" class="add_cart">View more<i
+                                                        class="fas fa-heart"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -99,6 +112,17 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="client_logo" style="margin-top: 60px">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/12/banner/123232-1920x450.jpg"
+                         alt="">
                 </div>
             </div>
         </div>

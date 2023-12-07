@@ -59,8 +59,7 @@
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex">
-                            <a id="search_1" href=""><i class="fas fa-search"></i></a>
-                            <a href="/signin/"><i class="fas fa-user"></i></a>
+                            <?= (!isset($_SESSION['authentication_user'])) ? "<a href='/signin/'><i class='fas fa-user'></i></a>" : " "; ?>
                             <div class="dropdown cart mr-3">
                                 <a class="dropdown-toggle" href="/cart/">
                                     <i class="fas fa-shopping-cart"></i>
