@@ -43,7 +43,9 @@ class PostController extends Controller
                 if (move_uploaded_file($tempName, $uploadDir . $newFileName)) {
                     // Trả về đường dẫn ảnh mới
                     $image = $uploadDir . $newFileName;
+                    if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($image)) {
                     $this->PostModel->CreatePost($user_id,  $category_id, $title, $image, $content);
+                    }
                 } else {
                     echo "<div class='alert alert-danger style='width: 400px;
                             margin-left: 250px;'>Có lỗi xảy ra khi lưu trữ file ảnh.</div>";
