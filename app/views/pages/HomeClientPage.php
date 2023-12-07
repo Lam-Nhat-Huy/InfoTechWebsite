@@ -9,8 +9,8 @@
                                 <div class="banner_text">
                                     <div class="banner_text_iner">
                                         <h1>Super Sale</h1>
-                                        <p>Incididunt ut labore et dolore magna aliqua quis ipsum
-                                            suspendisse ultrices gravida. Risus commodo viverra</p>
+                                        <p>Super sales can occur for various reasons, such as holidays, clearance of
+                                            inventory, special occasions, or to celebrate milestones.</p>
                                     </div>
                                 </div>
                             </div>
@@ -26,8 +26,8 @@
                                 <div class="banner_text">
                                     <div class="banner_text_iner">
                                         <h1>Laptop Gaming</h1>
-                                        <p>Incididunt ut labore et dolore magna aliqua quis ipsum
-                                            suspendisse ultrices gravida. Risus commodo viverra</p>
+                                        <p>Gaming laptops are equipped with high-performance components, including
+                                            advanced processors and dedicated graphics cards.</p>
                                     </div>
                                 </div>
                             </div>
@@ -43,8 +43,8 @@
                                 <div class="banner_text">
                                     <div class="banner_text_iner">
                                         <h1>Iphone 15 Promax</h1>
-                                        <p>Incididunt ut labore et dolore magna aliqua quis ipsum
-                                            suspendisse ultrices gravida. Risus commodo viverra</p>
+                                        <p> These platforms will provide the most up-to-date information on product
+                                            releases, features, and specifications</p>
                                     </div>
                                 </div>
                             </div>
