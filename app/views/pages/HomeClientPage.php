@@ -1,4 +1,3 @@
-<!-- banner part start-->
 <section class="banner_part">
     <div class="container">
         <div class="row align-items-center">
@@ -9,14 +8,14 @@
                             <div class="col-lg-5 col-md-8">
                                 <div class="banner_text">
                                     <div class="banner_text_iner">
-                                        <h1>Black Friday</h1>
+                                        <h1>Super Sale</h1>
                                         <p>Incididunt ut labore et dolore magna aliqua quis ipsum
                                             suspendisse ultrices gravida. Risus commodo viverra</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/12/banner/dh-befit-720-220-720x220.png"
+                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/12/banner/720x220Xahangbackuppng-720x220.png"
                                      style="width: 706px; height: 303px" alt="">
                             </div>
                         </div>
@@ -164,6 +163,21 @@
 </section>
 <!-- product_list part start-->
 
+<section class="client_logo" style="margin-top: 60px">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/10/banner/LAP-GAMING-720-220-720x220.png"
+                     alt="">
+            </div>
+            <div class="col-lg-6">
+                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/12/banner/720x220Xahangbackuppng-720x220.png"
+                     alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- awesome_shop start-->
 <section class="our_offer">
     <div class="container">
@@ -177,20 +191,6 @@
                 <div class="offer_text">
                     <h2>Weekly Sale on
                         60% Off All Products</h2>
-                    <div class="date_countdown">
-                        <div id="timer">
-                            <div id="days" class="date"></div>
-                            <div id="hours" class="date"></div>
-                            <div id="minutes" class="date"></div>
-                            <div id="seconds" class="date"></div>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="enter email address" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <a href="#" class="input-group-text btn_2" id="basic-addon2">book now</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
