@@ -1,5 +1,6 @@
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
+  
   <section class="breadcrumb breadcrumb_bg">
       <div class="container">
           <div class="row justify-content-center">
@@ -18,7 +19,8 @@
 
   <!--================Cart Area =================-->
   <section class="cart_area padding_top">
-      <form class="container" action="" method="post">
+  
+      <form class="container" action="" method="post" >
           <div class="cart_inner">
               <div class="table-responsive">
                   <table class="table">
@@ -111,11 +113,12 @@
                       </tbody>
                   </table>
                   <div class="checkout_btn_inner float-right">
-                      <a class="btn_1" href="#">Continue Shopping</a>
-                      <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+                      <a class="btn_1" href="/dashboard/">Continue Shopping</a>
+                      <a class="btn_1 checkout_btn_1" href="<?= isset($_SESSION['authentication_user'])?'/checkout':'/signin'?>">Proceed to checkout</a>
                   </div>
               </div>
           </div>
-      </form>
+      </form>    
   </section>
+  
   <!--================End Cart Area =================-->

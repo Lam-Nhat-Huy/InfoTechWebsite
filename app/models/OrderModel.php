@@ -6,4 +6,16 @@ class OrderModel extends Database
         $stmt = "SELECT * FROM orders";
         return $this->execute($stmt);
     }
+
+    public function createOrder($user_name, $user_email, $user_address, $cart_code, $payment){
+        $stmt = $this->conn->prepare("INSERT INTO `orders`(`user_name`, `user_email`, `user_address`, `cart_code`, `payment`) VALUES (?,?,?,?,?)");
+        $stmt->bind_param('sssis',$user_name,$user_email,$user_address,$cart_code,$payment);
+        $stmt->execute();
+    }
+
+    public function createOrderDetail($cart_code, $user_id, $product_id, $price, $qty){
+        $stmt = $this->conn->prepare("INSERT INTO `order_detail`(`cart_code`, `user_id`, `product_id`, `price`, `qty`) VALUES (?,?,?,?,?)");
+        $stmt->bind_param('iiiii',$cart_code, $user_id, $product_id, $price, $qty);
+        $stmt->execute();
+    }
 }
