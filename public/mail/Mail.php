@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require './app/PHPMailer/src/Exception.php';
+require './app/PHPMailer/src/PHPMailer.php';
+require './app/PHPMailer/src/SMTP.php';
 
 function thanhToanVaGuiEmail($emailNguoiNhan, $tieuDe, $noiDung) {
     $mail = new PHPMailer(true);
