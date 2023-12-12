@@ -147,7 +147,7 @@ if (isset($_GET['product_id'])) {
     }
 
     .replyform button {
-        background-color: #28a745;
+        background-color: #ff3368;
         color: #fff;
         border: none;
         padding: 10px 15px;
@@ -170,6 +170,11 @@ if (isset($_GET['product_id'])) {
     .reply-link span {
         margin-left: 5px; /* Khoảng cách giữa biểu tượng và văn bản */
     }
+    .btn-danger{
+        background-color: #ff3368;
+        border-color: #ff3368;
+    }
+    
 </style>
 <section class="breadcrumb breadcrumb_bg">
     <div class="container">
@@ -432,7 +437,10 @@ if (isset($_GET['product_id'])) {
                     </table>
                 </div>
             </div>
-
+            <?php
+// Kiểm tra nếu session 'user_id' tồn tại
+if(isset($_SESSION['user_id'])) {
+?>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#form">Comment Form</button>
 
             <form action="" method="post">
@@ -471,7 +479,12 @@ if (isset($_GET['product_id'])) {
                     </div>
                 </div>
             </form>
-
+            <?php
+} else {
+    // Hiển thị thông báo hoặc thực hiện hành động khác khi 'user_id' không tồn tại
+    echo '<p>Please log in to comment.</p>';
+}
+?>
 
             <!-- list comment Cha -->
             <div class="container mb-5 mt-5">
@@ -563,7 +576,7 @@ if (isset($_GET['product_id'])) {
                                                                                   class="input"
                                                                                   placeholder="@<?php echo $_SESSION['username'] ?>"></textarea>
                                                                         <button name="submit_reply"
-                                                                                class="primaryContained float-right"
+                                                                                class="primaryContained btn-danger  float-right"
                                                                                 type="submit">Send
                                                                         </button>
                                                                     </div>
@@ -883,7 +896,7 @@ if (isset($_GET['product_id'])) {
         document.getElementById(formId).style.display = "none";
     }
 
-    s
+    
 
 </script>
 
