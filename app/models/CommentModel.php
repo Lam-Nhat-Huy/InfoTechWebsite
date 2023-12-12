@@ -71,10 +71,10 @@ INNER JOIN products pr ON pr.id = bl.product_id
         }
     }
 
-    public function updateComment($noidung, $parent_id,$id_sp)
+    public function updateComment($noidung, $parent_id,$id_sp,$id_user)
     {
-        $stmt = $this->conn->prepare("UPDATE `comments` SET `content`= ? WHERE `id` = ?");
-        $stmt->bind_param('si', $noidung, $parent_id);
+        $stmt = $this->conn->prepare("UPDATE `comments` SET `content`= ? WHERE `id` = ? AND `user_id` = ?");
+        $stmt->bind_param('sii', $noidung, $parent_id,$id_user);
         if ($stmt->execute()) {
             header("Location: /detail/?product_id=$id_sp ");
         } else {

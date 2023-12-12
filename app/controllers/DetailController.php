@@ -48,7 +48,8 @@ class DetailController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['EditComment'])) {
             $noidung = $_POST['noidung'];
             $parent_id = $_POST['parent_comment_id'];
-            $this->CommentModel->updateComment($noidung, $parent_id,$id_sp);
+            $id_user = $_SESSION['user_id'];
+            $this->CommentModel->updateComment($noidung, $parent_id,$id_sp,$id_user);
         }
         $this->view('ClientMasterLayout', [
             'pages' => 'DetailClientPage',
