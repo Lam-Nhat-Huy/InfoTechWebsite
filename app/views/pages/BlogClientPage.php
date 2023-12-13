@@ -32,7 +32,7 @@
                                         </a>
                                     </div>
                                     <div class="blog_details">
-                                        <a class="d-inline-block" href="single-blog.html">
+                                        <a class="d-inline-block" href="/blogdetail?post_id=<?=$Data['id']?>">
                                             <h2> <?= $Data['title'] ?> </h2>
                                         </a>
                                         <p> <?= substr($Data['content'], 0, 100) ?>... </p>
@@ -101,7 +101,7 @@
                                     <div class="media post_item">
                                         <img src="../../../../<?= $data['image'] ?>" alt="post" width="80px">
                                         <div class="media-body">
-                                            <a href="single-blog.html">
+                                            <a href="/blogdetail?post_id=<?=$data['id']?>">
                                                 <h3><?= substr($data['content'], 0, 20) ?>...</h3>
                                             </a>
                                             <p><?= calculateTimeDifference(strtotime($data['create_at'])) ?></p>

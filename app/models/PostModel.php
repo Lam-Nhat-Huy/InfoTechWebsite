@@ -137,4 +137,14 @@ class PostModel extends Database
         LIMIT $this_page_first_result, $result_per_page ";
         return $this->execute($stmt);
     }
+
+    public function GetPostById()
+    {
+        $id = $_GET['post_id'];
+        $stmt = "SELECT p.id as id, p.title as title, p.image as image, p.content as content, p.create_at as cr, u.name as user_name 
+        FROM posts p
+        INNER JOIN users u ON p.user_id = u.id
+        WHERE p.id = $id";
+        return $this->execute($stmt);
+    }
 }
