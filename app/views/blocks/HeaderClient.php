@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="<?= ASSETS ?>/css/lightslider.min.css">
     <link rel="stylesheet" href="<?= ASSETS ?>/css/magnific-popup.css">
 
+    <!-- blogdetail CSS-->
+    <link href="<?= ASSETS ?>/css/blogdetail.css" rel="stylesheet" media="all">
+
 
 
 </head>

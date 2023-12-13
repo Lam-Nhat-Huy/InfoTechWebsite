@@ -53,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="row form-group">
                     <div class="col col-md-3">
-                        <label for="textarea-input" class=" form-control-label">Content</label>
+                        <label class=" form-control-label">Content</label>
                     </div>
                     <div class="col-12 col-md-9">
-                        <textarea name="content" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                        <textarea  name="content" id="summernote" rows="9" placeholder="Content..." class="form-control MySummerNote"></textarea>
                         <small class="form-text text-danger"><? (isset($cerror)) && print($cerror) ?></small>
                     </div>
                 </div>
@@ -72,3 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </div>
 </div>
+
+
+ 
