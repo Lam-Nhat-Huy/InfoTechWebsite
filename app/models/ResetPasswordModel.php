@@ -3,6 +3,17 @@
 
 class ResetPasswordModel extends Database
 {
+    public function isEmailExists($email)
+    {
+        $sql = "SELECT COUNT(*) as count FROM users WHERE email = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $count = $result->fetch_assoc()['count'];
+
+        return $count > 0;
+    }
 
  public function UpdateToken($token_hash,$expiry,$email){
     $sql = "UPDATE users SET reset_token_hash = ? , reset_token_expires_at = ? WHERE email = ?";
