@@ -23,7 +23,27 @@
     <link rel="stylesheet" href="<?= ASSETS ?>/css/main.css">
     <link rel="stylesheet" href="<?= ASSETS ?>/css/lightslider.min.css">
     <link rel="stylesheet" href="<?= ASSETS ?>/css/magnific-popup.css">
+    <style>
+        .loading {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
 
+        .loading-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+        }
+    </style>
 
 
 </head>

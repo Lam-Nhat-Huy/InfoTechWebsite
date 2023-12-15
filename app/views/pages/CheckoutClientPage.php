@@ -29,7 +29,7 @@
                           </div>
                           <div class="col-md-12 form-group p_star">
                               <input type="text" class="form-control" id="number" name="phone" value="<?= isset($_SESSION['phone']) ? $_SESSION['phone'] : '' ?>" placeholder="Phone number" />
-
+                              <div class="text-danger"><?= isset($_SESSION['errorPhone']) ? $_SESSION['errorPhone'] : '' ?></div>
                           </div>
                           <div class="col-md-12 form-group p_star">
                               <input type="text" class="form-control" id="email" name="email" placeholder="Email address" value="<?= isset($_SESSION['client_user_email']) ? $_SESSION['client_user_email'] : '' ?>">
@@ -37,7 +37,7 @@
                           </div>
                           <div class="col-md-12 form-group p_star">
                               <input type="text" class="form-control" id="add1" name="address" placeholder="Address" />
-
+                              <div class="text-danger"><?= isset($_SESSION['errorAddress']) ? $_SESSION['errorAddress'] : '' ?></div>
                           </div>
                           <div class="col-md-12 form-group">
                               <textarea class="form-control" name="note" id="message" rows="1" placeholder="Order Notes"></textarea>
@@ -99,7 +99,10 @@
                                   VNPay
                               </label>
                           </div>
-                          <button class="btn_3 w-100" type="submit">Proceed to Paypal</button>
+                          <button class="btn_3 w-100" type="submit" onclick="sendEmail()">Proceed to Paypal</button>
+                          <div class="loading" id="loading">
+                              <i class="fas fa-spinner fa-spin loading-icon"></i>
+                          </div>
                       </div>
                   </div>
               </div>
@@ -107,4 +110,3 @@
       </div>
   </section>
   <!--================End Checkout Area =================-->
-  

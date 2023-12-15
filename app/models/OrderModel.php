@@ -7,6 +7,11 @@ class OrderModel extends Database
         return $this->execute($stmt);
     }
 
+    public function getAllOrderDetails($code) {
+        $stmt = "SELECT d.*,p.name as product_name  FROM order_detail d, products p  WHERE d.cart_code = '$code' AND d.product_id = p.id";
+        return $this->execute($stmt);
+    }
+
     public function createOrder($user_name, $user_email, $user_address, $cart_code, $payment){
         $stmt = $this->conn->prepare("INSERT INTO `orders`(`user_name`, `user_email`, `user_address`, `cart_code`, `payment`) VALUES (?,?,?,?,?)");
         $stmt->bind_param('sssis',$user_name,$user_email,$user_address,$cart_code,$payment);
