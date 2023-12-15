@@ -18,6 +18,18 @@ class CheckoutController extends Controller
             $cart_code = rand(0, 999999);
             $note = $_POST['note'];
             $pay = $_POST['payment'];
+            unset($_SESSION['errorPhone']);
+            unset($_SESSION['errorAddress']);
+            if (empty($phone)) {
+                $_SESSION['errorPhone'] = 'Please enter a phone number';
+            } elseif (!is_numeric($phone)) {
+                $_SESSION['errorPhone'] = 'The phone number is not in the correct format';
+            }
+            if (empty($address)) {
+                $_SESSION['errorAddress'] = 'Please enter a street address';
+            } else {
+                unset($_SESSION['errorPhone']);
+                unset($_SESSION['errorAddress']);
             $this->OrderModel->createOrder($name, $email, $address, $cart_code, $pay);
             foreach ($_SESSION['cart'] as $data) {
                 $product_id = $data['id'];
@@ -287,11 +299,20 @@ class CheckoutController extends Controller
     </div>
 </div>";
             thanhToanVaGuiEmail($email, $tieuDe, $noiDung);
+                header('Location: /checkout/thankyou/');
             $_SESSION['cart_code'] = $cart_code;
             unset($_SESSION['cart']);
         }
+        }
         $this->view('ClientMasterLayout', [
             'pages' => 'CheckoutClientPage'
+        ]);
+    }
+
+    public function thankyou()
+    {
+        $this->view('ClientMasterLayout', [
+            'pages' => 'ThankYouPage'
         ]);
     }
 }

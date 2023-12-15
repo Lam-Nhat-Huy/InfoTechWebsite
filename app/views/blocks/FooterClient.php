@@ -239,6 +239,14 @@
                 });
             })
     }
+
+    function sendEmail() {
+        var loading = document.getElementById('loading');
+        loading.style.display = 'block';
+        setTimeout(function () {
+            loading.style.display = 'none';
+        }, 5000);
+    }
 </script>
 
 </body>

@@ -14,7 +14,7 @@
                 <th>user_email</th>
                 <th>user_address</th>
                 <th>cart_code</th>
-                <th>cart_status</th>
+                <th>action</th>
         </thead>
         <tbody>
             <?php foreach ($data['order'] as $data) : ?>
@@ -24,7 +24,10 @@
                     <td><?= $data['user_email']; ?></td>
                     <td><?= $data['user_address'] ?></td>
                     <td><?= $data['cart_code'] ?></td>
-                    <td><?= $data['cart_status'] ?></td>
+                    <td>
+                        <div class="table-data-feature w-25"><a href="/order/detail/?code=<?= $data['cart_code']; ?>"
+                                                                class="item"><i class="zmdi zmdi-eye"></i></a></div>
+                    </td>
 
                 </tr>
             <?php endforeach ?>

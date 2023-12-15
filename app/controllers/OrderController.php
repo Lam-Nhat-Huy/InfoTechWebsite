@@ -16,4 +16,14 @@ class OrderController extends Controller
             'order'  => $this->OrderModel->GetAllOrder()
         ]);
     }
+
+    public function detail()
+    {
+        $code = $_GET['code'];
+        $this->view('HomeMasterLayout', [
+            'pages' => 'OrderAdminPage',
+            'block' => 'order/detail',
+            'order' => $this->OrderModel->getAllOrderDetails($code)
+        ]);
+    }
 }
