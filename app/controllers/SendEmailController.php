@@ -68,7 +68,7 @@ class SendEmailController extends Controller
 
             // Đặt tiêu đề và nội dung của email
             $mail->Subject = 'Password Reset';
-            $mail->Body = 'ĐỔI MẬT KHẨU THEO LINK: <a href="http://infortechwebsite//forget/?token=' . $token . '">Tại Đây</a>';
+            $mail->Body = 'ĐỔI MẬT KHẨU THEO LINK: <a href="http://infotech-website/forget/?token=' . $token . '">Tại Đây</a>';
             $mail->send();
             echo 'Message has been sent';
      
